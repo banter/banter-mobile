@@ -10,6 +10,8 @@ import {
   Icon,
   Content,
   Spinner,
+  Body,
+  Thumbnail,
 } from 'native-base';
 
 export default class HomeScreen extends React.Component {
@@ -66,6 +68,7 @@ export default class HomeScreen extends React.Component {
                       topic: genre.tag,
                     })
                   }
+                  thumbnail
                   onPressIn={() => {
                     this.setState({selected: genre.tag.id});
                   }}
@@ -75,8 +78,11 @@ export default class HomeScreen extends React.Component {
                     styles.homeScreenFilename,
                   ]}>
                   <Left>
-                    <Text>{genre.tag.value}</Text>
+                    <Thumbnail square source={{uri: genre.tag.imageUrl}} />
                   </Left>
+                  <Body>
+                    <Text>{genre.tag.value}</Text>
+                  </Body>
                   <Right>
                     <Icon name="arrow-forward" />
                   </Right>

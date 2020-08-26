@@ -1,7 +1,20 @@
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Text, List, ListItem, Left, Right, Icon} from 'native-base';
+import {Animated} from 'react-native';
+import {
+  Text,
+  Content,
+  Thumbnail,
+  Card,
+  CardItem,
+  Body,
+  Left,
+  Icon,
+  Container,
+  Button,
+  Fab,
+} from 'native-base';
 
 import PlayListItem from '../models/PlaylistItem';
 
@@ -11,7 +24,7 @@ export default class HomeScreen extends React.Component {
     this.state = {
       isLoading: true,
       playlist: [],
-      selected: null,
+      topic: {},
     };
   }
 
@@ -22,14 +35,17 @@ export default class HomeScreen extends React.Component {
       .then((responseJson) => {
         this.setState({
           isLoading: false,
+          topic: responseJson.primaryTag,
           playlist: responseJson.playlist.map(
             (playlistItem) =>
               new PlayListItem({
-                name: playlistItem.description.slice(0, 20),
+                name: playlistItem.description,
                 uri: playlistItem.episodePlaybackUrl,
                 discussionId: playlistItem.discussionId,
                 startTime: playlistItem.startTimeMillis,
                 endTime: playlistItem.endTimeMillis,
+                thumbnailUrl: playlistItem.podcastThumbnailUrl,
+                podcastTitle: playlistItem.podcastTitle,
               }),
           ),
         });
@@ -49,40 +65,53 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-    const {selected} = this.state;
+    const {topic} = this.state;
     return (
-      <View style={styles.container}>
+      <Container style={styles.container}>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
-          <List>
+          <Animated.Image
+            source={{
+              uri: topic.imageUrl,
+            }}
+            style={styles.topicHeader}
+          />
+          <Content>
             {this.state.playlist.map((playlistItem) => {
               return (
-                <ListItem
-                  selected={selected === playlistItem.discussionId}
-                  onPressIn={() => {
-                    this.setState({selected: playlistItem.discussionId});
-                  }}
-                  onPressOut={() => {
-                    this.playAudio(playlistItem.uri, playlistItem.startTime);
-                  }}
-                  key={`discussion-${playlistItem.discussionId}-key`}
-                  style={[
-                    styles.codeHighlightContainer,
-                    styles.homeScreenFilename,
-                  ]}>
-                  <Left>
-                    <Text>{playlistItem.name}</Text>
-                  </Left>
-                  <Right>
-                    <Icon name="arrow-forward" />
-                  </Right>
-                </ListItem>
+                <Card key={`discussion-${playlistItem.discussionId}-key`}>
+                  <CardItem thumbnail>
+                    <Left>
+                      <Thumbnail source={{uri: playlistItem.thumbnailUrl}} />
+                      <Body>
+                        <Text>{playlistItem.podcastTitle}</Text>
+                      </Body>
+                      <Icon name="play" />
+                    </Left>
+                  </CardItem>
+                  <CardItem>
+                    <Left>
+                      <Text>{playlistItem.name}</Text>
+                    </Left>
+                  </CardItem>
+                </Card>
               );
             })}
-          </List>
+          </Content>
+          <Fab
+            active={this.state.active}
+            direction="up"
+            style={styles.mainFab}
+            position="bottomRight"
+            onPress={() => this.setState({active: !this.state.active})}>
+            <Icon name="share" />
+            <Button style={styles.twitterFab}>
+              <Icon name="logo-twitter" />
+            </Button>
+          </Fab>
         </ScrollView>
-      </View>
+      </Container>
     );
   }
 }
@@ -95,5 +124,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  mainFab: {
+    backgroundColor: '#5067FF',
+  },
+  twitterFab: {
+    backgroundColor: '#1DA2F2',
+  },
+  topicHeader: {
+    width: '100%',
+    height: 300,
   },
 });
