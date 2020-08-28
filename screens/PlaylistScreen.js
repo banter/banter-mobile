@@ -2,6 +2,7 @@ import * as React from 'react';
 import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Animated} from 'react-native';
+import TrackPlayer from 'react-native-track-player';
 import {
   Text,
   Content,
@@ -55,13 +56,16 @@ export default class HomeScreen extends React.Component {
       });
   }
 
-  async playAudio(uri, startTime) {
-    try {
-      console.log(playing);
-    } catch (error) {
-      console.log('Failed!');
-      console.log(error);
-    }
+  async playAudio({id, title, artist, url, artwork, startTime}) {
+    console.log(artist);
+    // Creates the player
+    TrackPlayer.setupPlayer().then(async () => {
+      // Adds a track to the queue
+      await TrackPlayer.add({id, url, title, artist, artwork});
+
+      // Starts playing it
+      TrackPlayer.play();
+    });
   }
 
   render() {
@@ -87,7 +91,18 @@ export default class HomeScreen extends React.Component {
                       <Body>
                         <Text>{playlistItem.podcastTitle}</Text>
                       </Body>
-                      <Icon name="play" />
+                      <Icon
+                        onPress={() => {
+                          this.playAudio({
+                            id: playlistItem.discussionId,
+                            title: playlistItem.name,
+                            artist: playlistItem.podcastTitle,
+                            url: playlistItem.uri,
+                            artwork: playlistItem.thumbnailUrl,
+                          });
+                        }}
+                        name="play"
+                      />
                     </Left>
                   </CardItem>
                   <CardItem>
