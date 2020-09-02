@@ -14,37 +14,35 @@ import {
   Button,
   Thumbnail,
 } from 'native-base';
-import {increment, decrement} from '../actions/index.js';
+
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
-      genres: [],
       selected: null,
     };
   }
-
-  componentDidMount() {
-    return fetch(
-      'https://api.banteraudio.com/v1/topics/trending/?sinceDaysAgo=3&limit=15',
-    )
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          genres: responseJson,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+  // componentDidMount() {
+  //   return fetch(
+  //     'https://api.banteraudio.com/v1/topics/trending/?sinceDaysAgo=3&limit=15',
+  //   )
+  //     .then((response) => response.json())
+  //     .then((responseJson) => {
+  //       this.setState({
+  //         isLoading: false,
+  //         topics: responseJson,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
 
   render() {
-    if (this.state.isLoading) {
+    const {navigation, topics, isLoading} = this.props;
+    if (isLoading) {
       return (
         <View style={{flex: 1, padding: 20}}>
           <Content>
@@ -55,51 +53,47 @@ class HomeScreen extends React.Component {
     }
 
     const {selected} = this.state;
-    const {navigation} = this.props;
     return (
       <View style={styles.container}>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
-          <Text>{this.props.topics}</Text>
-          <Button dark bordered onPress={() => this.props.increment()}>
-            <Text>Increment</Text>
-          </Button>
-          <Button dark bordered onPress={() => this.props.decrement()}>
-            <Text>Decrement</Text>
-          </Button>
-          {/* <List>
-            {this.state.genres.map((genre) => {
-              return (
-                <ListItem
-                  selected={selected === genre.tag.id}
-                  onPressOut={() =>
-                    navigation.navigate('Playlist', {
-                      topic: genre.tag,
-                    })
-                  }
-                  thumbnail
-                  onPressIn={() => {
-                    this.setState({selected: genre.tag.id});
-                  }}
-                  key={`genre-${genre.tag.id}-key`}
-                  style={[
-                    styles.codeHighlightContainer,
-                    styles.homeScreenFilename,
-                  ]}>
-                  <Left>
-                    <Thumbnail square source={{uri: genre.tag.imageUrl}} />
-                  </Left>
-                  <Body>
-                    <Text>{genre.tag.value}</Text>
-                  </Body>
-                  <Right>
-                    <Icon name="arrow-forward" />
-                  </Right>
-                </ListItem>
-              );
-            })}
-          </List> */}
+          <List>
+            {topics.length > 0 ? (
+              topics.map((topic) => {
+                return (
+                  <ListItem
+                    selected={selected === topic.tag.id}
+                    onPressOut={() =>
+                      navigation.navigate('Playlist', {
+                        topic: topic.tag,
+                      })
+                    }
+                    thumbnail
+                    onPressIn={() => {
+                      this.setState({selected: topic.tag.id});
+                    }}
+                    key={`topic-${topic.tag.id}-key`}
+                    style={[
+                      styles.codeHighlightContainer,
+                      styles.homeScreenFilename,
+                    ]}>
+                    <Left>
+                      <Thumbnail square source={{uri: topic.tag.imageUrl}} />
+                    </Left>
+                    <Body>
+                      <Text>{topic.tag.value}</Text>
+                    </Body>
+                    <Right>
+                      <Icon name="arrow-forward" />
+                    </Right>
+                  </ListItem>
+                );
+              })
+            ) : (
+              <Text>No Stuff</Text>
+            )}
+          </List>
         </ScrollView>
       </View>
     );
@@ -118,11 +112,11 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
-    topics: state.topics,
+    topics: state.topicState.topics,
+    isLoading: state.topicState.isLoading,
   };
 }
-function matchDispatchToProps(dispatch) {
-  return bindActionCreators({increment, decrement}, dispatch);
-}
-export default connect(mapStateToProps, matchDispatchToProps)(HomeScreen);
+
+export default connect(mapStateToProps)(HomeScreen);

@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
 import topicReducer from './topicReducer.js';
+import deleteReducer from './deleteReducer.js';
 
 const allReducers = combineReducers({
-  topics: topicReducer,
+  topicState: topicReducer,
+  deleteState: deleteReducer,
 });
 
 export default allReducers;
