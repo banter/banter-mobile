@@ -11,10 +11,13 @@ import {
   Content,
   Spinner,
   Body,
+  Button,
   Thumbnail,
 } from 'native-base';
-
-export default class HomeScreen extends React.Component {
+import {increment, decrement} from '../actions/index.js';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,6 +62,23 @@ export default class HomeScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
           <List>
+            {this.props.topics.map((topic, i) => {
+              return (
+                <ListItem key={`topic-${i}-key`}>
+                  <Body>
+                    <Text>{topic.yer}</Text>
+                  </Body>
+                </ListItem>
+              );
+            })}
+          </List>
+          <Button dark bordered onPress={() => this.props.increment()}>
+            <Text>Increment</Text>
+          </Button>
+          <Button dark bordered onPress={() => this.props.decrement()}>
+            <Text>Decrement</Text>
+          </Button>
+          {/* <List>
             {this.state.genres.map((genre) => {
               return (
                 <ListItem
@@ -89,7 +109,7 @@ export default class HomeScreen extends React.Component {
                 </ListItem>
               );
             })}
-          </List>
+          </List> */}
         </ScrollView>
       </View>
     );
@@ -106,3 +126,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+function mapStateToProps(state) {
+  return {
+    topics: state.topics,
+  };
+}
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({increment, decrement}, dispatch);
+}
+export default connect(mapStateToProps, matchDispatchToProps)(HomeScreen);
