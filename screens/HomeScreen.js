@@ -61,17 +61,7 @@ class HomeScreen extends React.Component {
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
-          <List>
-            {this.props.topics.map((topic, i) => {
-              return (
-                <ListItem key={`topic-${i}-key`}>
-                  <Body>
-                    <Text>{topic.yer}</Text>
-                  </Body>
-                </ListItem>
-              );
-            })}
-          </List>
+          <Text>{this.props.topics}</Text>
           <Button dark bordered onPress={() => this.props.increment()}>
             <Text>Increment</Text>
           </Button>

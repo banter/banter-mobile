@@ -1,11 +1,11 @@
-let topics = [{yer: 'topic1'}];
+let topics = 1;
 export default function (state = topics, action) {
   switch (action.type) {
     case 'Increment':
-      topics.push({yer: 'yer'});
+      topics++;
       break;
     case 'Decrement':
-      topics.pop();
+      topics--;
       break;
   }
   return topics;
