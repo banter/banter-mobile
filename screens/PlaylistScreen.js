@@ -24,6 +24,7 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state = {
       isLoading: true,
+      currentlyPlaying: {},
       playlist: [],
       topic: {},
     };
@@ -57,19 +58,23 @@ export default class HomeScreen extends React.Component {
   }
 
   async playAudio({id, title, artist, url, artwork, startTime}) {
-    console.log(artist);
+    const currentlyPlaying = {id, url, title, artist, artwork};
     // Creates the player
     TrackPlayer.setupPlayer().then(async () => {
       // Adds a track to the queue
-      await TrackPlayer.add({id, url, title, artist, artwork});
-
+      await TrackPlayer.add(currentlyPlaying);
+      this.setState({currentlyPlaying});
       // Starts playing it
       TrackPlayer.play();
     });
   }
 
+  async pauseAudio() {
+    await TrackPlayer.pause();
+  }
+
   render() {
-    const {topic} = this.state;
+    const {topic, currentlyPlaying} = this.state;
     return (
       <Container style={styles.container}>
         <ScrollView
@@ -91,18 +96,22 @@ export default class HomeScreen extends React.Component {
                       <Body>
                         <Text>{playlistItem.podcastTitle}</Text>
                       </Body>
-                      <Icon
-                        onPress={() => {
-                          this.playAudio({
-                            id: playlistItem.discussionId,
-                            title: playlistItem.name,
-                            artist: playlistItem.podcastTitle,
-                            url: playlistItem.uri,
-                            artwork: playlistItem.thumbnailUrl,
-                          });
-                        }}
-                        name="play"
-                      />
+                      {currentlyPlaying.id !== playlistItem.discussionId ? (
+                        <Icon
+                          onPress={() => {
+                            this.playAudio({
+                              id: playlistItem.discussionId,
+                              title: playlistItem.name,
+                              artist: playlistItem.podcastTitle,
+                              url: playlistItem.uri,
+                              artwork: playlistItem.thumbnailUrl,
+                            });
+                          }}
+                          name="play"
+                        />
+                      ) : (
+                        <Icon onPress={this.pauseAudio} name="pause" />
+                      )}
                     </Left>
                   </CardItem>
                   <CardItem>
