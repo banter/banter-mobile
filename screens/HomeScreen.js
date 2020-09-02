@@ -24,21 +24,6 @@ class HomeScreen extends React.Component {
       selected: null,
     };
   }
-  // componentDidMount() {
-  //   return fetch(
-  //     'https://api.banteraudio.com/v1/topics/trending/?sinceDaysAgo=3&limit=15',
-  //   )
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
-  //       this.setState({
-  //         isLoading: false,
-  //         topics: responseJson,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
 
   render() {
     const {navigation, topics, isLoading} = this.props;

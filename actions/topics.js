@@ -3,7 +3,8 @@ export function fetchTopics() {
     dispatch(fetchTopicsRequest());
     return fetch('https://api.banteraudio.com/v1/topics/trending/?sinceDaysAgo=3&limit=15')
       .then((response) => response.json())
-      .then((json) => dispatch(fetchTopicsFulfilled(json)));
+      .then((json) => dispatch(fetchTopicsFulfilled(json)))
+      .catch((error) => dispatch(fetchTopicsRejected(error)));
   };
 }
 
@@ -27,9 +28,3 @@ export const fetchTopicsRejected = (error) => {
   };
 };
 
-// export async function fetchTopicsCall() {
-//   const response = await fetch(
-//     'https://api.banteraudio.com/v1/topics/trending/?sinceDaysAgo=3&limit=15',
-//   );
-//   return response.json();
-// }
