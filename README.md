@@ -22,4 +22,16 @@ ex) emulator @Pixel_2_API_27
 To see list of Devices ---- emulator -list-avds
 
 npm run android 
-npx react-native run-android
+
+Debug:
+
+react-devtools 
+ctrl+m on emulator 
+click debug --- brings you to a localhost:8081
+in console, top left of inspector next to clear console, select debuggerWorker...
+Here you can put break points in and inspect the JS. In the dev tools can look at 
+props and components and actively adjust
+
+
+Have Emulator Up and running 
+start up react-devtools
