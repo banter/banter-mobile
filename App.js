@@ -6,8 +6,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import PlaylistScreen from './screens/PlaylistScreen';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import FriendsScreen from './FriendsScreen';
-import EnterPage from './EnterPage';
-import LandingPage from './LandingPage';
+import LandingScreen from './screens/LandingScreen';
+import OnboardingScreen from './screens/OnboardingScreen';
 
 const Stack = createStackNavigator();
 
@@ -25,12 +25,11 @@ const App: () => React$Node = () => {
             <Stack.Screen
             options={{headerShown: false}}
             name="Landing"
-            component={LandingPage}
+            component={LandingScreen}
           />
           <Stack.Screen
-            options={{headerShown: false}}
-            name="Enter"
-            component={EnterPage}
+            name="Onboarding"
+            component={OnboardingScreen}
           />
            <Stack.Screen
             name="Friends"
