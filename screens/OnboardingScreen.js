@@ -10,27 +10,19 @@ const teams = MOCKTEAMS;
 
 export default class OnboardingScreen extends React.Component {
 
-  groupedArticles() {
-    return _.chunk(this.getLeagues, 3);
-  }
-
   render() {
 
       return (
         <Container>
 
-<Header searchBar rounded >
+<Header searchBar rounded style={{backgroundColor: 'black'}} >
 <Item>
             <Icon name="ios-search" />
             <Input placeholder="Search" />
           </Item>
-<Button title="Sign Up Free" />
 </Header>
-{/* <TeamSelectionScroll /> */}
-
-
         <Grid>
-          <Col style={{ backgroundColor: '#635DB7', width:100 }}>
+          <Col style={{ backgroundColor: 'lightgray', width:100 }}>
           <List>
             <ListItem>
               <Text>NFL</Text>
@@ -46,12 +38,8 @@ export default class OnboardingScreen extends React.Component {
             </ListItem>
           </List>
           </Col>
-          <Col style={{ backgroundColor: '#00CE9F', height: 200 }} >
-          <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-around'}}>
-        <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
-        <View style={{width: 50, height: 50, backgroundColor: 'skyblue'}} />
-        <View style={{width: 50, height: 50, backgroundColor: 'steelblue'}} />
-      </View>
+          <Col>
+          <TeamSelectionScroll teams={teams} teamsPerRow={2} />
           </Col>
         </Grid>
       </Container>
