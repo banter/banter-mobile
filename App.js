@@ -6,13 +6,12 @@ import PlaylistScreen from './screens/PlaylistScreen';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import allReducers from './reducers/index.js';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware, compose} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {fetchTopics} from './actions/topics';
 import { composeWithDevTools } from 'remote-redux-devtools';
 
 const Stack = createStackNavigator();
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   allReducers,
