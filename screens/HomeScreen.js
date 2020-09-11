@@ -11,11 +11,9 @@ import {
   Content,
   Spinner,
   Body,
-  Button,
   Thumbnail,
 } from 'native-base';
 
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -26,7 +24,7 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    const {navigation, topics, isLoading} = this.props;
+    const {navigation, topics, isLoading, error} = this.props;
     if (isLoading) {
       return (
         <View style={{flex: 1, padding: 20}}>
@@ -76,7 +74,10 @@ class HomeScreen extends React.Component {
                 );
               })
             ) : (
-              <Text>No Stuff</Text>
+              <View>
+                <Text>No Stuff</Text>
+                <Text>{error}</Text>
+              </View>
             )}
           </List>
         </ScrollView>
@@ -100,6 +101,7 @@ function mapStateToProps(state) {
   console.log(state);
   return {
     topics: state.topicState.topics,
+    error: state.topicState.errorMessage,
     isLoading: state.topicState.isLoading,
   };
 }

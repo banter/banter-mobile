@@ -11,7 +11,7 @@ export default function (state = initialState, action) {
     case 'FETCH_TOPCS_FULFILLED':
       return {...state, topics: action.payload, loading: false};
     case 'FETCH_TOPCS_REJECTED':
-      return {...state, errorMessage: action.payload, loading: false};
+      return {...state, topics: [], errorMessage: action.payload, loading: false};
     default:
       return state;
   }

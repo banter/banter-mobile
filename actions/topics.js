@@ -1,10 +1,14 @@
+import {getTopics} from '../api/topics';
+
 export function fetchTopics() {
-  return (dispatch) => {
+  return async dispatch => {
     dispatch(fetchTopicsRequest());
-    return fetch('https://api.banteraudio.com/v1/topics/trending/?sinceDaysAgo=3&limit=15')
-      .then((response) => response.json())
-      .then((json) => dispatch(fetchTopicsFulfilled(json)))
-      .catch((error) => dispatch(fetchTopicsRejected(error)));
+    try {
+      const topics = await getTopics();
+      dispatch(fetchTopicsFulfilled(topics));
+    } catch (error) {
+      dispatch(fetchTopicsRejected(error.message));
+    }
   };
 }
 
