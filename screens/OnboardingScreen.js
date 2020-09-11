@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
-import { Container, Header, Button, Text, Item, Icon, Input, ListItem, Grid, Col, List } from 'native-base';
+import { Container, Header, Button,
+  Text, Item, Icon, Input,
+  ListItem, Grid, Col, List, TouchableOpacity } from 'native-base';
 import SoundAnimation from '../commons/animations/SoundAnimation';
 import MOCKTEAMS from '../constants/mock-teams';
 import TeamSelectionScroll from '../containers/TeamSelectionScroll';
@@ -15,7 +17,7 @@ export default class OnboardingScreen extends React.Component {
       return (
         <Container>
 
-<Header searchBar rounded style={{backgroundColor: 'black'}} >
+<Header searchBar rounded style={{backgroundColor: 'lightgray'}} >
 <Item>
             <Icon name="ios-search" />
             <Input placeholder="Search" />
@@ -24,8 +26,13 @@ export default class OnboardingScreen extends React.Component {
         <Grid>
           <Col style={{ backgroundColor: 'lightgray', width:100 }}>
           <List>
-            <ListItem>
-              <Text>NFL</Text>
+            <ListItem
+                    onPress={() =>
+                      alert('Following this thing')
+                    }>
+            {/* <TouchableOpacity> */}
+            <Text>NFL</Text>
+            {/* </TouchableOpacity> */}
             </ListItem>
             <ListItem>
               <Text>MLB</Text>
