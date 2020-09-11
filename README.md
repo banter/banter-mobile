@@ -5,3 +5,5 @@ I'd recommend following [This Guide](https://reactnative.dev/docs/environment-se
 Once you're all set up:
 
 `npm i`, `npm start`, then open a new terminal window and `npm run ios`
+
+For using Redux devtools, utilize [The RemoteDev extension](https://chrome.google.com/webstore/detail/remotedev/faicmgpfiaijcedapokpbdejaodbelph/related)

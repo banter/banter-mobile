@@ -9,12 +9,14 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {fetchTopics} from './actions/topics';
+import { composeWithDevTools } from 'remote-redux-devtools';
 
 const Stack = createStackNavigator();
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
   allReducers,
-  composeEnhancers(applyMiddleware(thunk)),
+  composeWithDevTools(applyMiddleware(thunk))
 );
 
 store.dispatch(fetchTopics());
