@@ -8,20 +8,20 @@ export function fetchTopics() {
   };
 }
 
-export const fetchTopicsRequest = (data) => {
+const fetchTopicsRequest = (data) => {
   return {
     type: 'FETCH_TOPCS',
   };
 };
 
-export const fetchTopicsFulfilled = (data) => {
+const fetchTopicsFulfilled = (data) => {
   return {
     type: 'FETCH_TOPCS_FULFILLED',
     payload: data,
   };
 };
 
-export const fetchTopicsRejected = (error) => {
+const fetchTopicsRejected = (error) => {
   return {
     type: 'FETCH_TOPCS_REJECTED',
     payload: error,
