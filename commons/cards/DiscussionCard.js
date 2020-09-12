@@ -120,7 +120,7 @@ borderRadius:CARD_RADIUS,
         color: '#AAAAAA',
       },
   container: {
-    backgroundColor: 'lightgray',
+    // backgroundColor: 'lightgray',
     alignItems: 'center',
     // justifyContent: 'center',
   },

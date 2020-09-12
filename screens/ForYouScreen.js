@@ -6,12 +6,10 @@ export default class ForYouScreen extends React.Component {
   render() {
       return (
         <View style={styles.container}>
-            <Image
-            style={{width: 300, height: 70,  margin: 15}}
-            source={require('../assets/Banter_header.png')}
-          />
-          <DiscussionCard name="A"/>
-          <DiscussionCard name="A"/>
+          <Text style={styles.headerText}>For You</Text>
+          <Text style={styles.descriptionText}>Picking Podcasts is hard. So we did that for you.</Text>
+          <DiscussionCard />
+          <DiscussionCard />
         </View>
 
       );
@@ -20,4 +18,19 @@ export default class ForYouScreen extends React.Component {
 
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor:'darkgray',
+  },
+  descriptionText: {
+    fontSize: 18,
+    textAlign:'center',
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  headerText: {
+    fontSize: 46,
+    textAlign:'center',
+    fontWeight: 'bold',
+    color: 'white',
+  },
 });
