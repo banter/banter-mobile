@@ -5,8 +5,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import PlaylistScreen from './screens/PlaylistScreen';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
-import FriendsScreen from './FriendsScreen';
+import ExperienceCreationScreen from './screens/ExperienceCreationScreen';
 import LandingScreen from './screens/LandingScreen';
+import ForYouScreen from './screens/ForYouScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -23,6 +24,11 @@ const App: () => React$Node = () => {
         />
         <Stack.Screen name="Profile" component={ProfileScreen} /> */}
 
+<Stack.Screen
+            options={{headerShown: false}}
+            name="ForYou"
+            component={ForYouScreen}
+          />
             <Stack.Screen
             options={{headerShown: false}}
             name="Landing"
@@ -31,23 +37,23 @@ const App: () => React$Node = () => {
           <Stack.Screen
             name="Onboarding"
             component={OnboardingScreen}
-            options={{
+            options={({ navigation }) => ({
               headerTitle: 'Pick your favorite teams!',
               headerRight: () => (
                 <TouchableOpacity
-                  onPress={() => alert('This is a button!')}
+                  onPress={() => navigation.navigate('ExperienceCreation')}
                   title="Info"
                   style={{marginRight:10 }}
                 >
                   <Text>Done</Text>
                 </TouchableOpacity>
               ),
-            }}
-
+            })}
           />
            <Stack.Screen
-            name="Friends"
-            component={FriendsScreen}
+            name="ExperienceCreation"
+            options={{headerShown: false}}
+            component={ExperienceCreationScreen}
           />
           <Stack.Screen name="Root" component={BottomTabNavigator} />
         <Stack.Screen name="Playlist" component={PlaylistScreen} />
