@@ -4,12 +4,18 @@ import SoundAnimation from '../commons/animations/SoundAnimation';
 
 class ExperienceCreationScreen extends React.Component {
   render() {
+    const {navigation} = this.props;
     return (
       <View style={styles.container}>
                 <Text style={styles.sloganText}>
 Creating an experience thats just for you.
           </Text>
           <SoundAnimation />
+          <Button
+                    onPress={() =>
+                      navigation.navigate('ForYou')
+                    }
+            title="Begin"/>
       </View>
     );
   }

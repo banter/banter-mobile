@@ -35,3 +35,15 @@ props and components and actively adjust
 
 Have Emulator Up and running 
 start up react-devtools
+
+
+To Run on Your Phone
+run: adb devices 
+-This is used to check if your device is properly attached
+npm run android
+
+
+Clean Code:
+Download jsx-beautify
+ctrl/command + m on file you want to beautify
+Note: If you have commented out code in your render, it may fuck up a little bit

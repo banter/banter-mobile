@@ -23,8 +23,7 @@ const App: () => React$Node = () => {
           options={{ title: 'Welcome' }}
         />
         <Stack.Screen name="Profile" component={ProfileScreen} /> */}
-
-<Stack.Screen
+                  <Stack.Screen
             options={{headerShown: false}}
             name="ForYou"
             component={ForYouScreen}
