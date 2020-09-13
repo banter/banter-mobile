@@ -57,6 +57,7 @@ const App: () => React$Node = () => {
           <Stack.Screen name="Root" component={BottomTabNavigator} />
         <Stack.Screen name="Playlist" component={PlaylistScreen} />
       </Stack.Navigator>
+      {/* <BottomTabNavigator /> */}
     </NavigationContainer>
   );
 };
