@@ -23,11 +23,6 @@ const App: () => React$Node = () => {
           options={{ title: 'Welcome' }}
         />
         <Stack.Screen name="Profile" component={ProfileScreen} /> */}
-                  <Stack.Screen
-            options={{headerShown: false}}
-            name="ForYou"
-            component={ForYouScreen}
-          />
             <Stack.Screen
             options={{headerShown: false}}
             name="Landing"
@@ -53,6 +48,11 @@ const App: () => React$Node = () => {
             name="ExperienceCreation"
             options={{headerShown: false}}
             component={ExperienceCreationScreen}
+          />
+                            <Stack.Screen
+            options={{headerShown: false}}
+            name="ForYou"
+            component={ForYouScreen}
           />
           <Stack.Screen name="Root" component={BottomTabNavigator} />
         <Stack.Screen name="Playlist" component={PlaylistScreen} />
