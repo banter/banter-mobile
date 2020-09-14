@@ -59,7 +59,6 @@ export default class HomeScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
           <List>
-            {/* Vue --- for-each  */}
             {this.state.genres.map((genre) => {
               return (
                 <ListItem
