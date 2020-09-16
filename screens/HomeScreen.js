@@ -63,15 +63,15 @@ export default class HomeScreen extends React.Component {
               return (
                 <ListItem
                   selected={selected === genre.tag.id}
+                  onPressIn={() => {
+                    this.setState({selected: genre.tag.id});
+                  }}
                   onPressOut={() =>
                     navigation.navigate('Playlist', {
                       topic: genre.tag,
                     })
                   }
                   thumbnail
-                  onPressIn={() => {
-                    this.setState({selected: genre.tag.id});
-                  }}
                   key={`genre-${genre.tag.id}-key`}
                   style={[
                     styles.codeHighlightContainer,
