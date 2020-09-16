@@ -8,6 +8,10 @@ target 'bantermobile' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
+  pod 'lottie-react-native', :path => '../node_modules/lottie-react-native'
+
   target 'bantermobileTests' do
     inherit! :complete
     # Pods for testing
