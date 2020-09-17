@@ -78,6 +78,7 @@ class HomeScreen extends React.Component {
                 <Text>No Stuff</Text>
                 <Text>{error}</Text>
               </View>
+            )}
           </List>
         </ScrollView>
       </View>

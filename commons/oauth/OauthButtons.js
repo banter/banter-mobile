@@ -82,7 +82,6 @@ export default class OauthButtons extends React.Component{
         </View>
       );
     }
-
   }
 
 
