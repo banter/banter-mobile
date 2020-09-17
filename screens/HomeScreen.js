@@ -14,34 +14,18 @@ import {
   Thumbnail,
 } from 'native-base';
 
-export default class HomeScreen extends React.Component {
+import {connect} from 'react-redux';
+class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
-      genres: [],
       selected: null,
     };
   }
 
-  componentDidMount() {
-    return fetch(
-      'https://api.banteraudio.com/v1/topics/trending/?sinceDaysAgo=3&limit=15',
-    )
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          genres: responseJson,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
   render() {
-    if (this.state.isLoading) {
+    const {navigation, topics, isLoading, error} = this.props;
+    if (isLoading) {
       return (
         <View style={{flex: 1, padding: 20}}>
           <Content>
@@ -52,43 +36,48 @@ export default class HomeScreen extends React.Component {
     }
 
     const {selected} = this.state;
-    const {navigation} = this.props;
     return (
       <View style={styles.container}>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
           <List>
-            {this.state.genres.map((genre) => {
-              return (
-                <ListItem
-                  selected={selected === genre.tag.id}
-                  onPressIn={() => {
-                    this.setState({selected: genre.tag.id});
-                  }}
-                  onPressOut={() =>
-                    navigation.navigate('Playlist', {
-                      topic: genre.tag,
-                    })
-                  }
-                  thumbnail
-                  key={`genre-${genre.tag.id}-key`}
-                  style={[
-                    styles.codeHighlightContainer,
-                    styles.homeScreenFilename,
-                  ]}>
-                  <Left>
-                    <Thumbnail square source={{uri: genre.tag.imageUrl}} />
-                  </Left>
-                  <Body>
-                    <Text>{genre.tag.value}</Text>
-                  </Body>
-                  <Right>
-                    <Icon name="arrow-forward" />
-                  </Right>
-                </ListItem>
-              );
-            })}
+            {topics.length > 0 ? (
+              topics.map((topic) => {
+                return (
+                  <ListItem
+                    selected={selected === topic.tag.id}
+                    onPressOut={() =>
+                      navigation.navigate('Playlist', {
+                        topic: topic.tag,
+                      })
+                    }
+                    thumbnail
+                    onPressIn={() => {
+                      this.setState({selected: topic.tag.id});
+                    }}
+                    key={`topic-${topic.tag.id}-key`}
+                    style={[
+                      styles.codeHighlightContainer,
+                      styles.homeScreenFilename,
+                    ]}>
+                    <Left>
+                      <Thumbnail square source={{uri: topic.tag.imageUrl}} />
+                    </Left>
+                    <Body>
+                      <Text>{topic.tag.value}</Text>
+                    </Body>
+                    <Right>
+                      <Icon name="arrow-forward" />
+                    </Right>
+                  </ListItem>
+                );
+              })
+            ) : (
+              <View>
+                <Text>No Stuff</Text>
+                <Text>{error}</Text>
+              </View>
           </List>
         </ScrollView>
       </View>
@@ -106,3 +95,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    topics: state.topicState.topics,
+    error: state.topicState.errorMessage,
+    isLoading: state.topicState.isLoading,
+  };
+}
+
+export default connect(mapStateToProps)(HomeScreen);
