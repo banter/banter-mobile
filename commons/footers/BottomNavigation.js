@@ -18,7 +18,7 @@ export default class BottomNavigation extends React.Component {
       <Footer style={styles.container}>
         <FooterTab>
           <Button vertical>
-            <Icon type="AntDesign" name="home"/>
+            <Icon name="home"/>
             <Text>Home</Text>
           </Button>
           <Button vertical>

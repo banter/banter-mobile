@@ -2,21 +2,15 @@ import React from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {
   Thumbnail,
-  Container,
-  Header,
-  Content,
   Card,
   CardItem,
-  Body,
   Text,
   Icon,
   Grid,
   Col,
 } from 'native-base';
-import MOCKTAGS from '../../constants/mock-tags';
 import TagList from '../../containers/TagList';
 import DiscussionItem from '../../models/DiscussionItem';
-const tags = MOCKTAGS;
 
 export default class DiscussionCard extends React.Component {
   constructor(props) {
@@ -67,21 +61,19 @@ export default class DiscussionCard extends React.Component {
           <CardItem style={styles.discussionCardTagItem}>
             <Icon
               type="AntDesign"
-              name="tago"
+              name="tag"
               style={{
               color: 'white',
-            }}/>
+}}/>
             <TagList tags={this.discussion.tags}/>
           </CardItem>
 
           <CardItem style={styles.discussionCardItem}>
             <Grid>
-              <Col style={{
-                width: 50,
-              }}>
+              <Col style={{ width: 50 }}>
                 <TouchableOpacity onPress={this.onPress}>
                   <Text>
-                    <Icon type="AntDesign" name="play" style={styles.largeIconStyle}/>
+                    <Icon name="play" style={styles.largeIconStyle}/>
                   </Text>
                 </TouchableOpacity>
               </Col>
@@ -90,12 +82,10 @@ export default class DiscussionCard extends React.Component {
                   DATE
                 </Text>
               </Col>
-              <Col style={{
-                width: 50,
-              }}>
+              <Col style={{ width: 50 }}>
                 <TouchableOpacity onPress={this.onPress}>
                   <Text>
-                    <Icon type="AntDesign" name="hearto" style={styles.largeIconStyle}/>
+                    <Icon name="heart" style={styles.largeIconStyle}/>
                   </Text>
                 </TouchableOpacity>
               </Col>
