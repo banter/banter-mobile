@@ -17,10 +17,10 @@ export default class TeamSelectionScroll extends React.Component {
             <View style={styles.container}>
 {this.groupedTeams().map((teams, key) => {
                     return (
-                        <View style={styles.selectionRow}>
-{teams.map((team, key) => {
+                        <View key={key} style={styles.selectionRow}>
+{teams.map((team, index) => {
                     return (
-                        <View >
+                        <View key={index}>
 <FollowButton isIconButton={true} text={team.value} />
                         </View>
                     );
