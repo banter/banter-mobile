@@ -5,6 +5,7 @@ import BottomNavigation from '../commons/footers/BottomNavigation';
 import {ScrollView} from 'react-native-gesture-handler';
 import MOCKDISCUSSIONS from '../constants/mock-discussions';
 import {Container, Footer,Text, Button, FooterTab, Icon} from 'native-base';
+import TopicHeaderCard from '../commons/cards/TopicHeaderCard';
 export default class ForYouScreen extends React.Component {
   render() {
     return (
@@ -12,6 +13,7 @@ export default class ForYouScreen extends React.Component {
 <ScrollView style={styles.container}>
           <Text style={styles.headerText}>For You</Text>
           <Text style={styles.descriptionText}>Picking Podcasts is hard. So we did that for you.</Text>
+          <TopicHeaderCard isIconButton={false} discussion={MOCKDISCUSSIONS}/>
           <DiscussionCard discussion={MOCKDISCUSSIONS}/>
           <DiscussionCard discussion={MOCKDISCUSSIONS}/>
           <DiscussionCard discussion={MOCKDISCUSSIONS}/>

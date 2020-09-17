@@ -21,7 +21,7 @@ export default class TeamSelectionScroll extends React.Component {
 {teams.map((team, key) => {
                     return (
                         <View >
-<FollowButton name={team.value} />
+<FollowButton isIconButton={true} text={team.value} />
                         </View>
                     );
                   })}
