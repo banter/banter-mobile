@@ -68,7 +68,7 @@ const App: () => React$Node = () => {
             name="ForYou"
             component={ForYouScreen}
           />
-          <Stack.Screen name="Root" component={BottomTabNavigator} />
+        <Stack.Screen name="Root" component={BottomTabNavigator} />
         <Stack.Screen name="Playlist" component={PlaylistScreen} />
       </Stack.Navigator>
       {/* <BottomTabNavigator /> */}
