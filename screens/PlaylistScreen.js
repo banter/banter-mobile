@@ -4,6 +4,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {Animated} from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 import Player from '../components/PlayerWidget.js';
+import PlaybackIcon from '../components/PlaybackIcon.js';
 import {
   Text,
   Content,
@@ -69,9 +70,14 @@ export default class HomeScreen extends React.Component {
   async pauseAudio() {
     await TrackPlayer.pause();
   }
-
+  async currentState () {
+    const state = await TrackPlayer.getState();
+    console.log('state :');
+    console.log(state);
+    return state;
+  }
   async isPlaying() {
-    TrackPlayer.getState === TrackPlayer.STATE_PLAYING;
+    return await TrackPlayer.getState() === TrackPlayer.STATE_PLAYING;
   }
 
   async skipToNext() {
@@ -117,7 +123,6 @@ export default class HomeScreen extends React.Component {
             }}
             style={styles.topicHeader}
           />
-
           <Content>
             {this.state.playlist.map((playlistItem) => {
               return (
@@ -128,22 +133,7 @@ export default class HomeScreen extends React.Component {
                       <Body>
                         <Text>{playlistItem.podcastTitle}</Text>
                       </Body>
-                      {currentlyPlaying.id !== playlistItem.discussionId ? (
-                        <Icon
-                          onPress={() => {
-                            this.playAudio({
-                              id: playlistItem.discussionId,
-                              title: playlistItem.name,
-                              artist: playlistItem.podcastTitle,
-                              url: playlistItem.uri,
-                              artwork: playlistItem.thumbnailUrl,
-                            });
-                          }}
-                          name="play"
-                        />
-                      ) : (
-                        <Icon onPress={this.pauseAudio} name="pause" />
-                      )}
+                      <PlaybackIcon playlistItem={playlistItem}/>
                     </Left>
                   </CardItem>
                   <CardItem>

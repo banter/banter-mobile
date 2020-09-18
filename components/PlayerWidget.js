@@ -69,12 +69,9 @@ Player.defaultProps = {
 const styles = StyleSheet.create({
   card: {
     width: '100%',
-    elevation: 1,
-    shadowRadius: 2,
     shadowOpacity: 0.1,
     alignItems: 'center',
-    shadowColor: 'black',
-    backgroundColor: 'white',
+    backgroundColor: '#DDDDDD',
     shadowOffset: { width: 0, height: 1 },
   },
   cover: {
