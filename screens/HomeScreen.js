@@ -24,7 +24,7 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    const {navigation, topics, isLoading, error} = this.props;
+    const {navigation, topics, loading, isLoading, error} = this.props;
     if (isLoading) {
       return (
         <View style={{flex: 1, padding: 20}}>
@@ -102,7 +102,7 @@ function mapStateToProps(state) {
   return {
     topics: state.topicState.topics,
     error: state.topicState.errorMessage,
-    isLoading: state.topicState.isLoading,
+    isLoading: state.topicState.loading,
   };
 }
 

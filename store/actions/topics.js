@@ -7,7 +7,6 @@ export function fetchTrendingTopics() {
   return fetchDataGeneral(TOPIC_STORE.TRENDING_TOPICS, getTrendingTopics());
 }
 
-
-// export function fetchCollections() {
-//   return fetchDataGeneral('COLLECTIONS', getCollections());
-// }
+export function fetchCollections() {
+  return fetchDataGeneral(TOPIC_STORE.COLLECTIONS, getCollections());
+}

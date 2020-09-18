@@ -9,7 +9,7 @@ import allReducers from './store/reducers/index.js';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import {fetchTrendingTopics} from './store/actions/topics';
+import {fetchTrendingTopics, fetchCollections} from './store/actions/topics';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import ExperienceCreationScreen from './screens/ExperienceCreationScreen';
 import LandingScreen from './screens/LandingScreen';
@@ -26,6 +26,7 @@ const store = createStore(
 );
 
 store.dispatch(fetchTrendingTopics());
+store.dispatch(fetchCollections());
 
 const App: () => React$Node = () => {
   return (
