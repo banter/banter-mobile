@@ -50,15 +50,13 @@ const App: () => React$Node = () => {
               headerRight: () => (
                 <TouchableOpacity
                   onPress={() => navigation.navigate('ExperienceCreation')}
-                  title="Info"
-                  style={{ marginRight:10 }}
-                >
+                  title="Info">
                   <Text>Done</Text>
                 </TouchableOpacity>
               ),
             })}
           />
-           <Stack.Screen
+          <Stack.Screen
             name="ExperienceCreation"
             options={{headerShown: false}}
             component={ExperienceCreationScreen}
@@ -68,7 +66,7 @@ const App: () => React$Node = () => {
             name="ForYou"
             component={ForYouScreen}
           />
-        <Stack.Screen name="Root" component={BottomTabNavigator} />
+          <Stack.Screen name="Root" component={BottomTabNavigator} />
         <Stack.Screen name="Playlist" component={PlaylistScreen} />
       </Stack.Navigator>
       {/* <BottomTabNavigator /> */}

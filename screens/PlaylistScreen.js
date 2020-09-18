@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Animated} from 'react-native';
 import TrackPlayer from 'react-native-track-player';
+import Player from '../components/PlayerWidget.js';
 import {
   Text,
   Content,
@@ -18,7 +19,6 @@ import {
 } from 'native-base';
 
 import PlayListItem from '../models/PlaylistItem';
-
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -59,19 +59,50 @@ export default class HomeScreen extends React.Component {
 
   async playAudio({id, title, artist, url, artwork, startTime}) {
     const currentlyPlaying = {id, url, title, artist, artwork};
-    // Creates the player
-    TrackPlayer.setupPlayer().then(async () => {
-      // Adds a track to the queue
-      await TrackPlayer.add(currentlyPlaying);
-      this.setState({currentlyPlaying});
-      // Starts playing it
-      TrackPlayer.play();
-    });
+    // Adds a track to the queue
+    await TrackPlayer.add(currentlyPlaying);
+    this.setState({currentlyPlaying});
+    // Starts playing it
+    TrackPlayer.play();
   }
 
   async pauseAudio() {
     await TrackPlayer.pause();
   }
+
+  async isPlaying() {
+    TrackPlayer.getState === TrackPlayer.STATE_PLAYING;
+  }
+
+  async skipToNext() {
+    try {
+      await TrackPlayer.skipToNext();
+    } catch (_) {}
+  }
+
+  async skipToPrevious() {
+    try {
+      await TrackPlayer.skipToPrevious();
+    } catch (_) {}
+  }
+
+  // async togglePlayback() {
+  //   const currentTrack = await TrackPlayer.getCurrentTrack();
+  //   if (currentTrack == null) {
+  //     await TrackPlayer.reset();
+  //     await TrackPlayer.add(playlistData);
+  //     await TrackPlayer.add({
+  //
+  //     });
+  //     await TrackPlayer.play();
+  //   } else {
+  //     if (playbackState === TrackPlayer.STATE_PAUSED) {
+  //       await TrackPlayer.play();
+  //     } else {
+  //       await TrackPlayer.pause();
+  //     }
+  //   }
+  // }
 
   render() {
     const {topic, currentlyPlaying} = this.state;
@@ -86,6 +117,7 @@ export default class HomeScreen extends React.Component {
             }}
             style={styles.topicHeader}
           />
+
           <Content>
             {this.state.playlist.map((playlistItem) => {
               return (
@@ -135,6 +167,11 @@ export default class HomeScreen extends React.Component {
             </Button>
           </Fab>
         </ScrollView>
+        {this.isPlaying() && <Player
+          onNext={this.skipToNext}
+          onPrevious={this.skipToPrevious}
+          onTogglePlayback={this.pauseAudio}
+        />}
       </Container>
     );
   }
