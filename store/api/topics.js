@@ -10,3 +10,8 @@ export async function getCollections() {
   const url = `${API.BASE_URL}${API.TOPICS}${API.COLLECTIONS}?tagType=sport&sinceDaysAgo=3&limit=10`;
   return await getData(url);
 }
+
+export async function getTopics(tagString) {
+  const url = `${API.BASE_URL}${API.TOPICS}?q=${tagString}&limit=10`;
+  return await getData(url);
+}

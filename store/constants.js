@@ -11,6 +11,7 @@ const errorRequest = (name) => {
 
 const trendingTopics = 'FETCH_TRENDING_TOPICS';
 const collections = 'FETCH_COLLECTIONS';
+const queryTopics = 'QUERY_TOPICS';
 
 
 const TOPIC_STORE = {
@@ -20,6 +21,9 @@ const TOPIC_STORE = {
     COLLECTIONS: collections,
     COLLECTIONS_SUCCESS: successfulRequest(collections),
     COLLECTIONS_ERROR: errorRequest(collections),
+    QUERY_TOPICS: queryTopics,
+    QUERY_TOPICS_SUCCESS: successfulRequest(queryTopics),
+    QUERY_TOPICS_ERROR: errorRequest(queryTopics),
   };
 
   export default TOPIC_STORE;

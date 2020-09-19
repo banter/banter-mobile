@@ -9,6 +9,7 @@ Once you're all set up:
 For debugging, I'd highly recommend using [React Native Debugger](https://github.com/jhen0409/react-native-debugger)
 
 To launch it, run `open "rndebugger://set-debugger-loc?host=localhost&port=8081"`
+Windows Executable Sample Location: `C:\programdata\runni_000\react_native_debugger\app-0.11.4\react-native-debugger.exe`
 
 Keep these notes in mind if it's not working
 ```
