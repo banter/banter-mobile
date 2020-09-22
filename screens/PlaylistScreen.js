@@ -2,9 +2,10 @@ import * as React from 'react';
 import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Animated} from 'react-native';
-import TrackPlayer from 'react-native-track-player';
 import Player from '../components/PlayerWidget.js';
 import PlaybackIcon from '../components/PlaybackIcon.js';
+import AudioService from '../services/AudioService.js';
+
 import {
   Text,
   Content,
@@ -58,60 +59,17 @@ export default class HomeScreen extends React.Component {
       });
   }
 
-  async playAudio({id, title, artist, url, artwork, startTime}) {
-    const currentlyPlaying = {id, url, title, artist, artwork};
-    // Adds a track to the queue
-    await TrackPlayer.add(currentlyPlaying);
-    this.setState({currentlyPlaying});
-    // Starts playing it
-    TrackPlayer.play();
+  async togglePlayback({id, title, artist, url, artwork, startTime}) {
+    const currentTrack = AudioService.currentTrack();
+    if (!currentTrack) {
+      await AudioService.startNewTrack({id, title, artist, url, artwork, startTime});
+    } else {
+      AudioService.togglePlayback;
+    }
   }
-
-  async pauseAudio() {
-    await TrackPlayer.pause();
-  }
-  async currentState () {
-    const state = await TrackPlayer.getState();
-    console.log('state :');
-    console.log(state);
-    return state;
-  }
-  async isPlaying() {
-    return await TrackPlayer.getState() === TrackPlayer.STATE_PLAYING;
-  }
-
-  async skipToNext() {
-    try {
-      await TrackPlayer.skipToNext();
-    } catch (_) {}
-  }
-
-  async skipToPrevious() {
-    try {
-      await TrackPlayer.skipToPrevious();
-    } catch (_) {}
-  }
-
-  // async togglePlayback() {
-  //   const currentTrack = await TrackPlayer.getCurrentTrack();
-  //   if (currentTrack == null) {
-  //     await TrackPlayer.reset();
-  //     await TrackPlayer.add(playlistData);
-  //     await TrackPlayer.add({
-  //
-  //     });
-  //     await TrackPlayer.play();
-  //   } else {
-  //     if (playbackState === TrackPlayer.STATE_PAUSED) {
-  //       await TrackPlayer.play();
-  //     } else {
-  //       await TrackPlayer.pause();
-  //     }
-  //   }
-  // }
 
   render() {
-    const {topic, currentlyPlaying} = this.state;
+    const {topic} = this.state;
     return (
       <Container style={styles.container}>
         <ScrollView
@@ -157,10 +115,10 @@ export default class HomeScreen extends React.Component {
             </Button>
           </Fab>
         </ScrollView>
-        {this.isPlaying() && <Player
-          onNext={this.skipToNext}
-          onPrevious={this.skipToPrevious}
-          onTogglePlayback={this.pauseAudio}
+        {AudioService.isPlaying() && <Player
+          onNext={AudioService.skipToNext}
+          onPrevious={AudioService.skipToPrevious}
+          onTogglePlayback={this.togglePlayback}
         />}
       </Container>
     );

@@ -1,41 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TrackPlayer, { usePlaybackState } from 'react-native-track-player';
 import { View } from 'react-native';
 import { Icon } from 'native-base';
+import AudioService from '../services/AudioService.js';
 
 export default function PlaybackIcon(props) {
-  const playbackState = usePlaybackState();
-
   const { playlistItem } = props;
 
-  async function togglePlayback() {
-    const currentTrack = await TrackPlayer.getCurrentTrack();
-    if (currentTrack == null) {
-      await TrackPlayer.reset();
-      await TrackPlayer.add({
-        id: playlistItem.discussionId,
-        title: playlistItem.name,
-        artist: playlistItem.podcastTitle,
-        url: playlistItem.uri,
-        artwork: playlistItem.thumbnailUrl,
-      });
-      await TrackPlayer.play();
-    } else {
-      if (playbackState === TrackPlayer.STATE_PAUSED) {
-        await TrackPlayer.play();
-      } else {
-        await TrackPlayer.pause();
-      }
-    }
+  function playAudio() {
+    AudioService.playOrContinue(playlistItem);
   }
 
   return (
     <View>
-      {playbackState === TrackPlayer.STATE_PAUSED ? (
-        <Icon onPress={togglePlayback} name="play" />
+      {AudioService.trackIsPlaying(playlistItem.discussionId) ? (
+        <Icon onPress={playAudio} name="play" />
       ) : (
-        <Icon onPress={togglePlayback} name="pause" />
+        <Icon onPress={AudioService.pauseAudio} name="pause" />
       )}
     </View>
   );

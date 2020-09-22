@@ -98,7 +98,6 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     topics: state.topicState.topics,
     error: state.topicState.errorMessage,
