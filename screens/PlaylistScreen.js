@@ -3,24 +3,18 @@ import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Animated} from 'react-native';
 import Player from '../components/PlayerWidget.js';
-import PlaybackIcon from '../components/PlaybackIcon.js';
 import AudioService from '../services/AudioService.js';
+import DiscussionCard from '../commons/cards/DiscussionCard';
 
 import {
-  Text,
   Content,
-  Thumbnail,
-  Card,
-  CardItem,
-  Body,
-  Left,
   Icon,
   Container,
   Button,
   Fab,
 } from 'native-base';
 
-import PlayListItem from '../models/PlaylistItem';
+import DiscussionItem from '../models/DiscussionItem';
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -41,16 +35,7 @@ export default class HomeScreen extends React.Component {
           isLoading: false,
           topic: responseJson.primaryTag,
           playlist: responseJson.playlist.map(
-            (playlistItem) =>
-              new PlayListItem({
-                name: playlistItem.description,
-                uri: playlistItem.episodePlaybackUrl,
-                discussionId: playlistItem.discussionId,
-                startTime: playlistItem.startTimeMillis,
-                endTime: playlistItem.endTimeMillis,
-                thumbnailUrl: playlistItem.podcastThumbnailUrl,
-                podcastTitle: playlistItem.podcastTitle,
-              }),
+            playlistItem => new DiscussionItem(playlistItem)
           ),
         });
       })
@@ -84,22 +69,23 @@ export default class HomeScreen extends React.Component {
           <Content>
             {this.state.playlist.map((playlistItem) => {
               return (
-                <Card key={`discussion-${playlistItem.discussionId}-key`}>
-                  <CardItem thumbnail>
-                    <Left>
-                      <Thumbnail source={{uri: playlistItem.thumbnailUrl}} />
-                      <Body>
-                        <Text>{playlistItem.podcastTitle}</Text>
-                      </Body>
-                      <PlaybackIcon playlistItem={playlistItem}/>
-                    </Left>
-                  </CardItem>
-                  <CardItem>
-                    <Left>
-                      <Text>{playlistItem.name}</Text>
-                    </Left>
-                  </CardItem>
-                </Card>
+                // <Card key={`discussion-${playlistItem.discussionId}-key`}>
+                //   <CardItem thumbnail>
+                //     <Left>
+                //       <Thumbnail source={{uri: playlistItem.thumbnailUrl}} />
+                //       <Body>
+                //         <Text>{playlistItem.podcastTitle}</Text>
+                //       </Body>
+                //       <PlaybackIcon discussion={playlistItem}/>
+                //     </Left>
+                //   </CardItem>
+                //   <CardItem>
+                //     <Left>
+                //       <Text>{playlistItem.name}</Text>
+                //     </Left>
+                //   </CardItem>
+                // </Card>
+                <DiscussionCard discussion={playlistItem}/>
               );
             })}
           </Content>
@@ -115,11 +101,11 @@ export default class HomeScreen extends React.Component {
             </Button>
           </Fab>
         </ScrollView>
-        {AudioService.isPlaying() && <Player
+        <Player
           onNext={AudioService.skipToNext}
           onPrevious={AudioService.skipToPrevious}
           onTogglePlayback={this.togglePlayback}
-        />}
+        />
       </Container>
     );
   }

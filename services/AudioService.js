@@ -25,7 +25,14 @@ export default {
 
   async startNewTrack(discussion) {
     const pitchAlgorithm = TrackPlayer.PITCH_ALGORITHM_VOICE;
-    const {discussionId: id, name: title, podcastTitle: artist, uri: url, thumbnailUrl: artwork, startTime} = discussion;
+    const {
+      discussionId: id,
+      description: title,
+      podcastTitle: artist,
+      episodePlaybackUrl: url,
+      podcastThumbnailUrl: artwork,
+      startTimeMillis: startTime,
+    } = discussion;
 
     await TrackPlayer.reset();
     await TrackPlayer.add({id, title, artist, url, artwork, startTime, pitchAlgorithm});

@@ -10,7 +10,7 @@ export default class ForYouScreen extends React.Component {
   render() {
     return (
       <Container>
-<ScrollView style={styles.container}>
+        <ScrollView style={styles.container}>
           <Text style={styles.headerText}>For You</Text>
           <Text style={styles.descriptionText}>Picking Podcasts is hard. So we did that for you.</Text>
           <TopicHeaderCard isIconButton={false} discussion={MOCKDISCUSSIONS}/>

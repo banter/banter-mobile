@@ -13,23 +13,19 @@ import {
 } from 'react-native';
 import ProgressBar from './ProgressBar.js';
 import ControlButton from './ControlButton.js';
+import PlaybackIcon from './PlaybackIcon';
 
 export default function Player(props) {
   const playbackState = usePlaybackState();
-  const [trackTitle, setTrackTitle] = useState('');
-  const [trackArtwork, setTrackArtwork] = useState();
-  const [trackArtist, setTrackArtist] = useState('');
+  const [track, setTrack] = useState('');
   useTrackPlayerEvents(['playback-track-changed'], async event => {
     if (event.type === TrackPlayer.TrackPlayerEvents.PLAYBACK_TRACK_CHANGED) {
-      const track = await TrackPlayer.getTrack(event.nextTrack);
-      const { title, artist, artwork } = track || {};
-      setTrackTitle(title);
-      setTrackArtist(artist);
-      setTrackArtwork(artwork);
+      const currentTrack = await TrackPlayer.getTrack(event.nextTrack);
+      setTrack(currentTrack);
     }
   });
 
-  const { style, onNext, onPrevious, onTogglePlayback } = props;
+  const { onNext, onPrevious, onTogglePlayback } = props;
 
   var middleButtonText = 'Play';
 
@@ -41,16 +37,18 @@ export default function Player(props) {
   }
 
   return (
-    <View style={[styles.card, style]}>
-      <Image style={styles.cover} source={{ uri: trackArtwork }} />
-      <ProgressBar />
-      <Text style={styles.title}>{trackTitle}</Text>
-      <Text style={styles.artist}>{trackArtist}</Text>
-      <View style={styles.controls}>
-        <ControlButton title={'<<'} onPress={onPrevious} />
-        <ControlButton title={middleButtonText} onPress={onTogglePlayback} />
-        <ControlButton title={'>>'} onPress={onNext} />
-      </View>
+    <View>
+      {track ? <View style={styles.card}>
+        <Image style={styles.cover} source={{ uri: track.artwork }} />
+        <ProgressBar />
+        <Text style={styles.title}>{track.title}</Text>
+        <Text style={styles.artist}>{track.artist}</Text>
+        <View style={styles.controls}>
+          <ControlButton title={'<<'} onPress={onPrevious} />
+          <PlaybackIcon discussion={track}/>
+          <ControlButton title={'>>'} onPress={onNext} />
+        </View>
+      </View> : null}
     </View>
   );
 }

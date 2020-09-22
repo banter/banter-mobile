@@ -7,6 +7,7 @@ export default class PlaylistItem {
     endTime,
     thumbnailUrl,
     podcastTitle,
+    tags,
   }) {
     this.name = name;
     this.uri = uri;
@@ -15,5 +16,6 @@ export default class PlaylistItem {
     this.endTime = endTime;
     this.thumbnailUrl = thumbnailUrl;
     this.podcastTitle = podcastTitle;
+    this.tags = tags;
   }
 }
