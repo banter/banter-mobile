@@ -3,11 +3,11 @@ import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { Icon } from 'native-base';
-import TrackPlayer, { useTrackPlayerEvents, TrackPlayerEvents, STATE_PLAYING, STATE_BUFFERING } from 'react-native-track-player';
+import TrackPlayer, { useTrackPlayerEvents, TrackPlayerEvents, STATE_PLAYING } from 'react-native-track-player';
 
 import AudioService from '../services/AudioService.js';
 
-const events = [
+const watchedEvents = [
   TrackPlayerEvents.PLAYBACK_STATE,
   TrackPlayerEvents.PLAYBACK_ERROR,
   TrackPlayerEvents.PLAYBACK_TRACK_CHANGED,
@@ -18,7 +18,7 @@ export default function PlaybackIcon(props) {
   const [playerState, setPlayerState] = useState(null);
   const [currentTrack, setCurrentTrack] = useState('');
 
-  useTrackPlayerEvents(events, async (event) => {
+  useTrackPlayerEvents(watchedEvents, async (event) => {
     switch (event.type) {
       case TrackPlayerEvents.PLAYBACK_ERROR:
         console.warn('An error occured while playing the current track.');
@@ -35,6 +35,7 @@ export default function PlaybackIcon(props) {
     }
   });
   const contentIsPlaying = playerState === STATE_PLAYING;
+
   const playingThisDiscussion = currentTrack.id === discussion.discussionId;
 
   const isPlaying = playingThisDiscussion && contentIsPlaying;

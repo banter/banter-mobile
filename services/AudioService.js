@@ -10,7 +10,7 @@ export default {
   },
 
   async playOrContinue (discussion) {
-    if (this.currentTrack().discussionId === discussion.discussionId) {
+    if (this.currentTrack().discussionId === discussion?.discussionId) {
       TrackPlayer.play();
     } else {
       this.startNewTrack(discussion);
