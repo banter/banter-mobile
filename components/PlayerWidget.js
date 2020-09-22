@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TrackPlayer, {
-  usePlaybackState,
   useTrackPlayerEvents,
 } from 'react-native-track-player';
 import {
@@ -16,7 +15,6 @@ import ControlButton from './ControlButton.js';
 import PlaybackIcon from './PlaybackIcon';
 
 export default function Player(props) {
-  const playbackState = usePlaybackState();
   const [track, setTrack] = useState('');
   useTrackPlayerEvents(['playback-track-changed'], async event => {
     if (event.type === TrackPlayer.TrackPlayerEvents.PLAYBACK_TRACK_CHANGED) {
@@ -25,16 +23,7 @@ export default function Player(props) {
     }
   });
 
-  const { onNext, onPrevious, onTogglePlayback } = props;
-
-  var middleButtonText = 'Play';
-
-  if (
-    playbackState === TrackPlayer.STATE_PLAYING ||
-    playbackState === TrackPlayer.STATE_BUFFERING
-  ) {
-    middleButtonText = 'Pause';
-  }
+  const { onNext, onPrevious } = props;
 
   return (
     <View>

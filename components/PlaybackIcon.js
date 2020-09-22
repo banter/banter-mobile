@@ -1,12 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { Icon } from 'native-base';
+import TrackPlayer, { useTrackPlayerEvents, TrackPlayerEvents, STATE_PLAYING, STATE_BUFFERING } from 'react-native-track-player';
+
 import AudioService from '../services/AudioService.js';
+
+const events = [
+  TrackPlayerEvents.PLAYBACK_STATE,
+  TrackPlayerEvents.PLAYBACK_ERROR,
+  TrackPlayerEvents.PLAYBACK_TRACK_CHANGED,
+];
 
 export default function PlaybackIcon(props) {
   const { discussion } = props;
+  const [playerState, setPlayerState] = useState(null);
+  const [currentTrack, setCurrentTrack] = useState('');
+
+  useTrackPlayerEvents(events, async (event) => {
+    switch (event.type) {
+      case TrackPlayerEvents.PLAYBACK_ERROR:
+        console.warn('An error occured while playing the current track.');
+        break;
+      case TrackPlayerEvents.PLAYBACK_STATE:
+        setPlayerState(event.state);
+        break;
+      case TrackPlayerEvents.PLAYBACK_TRACK_CHANGED:
+        const playingTrack = await TrackPlayer.getTrack(event.nextTrack);
+        setCurrentTrack(playingTrack);
+        break;
+      default:
+        break;
+    }
+  });
+  const contentIsPlaying = playerState === STATE_PLAYING;
+  const playingThisDiscussion = currentTrack.id === discussion.discussionId;
+
+  const isPlaying = playingThisDiscussion && contentIsPlaying;
 
   function playAudio() {
     AudioService.playOrContinue(discussion);
@@ -14,10 +45,10 @@ export default function PlaybackIcon(props) {
 
   return (
     <View>
-      {AudioService.trackIsPlaying(discussion.discussionId) ? (
-        <Icon style={styles.icon} classonPress={playAudio} name="play" />
+      {!isPlaying ? (
+        <Icon style={styles.icon} onPress={playAudio} name="play" />
       ) : (
-        <Icon style={styles.icon} classonPress={AudioService.pauseAudio} name="pause" />
+        <Icon style={styles.icon} onPress={AudioService.pauseAudio} name="pause" />
       )}
     </View>
   );

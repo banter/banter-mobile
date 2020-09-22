@@ -1,8 +1,6 @@
-import TrackPlayer, { usePlaybackState } from 'react-native-track-player';
+import TrackPlayer from 'react-native-track-player';
 
 export default {
-  usePlaybackState,
-
   async currentTrack() {
     return await TrackPlayer.getCurrentTrack();
   },

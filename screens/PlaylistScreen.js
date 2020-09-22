@@ -67,27 +67,13 @@ export default class HomeScreen extends React.Component {
             style={styles.topicHeader}
           />
           <Content>
-            {this.state.playlist.map((playlistItem) => {
-              return (
-                // <Card key={`discussion-${playlistItem.discussionId}-key`}>
-                //   <CardItem thumbnail>
-                //     <Left>
-                //       <Thumbnail source={{uri: playlistItem.thumbnailUrl}} />
-                //       <Body>
-                //         <Text>{playlistItem.podcastTitle}</Text>
-                //       </Body>
-                //       <PlaybackIcon discussion={playlistItem}/>
-                //     </Left>
-                //   </CardItem>
-                //   <CardItem>
-                //     <Left>
-                //       <Text>{playlistItem.name}</Text>
-                //     </Left>
-                //   </CardItem>
-                // </Card>
-                <DiscussionCard discussion={playlistItem}/>
-              );
-            })}
+            {
+              this.state.playlist
+                .map(playlistItem => <DiscussionCard
+                  key={`card-${playlistItem.discussionId}`}
+                  discussion={playlistItem}/>
+                )
+            }
           </Content>
           <Fab
             active={this.state.active}
