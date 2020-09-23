@@ -34,23 +34,14 @@ export default function PlaybackIcon(props) {
         break;
     }
   });
-  const contentIsPlaying = playerState === STATE_PLAYING;
 
-  const playingThisDiscussion = currentTrack.id === discussion.discussionId;
-
-  const isPlaying = playingThisDiscussion && contentIsPlaying;
-
-  function playAudio() {
-    AudioService.playOrContinue(discussion);
-  }
-
+  const isPlaying = (currentTrack.id === discussion.discussionId) && (playerState === STATE_PLAYING);
   return (
     <View>
-      {!isPlaying ? (
-        <Icon style={styles.icon} onPress={playAudio} name="play" />
-      ) : (
-        <Icon style={styles.icon} onPress={AudioService.pauseAudio} name="pause" />
-      )}
+        <Icon
+          style={styles.icon}
+          onPress={isPlaying ? AudioService.pauseAudio : () => AudioService.playOrContinue(discussion)}
+          name={isPlaying ? 'pause' : 'play'} />
     </View>
   );
 }

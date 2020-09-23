@@ -44,12 +44,12 @@ export default class HomeScreen extends React.Component {
       });
   }
 
-  async togglePlayback({id, title, artist, url, artwork, startTime}) {
+  async togglePlayback(discussionItem) {
     const currentTrack = AudioService.currentTrack();
     if (!currentTrack) {
-      await AudioService.startNewTrack({id, title, artist, url, artwork, startTime});
+      await AudioService.startNewTrack(discussionItem);
     } else {
-      AudioService.togglePlayback;
+      AudioService.togglePlayback();
     }
   }
 
