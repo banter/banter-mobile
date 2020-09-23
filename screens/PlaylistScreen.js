@@ -44,15 +44,6 @@ export default class HomeScreen extends React.Component {
       });
   }
 
-  async togglePlayback(discussionItem) {
-    const currentTrack = AudioService.currentTrack();
-    if (!currentTrack) {
-      await AudioService.startNewTrack(discussionItem);
-    } else {
-      AudioService.togglePlayback();
-    }
-  }
-
   render() {
     const {topic} = this.state;
     return (
@@ -87,11 +78,7 @@ export default class HomeScreen extends React.Component {
             </Button>
           </Fab>
         </ScrollView>
-        <FooterPlayer
-          onNext={AudioService.skipToNext}
-          onPrevious={AudioService.skipToPrevious}
-          onTogglePlayback={this.togglePlayback}
-        />
+        <FooterPlayer/>
       </Container>
     );
   }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import TrackPlayer, {
   useTrackPlayerEvents, TrackPlayerEvents, STATE_PLAYING,
 } from 'react-native-track-player';
@@ -8,7 +7,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ViewPropTypes,
 } from 'react-native';
 import { Icon } from 'native-base';
 
@@ -42,7 +40,6 @@ export default function FooterPlayer(props) {
     }
   });
 
-  const { onNext, onPrevious } = props;
   const isPlaying = playerState === STATE_PLAYING;
 
   return (
@@ -53,28 +50,17 @@ export default function FooterPlayer(props) {
         <Text style={styles.title}>{track.title}</Text>
         <Text style={styles.artist}>{track.artist}</Text>
         <View style={styles.controls}>
-          <ControlButton title={'<<'} onPress={onPrevious} />
+          <ControlButton title={'<<'} onPress={AudioService.skipToPrevious} />
           <Icon
             style={styles.icon}
-            onPress={isPlaying ? AudioService.playOrContinue : AudioService.pauseAudio}
+            onPress={AudioService.togglePlayback}
             name={isPlaying ? 'pause' : 'play'}  />
-          <ControlButton title={'>>'} onPress={onNext} />
+          <ControlButton title={'>>'} onPress={AudioService.skipToNext} />
         </View>
       </View> : null}
     </View>
   );
 }
-
-FooterPlayer.propTypes = {
-  style: ViewPropTypes.style,
-  onNext: PropTypes.func.isRequired,
-  onPrevious: PropTypes.func.isRequired,
-  onTogglePlayback: PropTypes.func.isRequired,
-};
-
-FooterPlayer.defaultProps = {
-  style: {},
-};
 
 const styles = StyleSheet.create({
   card: {

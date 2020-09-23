@@ -34,13 +34,14 @@ export default function PlaybackIcon(props) {
         break;
     }
   });
+  const playingThisDiscussion = currentTrack.id === discussion.discussionId;
+  const isPlaying = playingThisDiscussion && playerState === STATE_PLAYING;
 
-  const isPlaying = (currentTrack.id === discussion.discussionId) && (playerState === STATE_PLAYING);
   return (
     <View>
         <Icon
           style={styles.icon}
-          onPress={isPlaying ? AudioService.pauseAudio : () => AudioService.playOrContinue(discussion)}
+          onPress={playingThisDiscussion ? AudioService.togglePlayback : () => AudioService.startNewTrack(discussion)}
           name={isPlaying ? 'pause' : 'play'} />
     </View>
   );
