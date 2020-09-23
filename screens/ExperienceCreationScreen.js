@@ -13,7 +13,7 @@ Creating an experience thats just for you.
           <SoundAnimation />
           <Button
                     onPress={() =>
-                      navigation.navigate('ForYou')
+                      navigation.navigate('App')
                     }
             title="Begin"/>
       </View>

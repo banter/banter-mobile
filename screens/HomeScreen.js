@@ -15,6 +15,7 @@ import {
 } from 'native-base';
 
 import {connect} from 'react-redux';
+import TopicCarousel from '../containers/TopicCarousel';
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -24,12 +25,23 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    const {navigation, topics, isLoading, error} = this.props;
-    if (isLoading) {
+    const {
+      navigation,
+      trendingTopics,
+      collections,
+      isTrendingTopicsLoading,
+      isCollectionsLoading,
+      isLoading,
+      error,
+    } = this.props;
+    if (isCollectionsLoading) {
       return (
-        <View style={{flex: 1, padding: 20}}>
+        <View style={{
+          flex: 1,
+          padding: 20,
+        }}>
           <Content>
-            <Spinner color="black" />
+            <Spinner color="black"/>
           </Content>
         </View>
       );
@@ -41,6 +53,21 @@ class HomeScreen extends React.Component {
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
+          <TopicCarousel itemsPerInterval={1} relatedTopics={trendingTopics}/>
+            {collections.length > 0
+              ? (collections.map((collection, index) => {
+                return (<TopicCarousel
+                  key = {index}
+                  itemsPerInterval={1}
+                  primaryTopic={collection.primaryTopic}
+                  relatedTopics={collection.relatedTopics}/>);
+              }))
+              : (
+                <View>
+                  <Text>No Stuff</Text>
+                  <Text>{error}</Text>
+                </View>
+              )}
           <List>
             {topics.length > 0 ? (
               topics.map((topic) => {
@@ -93,16 +120,20 @@ HomeScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'black',
   },
 });
 
 function mapStateToProps(state) {
   return {
-    topics: state.topicState.topics,
-    error: state.topicState.errorMessage,
+trendingTopics: state.topicState.trendingTopics, 
+collections: state.topicState.collections, 
+error: state.topicState.errorMessage, 
+isTrendingTopicsLoading: state.topicState.isTrendingTopicsLoading, 
+isCollectionsLoading: state.topicState.isCollectionsLoading,
     isLoading: state.topicState.isLoading,
-  };
+topics: state.topicState.topics,
+};
 }
 
 export default connect(mapStateToProps)(HomeScreen);
