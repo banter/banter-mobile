@@ -1,13 +1,14 @@
 import React from 'react';
-import { Share, View, Button } from 'react-native';
+import { Share, View, Button, Platform } from 'react-native';
 import { Icon } from 'native-base';
 
 const ShareExample = () => {
   const onShare = async () => {
     try {
+        let shareMessage = 'Banter, the new way to listen to sports Podcasts.';
+        shareMessage =  Platform.OS === 'ios' ? shareMessage : shareMessage + ' https://banteraudio.com';
       const result = await Share.share({
-        message:
-          'Banter, the new way to listen to sports Podcasts. https://banteraudio.com',
+        message: shareMessage,
           url: 'https://banteraudio.com',
           title:'Banter',
       });
