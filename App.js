@@ -15,8 +15,9 @@ import ExperienceCreationScreen from './screens/ExperienceCreationScreen';
 import LandingScreen from './screens/LandingScreen';
 import ForYouScreen from './screens/ForYouScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import HomeScreen from './screens/HomeScreen';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import FooterPlayer from './components/FooterPlayer.js';
 
 const Stack = createStackNavigator();
 
@@ -77,8 +78,8 @@ const App : () => React$Node = () => {
             name="ForYou"
             component={ForYouScreen}/>
           <Stack.Screen name="Playlist" component={PlaylistScreen}/>
-        </Stack.Navigator>
-        {/* <BottomTabNavigator /> */}
+      </Stack.Navigator>
+      <FooterPlayer/>
       </NavigationContainer>
     </Provider>
   );

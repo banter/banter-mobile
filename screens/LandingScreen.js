@@ -1,14 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
+import { Text, Button, Container } from 'native-base';
 import OauthButtons from '../commons/oauth/OauthButtons';
 import SoundAnimation from '../commons/animations/SoundAnimation';
+import { useNavigation } from '@react-navigation/native';
 
 export default class LandingScreen extends React.Component {
   render() {
-      return (
-        <View style={styles.container}>
-            <Image
-            style={{width: 300, height: 70,  margin: 15}}
+
+  const {navigation} = this.props;
+  return (
+        <Container style={styles.container}>
+          <Image
+            style={styles.headerImage}
             source={require('../assets/Banter_header.png')}
           />
                   <Text style={styles.sloganText}>
@@ -17,7 +21,13 @@ export default class LandingScreen extends React.Component {
           </Text>
           <SoundAnimation />
           <OauthButtons navigation={this.props.navigation}/>
-        </View>
+          <Button bordered success style={styles.exploreButton}
+          onPress={() =>
+            navigation.navigate('Root')
+          }>
+            <Text>Explore</Text>
+          </Button>
+        </Container>
       );
   }
 }
@@ -35,5 +45,11 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 25,
   },
-
+  exploreButton: {
+    alignItems: 'center',
+    margin: 'auto',
+    marginTop: 25,
+    alignSelf: 'center',
+  },
+  headerImage: {width: 300, height: 70,  margin: 15},
 });
