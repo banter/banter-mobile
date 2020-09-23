@@ -2,7 +2,7 @@ import * as React from 'react';
 import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Animated} from 'react-native';
-import Player from '../components/PlayerWidget.js';
+import FooterPlayer from '../components/FooterPlayer.js';
 import AudioService from '../services/AudioService.js';
 import DiscussionCard from '../commons/cards/DiscussionCard';
 
@@ -87,7 +87,7 @@ export default class HomeScreen extends React.Component {
             </Button>
           </Fab>
         </ScrollView>
-        <Player
+        <FooterPlayer
           onNext={AudioService.skipToNext}
           onPrevious={AudioService.skipToPrevious}
           onTogglePlayback={this.togglePlayback}

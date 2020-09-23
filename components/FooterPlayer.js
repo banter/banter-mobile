@@ -21,7 +21,7 @@ const watchedEvents = [
   TrackPlayerEvents.PLAYBACK_ERROR,
   TrackPlayerEvents.PLAYBACK_TRACK_CHANGED,
 ];
-export default function Player(props) {
+export default function FooterPlayer(props) {
   const [track, setTrack] = useState('');
   const [playerState, setPlayerState] = useState(null);
 
@@ -65,14 +65,14 @@ export default function Player(props) {
   );
 }
 
-Player.propTypes = {
+FooterPlayer.propTypes = {
   style: ViewPropTypes.style,
   onNext: PropTypes.func.isRequired,
   onPrevious: PropTypes.func.isRequired,
   onTogglePlayback: PropTypes.func.isRequired,
 };
 
-Player.defaultProps = {
+FooterPlayer.defaultProps = {
   style: {},
 };
 
