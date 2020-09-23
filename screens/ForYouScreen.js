@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import DiscussionCard from '../commons/cards/DiscussionCard';
-import BottomNavigation from '../commons/footers/BottomNavigation';
 import {ScrollView} from 'react-native-gesture-handler';
 import MOCKDISCUSSIONS from '../constants/mock-discussions';
 import {Container, Footer,Text, Button, FooterTab, Icon} from 'native-base';
@@ -19,7 +18,6 @@ export default class ForYouScreen extends React.Component {
           <DiscussionCard discussion={MOCKDISCUSSIONS}/>
           <DiscussionCard discussion={MOCKDISCUSSIONS}/>
         </ScrollView>
-        <BottomNavigation />
       </Container>
 
     );

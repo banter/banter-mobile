@@ -4,7 +4,6 @@ import { Container, Header, Button,
   Text, Item, Icon, Input,
   ListItem, Grid, Col, List, TouchableOpacity }
   from 'native-base';
-import SoundAnimation from '../commons/animations/SoundAnimation';
 import MOCKTEAMS from '../constants/mock-teams';
 import TeamSelectionScroll from '../containers/TeamSelectionScroll';
 import _ from 'lodash';

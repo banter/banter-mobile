@@ -1,17 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
-import { Container, Header, Button,
+import { StyleSheet, View  } from 'react-native';
+import { Container, Header,
   Text, Item, Icon, Input,
-  ListItem, Grid, Col, List, TouchableOpacity, Body, Spinner }
+  ListItem, List, Body, Spinner }
   from 'native-base';
-import SoundAnimation from '../commons/animations/SoundAnimation';
-import MOCKTEAMS from '../constants/mock-teams';
-import TeamSelectionScroll from '../containers/TeamSelectionScroll';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { queryTopics } from '../store/actions/topics';
-
-const teams = MOCKTEAMS;
 
 class ExploreScreen extends React.Component {
 

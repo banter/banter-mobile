@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
-import OauthButtons from '../commons/oauth/OauthButtons';
-import SoundAnimation from '../commons/animations/SoundAnimation';
+
+import OauthButtons from '../components/atoms/oauth/OauthButtons';
+import SoundAnimation from '../components/atoms/animations/SoundAnimation';
+
 
 export default class LandingScreen extends React.Component {
   render() {

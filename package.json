@@ -25,11 +25,11 @@
     "react-native-social-buttons": "^1.1.5",
     "react-native-swift": "^1.2.3",
     "react-native-track-player": "^1.2.3",
+    "react-native-vector-icons": "^7.1.0",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0",
-    "react-native-vector-icons": "^7.1.0"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",

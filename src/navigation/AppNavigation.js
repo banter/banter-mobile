@@ -1,13 +1,13 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as React from 'react';
 
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../../screens/HomeScreen';
 import {Icon} from 'native-base';
-import OnboardingScreen from '../screens/OnboardingScreen';
-import ExperienceCreationScreen from '../screens/ExperienceCreationScreen';
+import OnboardingScreen from '../../screens/OnboardingScreen';
+import ExperienceCreationScreen from '../../screens/ExperienceCreationScreen';
 import {createStackNavigator} from '@react-navigation/stack';
-import ForYouScreen from '../screens/ForYouScreen';
-import ExploreScreen from '../screens/ExploreScreen';
+import ForYouScreen from '../../screens/ForYouScreen';
+import ExploreScreen from '../../screens/ExploreScreen';
 
 const AppNavigator = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'App';
@@ -21,7 +21,8 @@ function HomeStack() {
         options={{
         headerShown: false,
       }}
-        component={HomeScreen}name="Home"/>
+        component={HomeScreen}
+        name="Home"/>
     </Stack.Navigator>
   );
 }
