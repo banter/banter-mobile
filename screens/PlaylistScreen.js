@@ -2,8 +2,7 @@ import * as React from 'react';
 import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Animated} from 'react-native';
-import FooterPlayer from '../components/FooterPlayer.js';
-import AudioService from '../services/AudioService.js';
+
 import DiscussionCard from '../commons/cards/DiscussionCard';
 
 import {
@@ -78,7 +77,6 @@ export default class HomeScreen extends React.Component {
             </Button>
           </Fab>
         </ScrollView>
-        <FooterPlayer/>
       </Container>
     );
   }

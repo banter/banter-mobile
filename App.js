@@ -16,6 +16,7 @@ import LandingScreen from './screens/LandingScreen';
 import ForYouScreen from './screens/ForYouScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import FooterPlayer from './components/FooterPlayer.js';
 
 const Stack = createStackNavigator();
 
@@ -69,6 +70,8 @@ const App: () => React$Node = () => {
           <Stack.Screen name="Root" component={BottomTabNavigator} />
         <Stack.Screen name="Playlist" component={PlaylistScreen} />
       </Stack.Navigator>
+      <FooterPlayer/>
+
       {/* <BottomTabNavigator /> */}
       </NavigationContainer>
     </Provider>
