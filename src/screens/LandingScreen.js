@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 
 import OauthButtons from '../components/atoms/oauth/OauthButtons';
+import ShareExample from '../components/atoms/buttons/ShareButton';
 import SoundAnimation from '../components/atoms/animations/SoundAnimation';
 
 
@@ -18,6 +19,7 @@ export default class LandingScreen extends React.Component {
             Listen to Sports Talk
           </Text>
           <SoundAnimation />
+          <ShareExample />
           <OauthButtons navigation={this.props.navigation}/>
         </View>
       );
