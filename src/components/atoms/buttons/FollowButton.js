@@ -13,7 +13,7 @@ export default class FollowButton extends React.Component {
     let button;
     if (this.props.isIconButton) {
       button = <TouchableOpacity onPress={() => alert('Following this thing')}>
-        <Thumbnail large source={require('../../assets/giants.png')}/>
+        <Thumbnail large source={require('../../../assets/giants.png')}/>
         <Text style={styles.buttonText}>{this.props.text}</Text>
       </TouchableOpacity>;
     } else {

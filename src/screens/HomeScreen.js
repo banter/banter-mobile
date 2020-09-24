@@ -15,7 +15,7 @@ import {
 } from 'native-base';
 
 import {connect} from 'react-redux';
-import TopicCarousel from '../containers/TopicCarousel';
+import TopicCarousel from '../../containers/TopicCarousel';
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -86,7 +86,15 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  return {trendingTopics: state.topicState.trendingTopics, collections: state.topicState.collections, error: state.topicState.errorMessage, isTrendingTopicsLoading: state.topicState.isTrendingTopicsLoading, isCollectionsLoading: state.topicState.isCollectionsLoading};
+  return {
+trendingTopics: state.topicState.trendingTopics,
+collections: state.topicState.collections,
+error: state.topicState.errorMessage,
+isTrendingTopicsLoading: state.topicState.isTrendingTopicsLoading,
+isCollectionsLoading: state.topicState.isCollectionsLoading,
+    isLoading: state.topicState.isLoading,
+topics: state.topicState.topics,
+};
 }
 
 export default connect(mapStateToProps)(HomeScreen);

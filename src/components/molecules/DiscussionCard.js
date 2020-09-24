@@ -9,8 +9,10 @@ import {
   Grid,
   Col,
 } from 'native-base';
-import TagList from '../../containers/TagList';
-import DiscussionItem from '../../models/DiscussionItem';
+import TagList from '../organisms/TagList';
+import AudioService from '../../../services/AudioService';
+import DiscussionItem from '../models/DiscussionItem';
+import PlaybackIcon from '../atoms/PlaybackIcon';
 
 export default class DiscussionCard extends React.Component {
   constructor(props) {
@@ -62,20 +64,15 @@ export default class DiscussionCard extends React.Component {
             <Icon
               type="AntDesign"
               name="tag"
-              style={{
-              color: 'white',
-}}/>
+              style={{color: 'white'}}
+            />
             <TagList tags={this.discussion.tags}/>
           </CardItem>
 
           <CardItem style={styles.discussionCardItem}>
             <Grid>
               <Col style={{ width: 50 }}>
-                <TouchableOpacity onPress={this.onPress}>
-                  <Text>
-                    <Icon name="play" style={styles.largeIconStyle}/>
-                  </Text>
-                </TouchableOpacity>
+                <PlaybackIcon discussion={this.discussion}/>
               </Col>
               <Col style={styles.dateAndTimeStyle}>
                 <Text style={styles.descriptionText}>

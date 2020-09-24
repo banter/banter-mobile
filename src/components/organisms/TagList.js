@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import TagButton from '../commons/buttons/TagButton';
+import TagButton from '../atoms/buttons/TagButton';
 import _ from 'lodash';
 
 export default class TagList extends React.Component {

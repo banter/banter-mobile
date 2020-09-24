@@ -9,9 +9,9 @@ import {
   Grid,
   Col,
 } from 'native-base';
-import TagList from '../../containers/TagList';
-import DiscussionItem from '../../models/DiscussionItem';
-import FollowButton from '../buttons/FollowButton';
+import TagList from '../organisms/TagList';
+import DiscussionItem from '../models/DiscussionItem';
+import FollowButton from '../atoms/buttons/FollowButton';
 
 
 export default class TopicHeaderCard extends React.Component {

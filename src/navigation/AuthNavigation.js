@@ -1,10 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as React from 'react';
 
-import HomeScreen from '../../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen';
 import {Icon, Text} from 'native-base';
-import OnboardingScreen from '../../screens/OnboardingScreen';
-import ExperienceCreationScreen from '../../screens/ExperienceCreationScreen';
+import OnboardingScreen from '../screens/OnboardingScreen';
+import ExperienceCreationScreen from '../screens/ExperienceCreationScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import LandingScreen from '../screens/LandingScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -36,12 +36,6 @@ export default function AuthApp({navigation, route}) {
           </TouchableOpacity>
         ),
       })}/>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-        title: 'Welcome',
-      }}/>
       <Stack.Screen
         name="ExperienceCreation"
         options={{

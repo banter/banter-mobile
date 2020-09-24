@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View} from 'react-native';
-import FollowButton from '../commons/buttons/FollowButton';
+import FollowButton from '../atoms/buttons/FollowButton';
 import _ from 'lodash';
 
 export default class TeamSelectionScroll extends React.Component {

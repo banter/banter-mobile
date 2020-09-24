@@ -4,8 +4,8 @@ import { Container, Header, Button,
   Text, Item, Icon, Input,
   ListItem, Grid, Col, List, TouchableOpacity }
   from 'native-base';
-import MOCKTEAMS from '../constants/mock-teams';
-import TeamSelectionScroll from '../containers/TeamSelectionScroll';
+import MOCKTEAMS from '../../constants/mock-teams';
+import TeamSelectionScroll from '../components/organisms/TeamSelectionScroll';
 import _ from 'lodash';
 
 const teams = MOCKTEAMS;

@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -10,13 +9,15 @@ import thunk from 'redux-thunk';
 import {fetchTrendingTopics, fetchCollections} from './store/actions/topics';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import AuthApp from './src/navigation/AuthNavigation';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import FooterPlayer from './src/components/atoms/FooterPlayer';
+
+const Stack = createStackNavigator();
 
 const store = createStore(allReducers, composeWithDevTools(applyMiddleware(thunk)));
 
 store.dispatch(fetchTrendingTopics());
 store.dispatch(fetchCollections());
-
-const Stack = createStackNavigator();
 
 const App : () => React$Node = () => {
 
@@ -40,9 +41,10 @@ const App : () => React$Node = () => {
             name="App"
             component={MainApp}/>
         </Stack.Navigator>
+        <FooterPlayer />
       </NavigationContainer>
     </Provider>
   );
-};
+        };
 
 export default App;

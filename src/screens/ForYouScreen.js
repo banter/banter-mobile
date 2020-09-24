@@ -1,15 +1,15 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import DiscussionCard from '../commons/cards/DiscussionCard';
+import DiscussionCard from '../components/molecules/DiscussionCard';
 import {ScrollView} from 'react-native-gesture-handler';
-import MOCKDISCUSSIONS from '../constants/mock-discussions';
+import MOCKDISCUSSIONS from '../../constants/mock-discussions';
 import {Container, Footer,Text, Button, FooterTab, Icon} from 'native-base';
-import TopicHeaderCard from '../commons/cards/TopicHeaderCard';
+import TopicHeaderCard from '../components/molecules/TopicHeaderCard';
 export default class ForYouScreen extends React.Component {
   render() {
     return (
       <Container>
-<ScrollView style={styles.container}>
+        <ScrollView style={styles.container}>
           <Text style={styles.headerText}>For You</Text>
           <Text style={styles.descriptionText}>Picking Podcasts is hard. So we did that for you.</Text>
           <TopicHeaderCard isIconButton={false} discussion={MOCKDISCUSSIONS}/>

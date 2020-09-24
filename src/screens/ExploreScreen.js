@@ -6,7 +6,7 @@ import { Container, Header,
   from 'native-base';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { queryTopics } from '../store/actions/topics';
+import { queryTopics } from '../../store/actions/topics';
 
 class ExploreScreen extends React.Component {
 
