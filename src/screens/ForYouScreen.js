@@ -4,7 +4,7 @@ import DiscussionCard from '../components/molecules/DiscussionCard';
 import {ScrollView} from 'react-native-gesture-handler';
 import MOCKDISCUSSIONS from '../../constants/mock-discussions';
 import {Container, Footer,Text, Button, FooterTab, Icon} from 'native-base';
-import TopicHeaderCard from '../components/molecules/TopicHeaderCard';
+import TopicHeaderCard from '../components/organisms/TopicHeaderCard';
 export default class ForYouScreen extends React.Component {
   render() {
     return (

@@ -15,7 +15,7 @@ import {
 } from 'native-base';
 
 import {connect} from 'react-redux';
-import TopicCarousel from '../../containers/TopicCarousel';
+import { TopicCarousel } from '../components/organisms';
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);

@@ -9,15 +9,13 @@ import {
   Grid,
   Col,
 } from 'native-base';
-import TagList from '../organisms/TagList';
-import DiscussionItem from '../models/DiscussionItem';
-import FollowButton from '../atoms/buttons/FollowButton';
-
+import {FollowButton} from '../atoms';
 
 export default class TopicHeaderCard extends React.Component {
   constructor(props) {
     super(props);
-    this.discussion = new DiscussionItem(this.props.discussion);
+    // FIXME this.props.topic.imageUrl works however, this.topic.imageUrl DOES NOT work
+    this.topic = this.props.topic;
   }
   onPress() {
     alert('Preses');
@@ -34,19 +32,21 @@ export default class TopicHeaderCard extends React.Component {
                 <Thumbnail
                   style={styles.largeThumbnailStyle}
                   square
-                  source={{uri: this.discussion.podcastThumbnailUrl}}/>
+                  source={{
+                  uri: this.props.topic.imageUrl,
+                }}/>
               </Col>
               <Col style={styles.headerContent}>
                 <Text numberOfLines={2} style={styles.headerText}>
-                  {/* {this.discussion.episodeTitle} */}
-                  Lebron James
-                  </Text>
-                  <FollowButton style={styles.headerText}/>
+                  {this.props.topic.value}
+                </Text>
+                <FollowButton style={styles.headerText}/>
               </Col>
             </Grid>
           </CardItem >
           <CardItem style={styles.discussionCardTagItem}>
-            <TagList tags={[{'value':'Lakers'}, {'value':'NBA'}, {'value':'Basketball'}]}/>
+            {/* TODO Add Future Associated Tags */}
+            {/* <TagList tags={[{'value':'Lakers'}, {'value':'NBA'}, {'value':'Basketball'}]}/> */}
           </CardItem>
         </Card>
 
@@ -68,12 +68,11 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
   headerContent: {
-justifyContent: 'center',
+    justifyContent: 'center',
   },
 
   discussionCard: {
-    // backgroundColor: CARD_COLOR,
-    // alignItems: 'center',
+    // backgroundColor: CARD_COLOR, alignItems: 'center',
     width: '90%',
     borderRadius: CARD_RADIUS,
   },
@@ -91,7 +90,7 @@ justifyContent: 'center',
   largeThumbnailStyle: {
     borderRadius: 10,
     height: LARGE_IMAGE_SIZE,
-    width:LARGE_IMAGE_SIZE,
+    width: LARGE_IMAGE_SIZE,
   },
 
   discussionCardItem: {
@@ -116,7 +115,7 @@ justifyContent: 'center',
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
-    marginBottom:15,
+    marginBottom: 15,
   },
   descriptionText: {
     fontSize: 15,

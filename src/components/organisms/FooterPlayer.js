@@ -10,9 +10,8 @@ import {
 } from 'react-native';
 import { Icon } from 'native-base';
 
-import ProgressBar from './ProgressBar.js';
-import ControlButton from './buttons/ControlButton.js';
 import AudioService from '../../../services/AudioService';
+import { ProgressBar, ControlButton } from '../atoms';
 
 const watchedEvents = [
   TrackPlayerEvents.PLAYBACK_STATE,

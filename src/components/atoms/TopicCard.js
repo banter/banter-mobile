@@ -3,8 +3,10 @@ import {Thumbnail, Text, Card, CardItem} from 'native-base';
 import {StyleSheet, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
-import TagItem from '../../src/components/models/TagItem';
 import {useNavigation} from '@react-navigation/native';
+import { TagItem } from '../../models';
+import {ImageStyle, CardStyle} from '../../styles';
+import { LARGE_CORNER_RADIUS } from '../../styles/card';
 
 
 
@@ -47,10 +49,6 @@ TopicCard.defaultProps = {
   size: 'large',
 };
 
-const CARD_COLOR = '#282828';
-const CARD_RADIUS = 20;
-const LARGE_ICON_SIZE = 42;
-const LARGE_IMAGE_SIZE = 130;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
@@ -64,14 +62,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   topicCardItem: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: -5,
-    paddingLeft: -3,
-    backgroundColor: 'transparent',
-    borderRadius: CARD_RADIUS,
-    paddingBottom: 5,
-    paddingTop: 5,
+    ...CardStyle.centeredTransparentCardItem,
   },
 
   topicCardText: {
@@ -79,9 +70,6 @@ const styles = StyleSheet.create({
   },
 
   largeThumbnailStyle: {
-    borderRadius: 10,
-    height: LARGE_IMAGE_SIZE,
-    width: LARGE_IMAGE_SIZE,
-    backgroundColor: 'white',
+    ...ImageStyle.largeThumbnailStyle,
   },
 });

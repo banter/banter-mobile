@@ -34,6 +34,7 @@ class ExploreScreen extends React.Component {
     const {
       isRequestingQuery,
       tagMatches,
+      navigation,
     } = this.props;
     if (this.isRequestingQuery) {
       return (
@@ -55,9 +56,13 @@ class ExploreScreen extends React.Component {
 </Header>
 <List>
 {tagMatches.map((tagMatch: any, index: number) => {
-
               return (
-                <ListItem key={index}>
+                <ListItem key={index}
+                onPressOut={() =>
+                  navigation.navigate('Playlist', {
+                    topic: tagMatch,
+                  })
+                }>
                 <Body>
                   <Text style={{color: 'white'}}> {tagMatch.value}</Text>
                 </Body>

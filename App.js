@@ -9,8 +9,7 @@ import thunk from 'redux-thunk';
 import {fetchTrendingTopics, fetchCollections} from './store/actions/topics';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import AuthApp from './src/navigation/AuthNavigation';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import FooterPlayer from './src/components/atoms/FooterPlayer';
+import { FootPlayer } from './src/components/organisms';
 
 const Stack = createStackNavigator();
 
@@ -28,20 +27,20 @@ const App : () => React$Node = () => {
     <Provider store={store}>
       <NavigationContainer linking={linking}>
         <Stack.Navigator>
-          <Stack.Screen
+        <Stack.Screen
             options={{
             headerShown: false,
           }}
             name="Auth"
             component={AuthApp}/>
-          <Stack.Screen
+        <Stack.Screen
             options={{
             headerShown: false,
           }}
             name="App"
             component={MainApp}/>
         </Stack.Navigator>
-        <FooterPlayer />
+        <FootPlayer />
       </NavigationContainer>
     </Provider>
   );

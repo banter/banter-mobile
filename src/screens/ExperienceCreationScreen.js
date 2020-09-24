@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import SoundAnimation from '../components/atoms/animations/SoundAnimation';
+import { SoundAnimation } from '../components/atoms';
 
 class ExperienceCreationScreen extends React.Component {
   render() {

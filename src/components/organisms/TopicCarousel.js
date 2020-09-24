@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import {Text} from 'native-base';
 import { containerStyles } from './styles';
-import TopicCard from '../commons/cards/TopicCard';
+import { TopicCard } from '.';
 
 export const TopicCarousel = (props: any) => {
 

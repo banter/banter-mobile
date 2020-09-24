@@ -1,8 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as React from 'react';
 
-import HomeScreen from '../screens/HomeScreen';
-import {Icon, Text} from 'native-base';
+import {Text} from 'native-base';
 import OnboardingScreen from '../screens/OnboardingScreen';
 import ExperienceCreationScreen from '../screens/ExperienceCreationScreen';
 import {createStackNavigator} from '@react-navigation/stack';

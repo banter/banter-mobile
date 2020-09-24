@@ -9,10 +9,14 @@ import {
   Grid,
   Col,
 } from 'native-base';
-import TagList from '../organisms/TagList';
 import AudioService from '../../../services/AudioService';
-import DiscussionItem from '../models/DiscussionItem';
-import PlaybackIcon from '../atoms/PlaybackIcon';
+import { DiscussionItem } from '../../models';
+import { PlaybackIcon } from '../atoms';
+import { TagList } from '.';
+import { CardStyleInterpolators } from '@react-navigation/stack';
+import { CardStyle, Typography } from '../../styles';
+import { GRAY_DARK } from '../../styles/colors';
+import { LARGE_CORNER_RADIUS } from '../../styles/card';
 
 export default class DiscussionCard extends React.Component {
   constructor(props) {
@@ -96,8 +100,6 @@ export default class DiscussionCard extends React.Component {
 
 }
 
-const CARD_COLOR = '#282828';
-const CARD_RADIUS = 20;
 const LARGE_ICON_SIZE = 42;
 const styles = StyleSheet.create({
 
@@ -108,10 +110,10 @@ const styles = StyleSheet.create({
   },
 
   discussionCard: {
-    backgroundColor: CARD_COLOR,
+    backgroundColor: GRAY_DARK,
     // alignItems: 'center',
     width: '90%',
-    borderRadius: CARD_RADIUS,
+    borderRadius: LARGE_CORNER_RADIUS,
   },
 
   dateAndTimeStyle: {
@@ -129,31 +131,20 @@ const styles = StyleSheet.create({
   },
 
   discussionCardItem: {
-    paddingVertical: -5,
-    backgroundColor: CARD_COLOR,
-    borderRadius: CARD_RADIUS,
-    paddingBottom: 5,
-    paddingTop: 8,
+    ...CardStyle.cardItem,
   },
 
   discussionCardTagItem: {
-    paddingVertical: -5,
-    backgroundColor: CARD_COLOR,
+    ...CardStyle.cardItem,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    borderRadius: CARD_RADIUS,
-    paddingBottom: 5,
-    paddingTop: 8,
   },
 
   titleText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
+...Typography.titleText,
   },
   descriptionText: {
-    fontSize: 15,
-    color: '#AAAAAA',
+    ...Typography.descriptionText,
   },
   buttonText: {
     textAlign: 'center',

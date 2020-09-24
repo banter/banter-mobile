@@ -15,7 +15,7 @@ class SoundAnimation  extends React.Component {
     ref={animation => {
       this.animation = animation;
     }}
-    source={require('../../../assets/sound-wave.json')}
+    source={require('../../assets/sound-wave.json')}
   />
     </View>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import { Share, View, Button, Platform } from 'react-native';
 import { Icon } from 'native-base';
 
-const ShareExample = () => {
+const ShareButton = () => {
   const onShare = async () => {
     try {
         let shareMessage = 'Banter, the new way to listen to sports Podcasts.';
@@ -38,4 +38,4 @@ const ShareExample = () => {
   );
 };
 
-export default ShareExample;
+export default ShareButton;
