@@ -34,7 +34,7 @@ export default function PlaybackIcon(props) {
         break;
     }
   });
-  const playingThisDiscussion =  currentTrack && currentTrack.id === discussion.discussionId;
+  const playingThisDiscussion = currentTrack?.id === discussion.discussionId;
   const isPlaying = playingThisDiscussion && playerState === STATE_PLAYING;
 
   return (

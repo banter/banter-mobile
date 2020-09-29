@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android release": "react-native run-android --variant release",
     "ios": "react-native run-ios",
+    "ios release": "react-native run-ios --configuration Release",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
@@ -24,6 +26,7 @@
     "react-native-screens": "^2.10.1",
     "react-native-social-buttons": "^1.1.5",
     "react-native-swift": "^1.2.3",
+    "react-native-swiper": "^1.6.0-rc.3",
     "react-native-track-player": "^1.2.3",
     "react-native-vector-icons": "^7.1.0",
     "react-redux": "^7.2.1",

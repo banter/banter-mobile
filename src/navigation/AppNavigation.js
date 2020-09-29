@@ -32,6 +32,13 @@ function HomeStack() {
 export default function MainApp({navigation, route}) {
   return (
     <AppNavigator.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+            <AppNavigator.Screen
+        name="For You"
+        component={ForYouScreen}
+        options={{
+        tabBarLabel: 'For You',
+        tabBarIcon: () => (<Icon type="Entypo" name="fingerprint"/>),
+      }}/>
       <AppNavigator.Screen
         name="Home"
         component={HomeStack}
@@ -39,13 +46,7 @@ export default function MainApp({navigation, route}) {
         headerShown: false,
         tabBarIcon: () => (<Icon type="Entypo" name="home"/>),
       }}/>
-      <AppNavigator.Screen
-        name="For You"
-        component={ForYouScreen}
-        options={{
-        tabBarLabel: 'For You',
-        tabBarIcon: () => (<Icon type="Entypo" name="fingerprint"/>),
-      }}/>
+
       <AppNavigator.Screen
         name="Explore"
         component={ExploreScreen}

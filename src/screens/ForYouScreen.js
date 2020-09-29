@@ -1,43 +1,118 @@
-import React from 'react';
-import {StyleSheet} from 'react-native';
-import DiscussionCard from '../components/molecules/DiscussionCard';
-import {ScrollView} from 'react-native-gesture-handler';
-import MOCKDISCUSSIONS from '../../constants/mock-discussions';
-import {Container, Footer,Text, Button, FooterTab, Icon} from 'native-base';
-import TopicHeaderCard from '../components/organisms/TopicHeaderCard';
-export default class ForYouScreen extends React.Component {
-  render() {
-    return (
-      <Container>
-        <ScrollView style={styles.container}>
-          <Text style={styles.headerText}>For You</Text>
-          <Text style={styles.descriptionText}>Picking Podcasts is hard. So we did that for you.</Text>
-          <TopicHeaderCard isIconButton={false} discussion={MOCKDISCUSSIONS}/>
-          <DiscussionCard discussion={MOCKDISCUSSIONS}/>
-          <DiscussionCard discussion={MOCKDISCUSSIONS}/>
-          <DiscussionCard discussion={MOCKDISCUSSIONS}/>
-          <DiscussionCard discussion={MOCKDISCUSSIONS}/>
-        </ScrollView>
-      </Container>
+import React, {Component, useRef, useState, useEffect} from 'react';
+import {
+  View,
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 
-    );
-  }
+import MOCKDISCUSSIONS from '../../constants/mock-discussions';
+
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { ScrollView } from 'react-native-gesture-handler';
+import { DiscussionCard } from '../components/molecules';
+import Swiper from 'react-native-swiper';
+import { Button, Text } from 'native-base';
+
+export default function ForYouScreen({}) {
+
+  const swiperRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    // bb = activeIndex
+    if (swiperRef) {
+      console.log(swiperRef.current.state.index);
+      console.log(swiperRef.current.state.index);
+      setActiveIndex(swiperRef.current.state.index);
+      console.log(activeIndex);
+    }
+    console.log('useEffect');
+    // setbb(activeIndex)
+  },[]);
+
+  const _foo = useRef(0);
+  const next = () => {
+    if (swiperRef) {
+      console.log(swiperRef.current.state.index);
+      swiperRef.current.scrollBy(1);
+      console.log(swiperRef.current.state.index);
+    }
+  };
+  const back = () => {
+    if (swiperRef) {
+      console.log(swiperRef.current.state.index);
+      swiperRef.current.scrollBy(-1);
+      console.log(swiperRef.current.state.index);
+    }
+  };
+
+  // const updateIndex = (index) => {
+  //   setActiveIndex(index);
+  // };
+
+  return (
+<View style={styles.container}>
+<Button bordered dark
+          onPressOut={() =>
+            back()
+          }>
+            <Text>{activeIndex}</Text>
+          </Button>
+          <Button bordered dark
+          onPressOut={() =>
+            setActiveIndex(2)
+          }
+          >
+            <Text>Dark</Text>
+          </Button>
+<Swiper ref={swiperRef} style={styles.wrapper}
+      loop={false}
+      showsButtons={true}
+      showsPagination={false}
+      onIndexChanged={(index) =>
+        // useEffect()
+        // console.log(index)
+        setActiveIndex(index)
+      }
+      >
+      <View style={styles.slide1}>
+        <Text>AA</Text>
+        <Text style={styles.text}>AAA</Text>
+      </View>
+      <View style={styles.slide2}>
+      <Text style={styles.text}>AAAA</Text>
+      </View>
+    </Swiper>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
+
   container: {
-    backgroundColor: 'darkgray',
+    flex: 1,
   },
-  descriptionText: {
-    fontSize: 18,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: 'white',
+  wrapper: {},
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
   },
-  headerText: {
-    fontSize: 46,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: 'white',
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5',
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9',
   },
 });
