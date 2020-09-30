@@ -52,11 +52,11 @@ export default class ForYouScreen extends React.Component {
           flexDirection: 'row',
           justifyContent: 'center',
         }}>
-          <TouchableOpacity onPress={() => this.carousel.snapToNext()}>
+          <TouchableOpacity onPress={() => this.carousel.snapToPrev()}>
             <Text style={[(this.state.activeIndex == 0) ? styles.headerText : styles.headerTextNonSelected]}>For You</Text>
           </TouchableOpacity>
           <Text style={styles.headerTextNonSelected}> | </Text>
-          <TouchableOpacity onPress={() => this.carousel.snapToPrev()}>
+          <TouchableOpacity onPress={() => this.carousel.snapToNext()}>
           <Text style={[(this.state.activeIndex == 1) ? styles.headerText : styles.headerTextNonSelected]}>Following</Text>
           </TouchableOpacity>
         </View>
