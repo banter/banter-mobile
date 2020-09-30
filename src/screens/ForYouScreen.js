@@ -1,94 +1,84 @@
-import React, {Component, useRef, useState, useEffect} from 'react';
-import {
-  View,
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
-
+/* eslint-disable react-native/no-inline-styles */
+import * as React from 'react';
+import {Text, View, SafeAreaView} from 'react-native';
+import {StyleSheet} from 'react-native';
+import Carousel from 'react-native-snap-carousel';
+import {WINDOW_WIDTH} from '../styles/mixins';
+import {DiscussionCard} from '../components/molecules';
 import MOCKDISCUSSIONS from '../../constants/mock-discussions';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import { FONT_SIZE_24, FONT_SIZE_16 } from '../styles/typography';
+import { BLACK, TRANSPARENT } from '../styles/colors';
 
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import { ScrollView } from 'react-native-gesture-handler';
-import { DiscussionCard } from '../components/molecules';
-import Swiper from 'react-native-swiper';
-import { Button, Text } from 'native-base';
+export default class ForYouScreen extends React.Component {
 
-export default function ForYouScreen({}) {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeIndex: 0,
+      carouselItems: [
+        {
+          title: 'Item 1',
+          text: 'Text 1',
+        }, {
+          title: 'Item 2',
+          text: 'Text 2',
+        },
+      ],
+    };
+  }
 
-  const swiperRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    // Update the document title using the browser API
-    // bb = activeIndex
-    if (swiperRef) {
-      console.log(swiperRef.current.state.index);
-      console.log(swiperRef.current.state.index);
-      setActiveIndex(swiperRef.current.state.index);
-      console.log(activeIndex);
-    }
-    console.log('useEffect');
-    // setbb(activeIndex)
-  },[]);
-
-  const _foo = useRef(0);
-  const next = () => {
-    if (swiperRef) {
-      console.log(swiperRef.current.state.index);
-      swiperRef.current.scrollBy(1);
-      console.log(swiperRef.current.state.index);
-    }
-  };
-  const back = () => {
-    if (swiperRef) {
-      console.log(swiperRef.current.state.index);
-      swiperRef.current.scrollBy(-1);
-      console.log(swiperRef.current.state.index);
-    }
-  };
-
-  // const updateIndex = (index) => {
-  //   setActiveIndex(index);
-  // };
-
-  return (
-<View style={styles.container}>
-<Button bordered dark
-          onPressOut={() =>
-            back()
-          }>
-            <Text>{activeIndex}</Text>
-          </Button>
-          <Button bordered dark
-          onPressOut={() =>
-            setActiveIndex(2)
-          }
-          >
-            <Text>Dark</Text>
-          </Button>
-<Swiper ref={swiperRef} style={styles.wrapper}
-      loop={false}
-      showsButtons={true}
-      showsPagination={false}
-      onIndexChanged={(index) =>
-        // useEffect()
-        // console.log(index)
-        setActiveIndex(index)
-      }
-      >
+  _renderItem({item, index}) {
+    return (
       <View style={styles.slide1}>
-        <Text>AA</Text>
-        <Text style={styles.text}>AAA</Text>
+        <ScrollView>
+          <DiscussionCard discussion={MOCKDISCUSSIONS}/>
+          <DiscussionCard discussion={MOCKDISCUSSIONS}/>
+        </ScrollView>
+
       </View>
-      <View style={styles.slide2}>
-      <Text style={styles.text}>AAAA</Text>
-      </View>
-    </Swiper>
-    </View>
-  );
+    );
+  }
+
+  render() {
+    return (
+      <SafeAreaView
+        style={{
+        flex: 1,
+        backgroundColor: BLACK,
+      }}>
+        <View
+          style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+          <TouchableOpacity onPress={() => this.carousel.snapToNext()}>
+            <Text style={[(this.state.activeIndex == 0) ? styles.headerText : styles.headerTextNonSelected]}>For You</Text>
+          </TouchableOpacity>
+          <Text style={styles.headerTextNonSelected}> | </Text>
+          <TouchableOpacity onPress={() => this.carousel.snapToPrev()}>
+          <Text style={[(this.state.activeIndex == 1) ? styles.headerText : styles.headerTextNonSelected]}>Following</Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+          <Carousel
+            layout={'default'}
+            ref={ref => this.carousel = ref}
+            data={this.state.carouselItems}
+            sliderWidth={WINDOW_WIDTH}
+            itemWidth={WINDOW_WIDTH}
+            renderItem={this._renderItem}
+            onSnapToItem=
+            { index => this.setState({activeIndex:index}) }/>
+        </View>
+      </SafeAreaView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -101,7 +91,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#9DD6EB',
+    backgroundColor: BLACK,
   },
   slide2: {
     flex: 1,
@@ -114,5 +104,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#92BBD9',
+  },
+  headerText: {
+    fontSize: FONT_SIZE_24,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 15,
+  },
+  headerTextNonSelected: {
+    fontSize: FONT_SIZE_24,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 15,
+    opacity:0.2,
   },
 });
