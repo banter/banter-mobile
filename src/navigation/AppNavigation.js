@@ -29,12 +29,27 @@ function HomeStack() {
   );
 }
 
+
+function ForYouStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        options={{
+        headerShown: false,
+      }}
+        component={ForYouScreen}
+        name="For You"/>
+        <Stack.Screen name="Playlist" component={PlaylistScreen}/>
+    </Stack.Navigator>
+  );
+}
+
 export default function MainApp({navigation, route}) {
   return (
     <AppNavigator.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
             <AppNavigator.Screen
         name="For You"
-        component={ForYouScreen}
+        component={ForYouStack}
         options={{
         tabBarLabel: 'For You',
         tabBarIcon: () => (<Icon type="Entypo" name="fingerprint"/>),

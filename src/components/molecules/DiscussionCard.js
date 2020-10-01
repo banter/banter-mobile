@@ -1,3 +1,4 @@
+/* eslint-disable no-trailing-spaces */
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {
@@ -15,14 +16,26 @@ import { PlaybackIcon } from '../atoms';
 import { TagList } from '.';
 import { CardStyleInterpolators } from '@react-navigation/stack';
 import { CardStyle, Typography } from '../../styles';
-import { GRAY_DARK } from '../../styles/colors';
+import { GRAY_DARK, TRANSPARENT } from '../../styles/colors';
 import { LARGE_CORNER_RADIUS } from '../../styles/card';
+import howLongAgo from '../../../utils/date-format';
+import moment from 'moment';
+import { largeIconStyle, smallIconStyle } from '../../styles/icons';
 
 export default class DiscussionCard extends React.Component {
   constructor(props) {
     super(props);
     this.discussion = new DiscussionItem(this.props.discussion);
   }
+
+  discussionAge({ year, monthValue: month, dayOfMonth: day }) {
+    return howLongAgo({ year, month, day }, this.$moment);
+  }
+  discussionTime(discussion) {
+    const duration = moment.utc(moment.duration(discussion.duration).as('milliseconds')).format('m:ss');
+    return duration === '0:00' ? '' : duration;
+  }
+
   onPress() {
     alert('Preses');
   }
@@ -65,11 +78,7 @@ export default class DiscussionCard extends React.Component {
               {this.discussion.description}</Text>
           </CardItem>
           <CardItem style={styles.discussionCardTagItem}>
-            <Icon
-              type="AntDesign"
-              name="tag"
-              style={{color: 'white'}}
-            />
+                    <Icon type="AntDesign" name="tag" style={styles.smallIconStyle}/>
             <TagList tags={this.discussion.tags}/>
           </CardItem>
 
@@ -79,8 +88,8 @@ export default class DiscussionCard extends React.Component {
                 <PlaybackIcon discussion={this.discussion}/>
               </Col>
               <Col style={styles.dateAndTimeStyle}>
-                <Text style={styles.descriptionText}>
-                  DATE
+                <Text style={styles.timestampText}>
+                {this.discussionAge(this.discussion.episodePublishDate)} • {this.discussionTime(this.discussion)}
                 </Text>
               </Col>
               <Col style={{ width: 50 }}>
@@ -100,11 +109,11 @@ export default class DiscussionCard extends React.Component {
 
 }
 
-const LARGE_ICON_SIZE = 42;
+
 const styles = StyleSheet.create({
 
   container: {
-    // backgroundColor: 'lightgray',
+    backgroundColor: TRANSPARENT,
     alignItems: 'center',
     // justifyContent: 'center',
   },
@@ -122,8 +131,10 @@ const styles = StyleSheet.create({
   },
 
   largeIconStyle: {
-    fontSize: LARGE_ICON_SIZE,
-    color: 'white',
+    ...largeIconStyle,
+  },
+  smallIconStyle: {
+    ...smallIconStyle,
   },
 
   thumbnailStyle: {
@@ -145,6 +156,10 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     ...Typography.descriptionText,
+  },
+  timestampText: {
+    ...Typography.descriptionText,
+    fontWeight: '500',
   },
   buttonText: {
     textAlign: 'center',

@@ -3,13 +3,14 @@ import * as React from 'react';
 import {Text, View, SafeAreaView} from 'react-native';
 import {StyleSheet} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import {WINDOW_WIDTH} from '../styles/mixins';
+import {WINDOW_WIDTH, percentageOfScreenHeight} from '../styles/mixins';
 import {DiscussionCard} from '../components/molecules';
 import MOCKDISCUSSIONS from '../../constants/mock-discussions';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import { FONT_SIZE_24, FONT_SIZE_16 } from '../styles/typography';
 import { BLACK, TRANSPARENT } from '../styles/colors';
-
+import MOCKPLAYLIST from '../../constants/mock-playlist';
+import { DiscussionPlaylist } from '../components/organisms';
 export default class ForYouScreen extends React.Component {
 
   constructor(props) {
@@ -18,11 +19,9 @@ export default class ForYouScreen extends React.Component {
       activeIndex: 0,
       carouselItems: [
         {
-          title: 'Item 1',
-          text: 'Text 1',
+          title: 'For You',
         }, {
-          title: 'Item 2',
-          text: 'Text 2',
+          title: 'Following',
         },
       ],
     };
@@ -31,11 +30,7 @@ export default class ForYouScreen extends React.Component {
   _renderItem({item, index}) {
     return (
       <View style={styles.slide1}>
-        <ScrollView>
-          <DiscussionCard discussion={MOCKDISCUSSIONS}/>
-          <DiscussionCard discussion={MOCKDISCUSSIONS}/>
-        </ScrollView>
-
+          <DiscussionPlaylist playlist={MOCKPLAYLIST} />
       </View>
     );
   }
@@ -72,6 +67,7 @@ export default class ForYouScreen extends React.Component {
             data={this.state.carouselItems}
             sliderWidth={WINDOW_WIDTH}
             itemWidth={WINDOW_WIDTH}
+            windowSize={WINDOW_WIDTH}
             renderItem={this._renderItem}
             onSnapToItem=
             { index => this.setState({activeIndex:index}) }/>
@@ -116,6 +112,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 15,
-    opacity:0.2,
+    opacity:0.4,
   },
 });

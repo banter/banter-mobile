@@ -2,10 +2,12 @@ import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
-import { Icon } from 'native-base';
+import { Icon, Text } from 'native-base';
 import TrackPlayer, { useTrackPlayerEvents, TrackPlayerEvents, STATE_PLAYING } from 'react-native-track-player';
 
 import AudioService from '../../../services/AudioService.js';
+import { largeIconStyle } from '../../styles/icons.js';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const watchedEvents = [
   TrackPlayerEvents.PLAYBACK_STATE,
@@ -38,12 +40,14 @@ export default function PlaybackIcon(props) {
   const isPlaying = playingThisDiscussion && playerState === STATE_PLAYING;
 
   return (
-    <View>
-        <Icon
+<TouchableOpacity>
+                  <Text>
+                  <Icon
           style={styles.icon}
           onPress={playingThisDiscussion ? AudioService.togglePlayback : () => AudioService.startNewTrack(discussion)}
           name={isPlaying ? 'pause' : 'play'} />
-    </View>
+                  </Text>
+                </TouchableOpacity>
   );
 }
 
@@ -53,6 +57,6 @@ PlaybackIcon.propTypes = {
 
 const styles = StyleSheet.create({
   icon: {
-    color: 'white',
+    ...largeIconStyle,
   },
 });
