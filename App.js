@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import {fetchTrendingTopics, fetchCollections} from './store/actions/topics';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import AuthApp from './src/navigation/AuthNavigation';
-import { FootPlayer } from './src/components/organisms';
+import { FooterPlayer } from './src/components/organisms';
 
 const Stack = createStackNavigator();
 
@@ -31,16 +31,16 @@ const App : () => React$Node = () => {
             options={{
             headerShown: false,
           }}
-            name="Auth"
-            component={AuthApp}/>
+            name="App"
+            component={MainApp}/>
         <Stack.Screen
             options={{
             headerShown: false,
           }}
-            name="App"
-            component={MainApp}/>
+            name="Auth"
+            component={AuthApp}/>
         </Stack.Navigator>
-        <FootPlayer />
+        <FooterPlayer />
       </NavigationContainer>
     </Provider>
   );

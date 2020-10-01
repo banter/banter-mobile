@@ -3,6 +3,7 @@ import { View, ScrollView, StyleSheet } from 'react-native';
 import {Text} from 'native-base';
 import { containerStyles } from './styles';
 import { TopicCard } from '.';
+import { LARGE_IMAGE_SIZE } from '../../styles/images';
 
 export const TopicCarousel = (props: any) => {
 
@@ -29,7 +30,7 @@ export const TopicCarousel = (props: any) => {
         'Trending' : primaryTopic.tag.value}</Text>
       <ScrollView
         horizontal={true}
-        contentContainerStyle={{ ...styles.scrollView, width: `${40 * intervals}%` }}
+        contentContainerStyle={{ ...styles.scrollView, width: `${LARGE_IMAGE_SIZE * intervals}%` }}
         showsHorizontalScrollIndicator={false}
         onContentSizeChange={(w, h) => init(w)}
         scrollEventThrottle={200}

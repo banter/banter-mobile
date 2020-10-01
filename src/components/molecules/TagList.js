@@ -11,14 +11,13 @@ export default class TagList extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Icon type="AntDesign" name="tago" style={{color:'white'}} /> */}
         {this
           .props
           .tags
           .map((tag, index) => {
             return (
               <View key={index} style={styles.selectionRow}>
-                <TagButton name={tag.value}/>
+                <TagButton tag={tag}/>
               </View>
             );
           })}
