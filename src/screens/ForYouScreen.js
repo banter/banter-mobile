@@ -11,6 +11,7 @@ import { FONT_SIZE_24, FONT_SIZE_16 } from '../styles/typography';
 import { BLACK, TRANSPARENT } from '../styles/colors';
 import MOCKPLAYLIST from '../../constants/mock-playlist';
 import { DiscussionPlaylist } from '../components/organisms';
+import SwipeUpDown from '../components/organisms/SwipeUpDown';
 export default class ForYouScreen extends React.Component {
 
   constructor(props) {
@@ -35,14 +36,26 @@ export default class ForYouScreen extends React.Component {
     );
   }
 
+
   render() {
     return (
       <SafeAreaView
         style={{
         flex: 1,
-        backgroundColor: BLACK,
+        backgroundColor: 'red',
       }}>
-        <View
+        <SwipeUpDown
+	itemMini={<Text>HIIII</Text>} // Pass props component when collapsed
+	itemFull={<Text>HI</Text>} // Pass props component when show full
+	onShowMini={() => console.log('mini')}
+	onShowFull={() => console.log('full')}
+  onMoveDown={() => console.log('down')}
+  swipeHeight={60}
+	onMoveUp={() => console.log('up')}
+	disablePressToShow={false} // Press item mini to show full
+	style={{ backgroundColor: 'green'}} // style for swipe
+/>
+        {/* <View
           style={{
           flexDirection: 'row',
           justifyContent: 'center',
@@ -71,7 +84,7 @@ export default class ForYouScreen extends React.Component {
             renderItem={this._renderItem}
             onSnapToItem=
             { index => this.setState({activeIndex:index}) }/>
-        </View>
+        </View> */}
       </SafeAreaView>
     );
   }

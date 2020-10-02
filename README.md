@@ -6,6 +6,9 @@ Once you're all set up:
 
 `npm i`, `npm start`, then open a new terminal window and `npm run ios`
 
+To Run Production 
+`npm run android release`
+
 For debugging, I'd highly recommend using [React Native Debugger](https://github.com/jhen0409/react-native-debugger)
 
 To launch it, run `open "rndebugger://set-debugger-loc?host=localhost&port=8081"`

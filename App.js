@@ -10,6 +10,7 @@ import {fetchTrendingTopics, fetchCollections} from './store/actions/topics';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import AuthApp from './src/navigation/AuthNavigation';
 import { FooterPlayer } from './src/components/organisms';
+import ForYouScreen from './src/screens/ForYouScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,12 @@ const App : () => React$Node = () => {
     <Provider store={store}>
       <NavigationContainer linking={linking}>
         <Stack.Navigator>
+        <Stack.Screen
+        options={{
+        headerShown: false,
+      }}
+        component={ForYouScreen}
+        name="For You"/>
         <Stack.Screen
             options={{
             headerShown: false,

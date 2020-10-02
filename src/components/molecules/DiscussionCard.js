@@ -29,7 +29,7 @@ export default class DiscussionCard extends React.Component {
   }
 
   discussionAge({ year, monthValue: month, dayOfMonth: day }) {
-    return howLongAgo({ year, month, day }, this.$moment);
+    return howLongAgo({ year, month, day });
   }
   discussionTime(discussion) {
     const duration = moment.utc(moment.duration(discussion.duration).as('milliseconds')).format('m:ss');
@@ -89,7 +89,8 @@ export default class DiscussionCard extends React.Component {
               </Col>
               <Col style={styles.dateAndTimeStyle}>
                 <Text style={styles.timestampText}>
-                {this.discussionAge(this.discussion.episodePublishDate)} • {this.discussionTime(this.discussion)}
+                {this.discussionAge(this.discussion.episodePublishDate)}
+                 {/* • {this.discussionTime(this.discussion)} */}
                 </Text>
               </Col>
               <Col style={{ width: 50 }}>
