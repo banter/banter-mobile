@@ -51,17 +51,17 @@ export const TopicCarousel = (props: any) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-      backgroundColor:'transparent',
-    justifyContent:'center',
-  alignSelf:'center'},
-  topicCarouselText:{
+  container: {
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  topicCarouselText: {
     color: 'white',
-    fontSize:25,
+    fontSize: 25,
     marginLeft: 10,
-},
-
-  });
+  },
+});
 
 
 export default TopicCarousel;

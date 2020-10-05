@@ -3,8 +3,6 @@ import * as React from 'react';
 
 import HomeScreen from '../screens/HomeScreen';
 import {Icon} from 'native-base';
-import OnboardingScreen from '../screens/OnboardingScreen';
-import ExperienceCreationScreen from '../screens/ExperienceCreationScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import ForYouScreen from '../screens/ForYouScreen';
 import ExploreScreen from '../screens/ExploreScreen';
@@ -47,7 +45,7 @@ function ForYouStack() {
 export default function MainApp({navigation, route}) {
   return (
     <AppNavigator.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
-            <AppNavigator.Screen
+      <AppNavigator.Screen
         name="For You"
         component={ForYouStack}
         options={{
