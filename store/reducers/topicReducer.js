@@ -3,6 +3,7 @@ import {requesting, success, error} from './index';
 
 let initialState = {
   trendingTopics: [],
+  topicPlaylist: [],
   collections: [],
   errorMessage: '',
   isTrendingTopicsLoading: false,
@@ -15,6 +16,8 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case TOPIC_STORE.TRENDING_TOPICS:
       return requesting(state, 'isTrendingTopicsloading');
+    case TOPIC_STORE.SET_TOPIC_PLAYLIST:
+      return success(state, 'isTrendingTopicsloading', 'topicPlaylist', action);
     case TOPIC_STORE.TRENDING_TOPICS_SUCCESS:
       return success(state, 'isTrendingTopicsloading', 'trendingTopics', action);
     case TOPIC_STORE.TRENDING_TOPICS_ERROR:

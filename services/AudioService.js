@@ -1,6 +1,10 @@
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, {getCurrentTrack} from 'react-native-track-player';
 
 export default {
+  async currentTrack() {
+    return await getCurrentTrack();
+  },
+
   async startNewTrack(discussion) {
     const pitchAlgorithm = TrackPlayer.PITCH_ALGORITHM_VOICE;
     const {
@@ -21,9 +25,9 @@ export default {
     const isPlaying = await TrackPlayer.getState() === TrackPlayer.STATE_PLAYING;
 
     if (isPlaying) {
-        return await TrackPlayer.pause();
+      return await TrackPlayer.pause();
     } else {
-        return await TrackPlayer.play();
+      return await TrackPlayer.play();
     }
   },
 

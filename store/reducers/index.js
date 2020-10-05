@@ -7,14 +7,12 @@ const allReducers = combineReducers({
 
 export default allReducers;
 
-
-
 export function requesting(state,loadingVariable) {
   state[loadingVariable] = true;
   return {...state};
 }
 
-export function success(state,loadingVariable, alteredVariable, action) {
+export function success(state, loadingVariable, alteredVariable, action) {
   state[loadingVariable] = false;
   state[alteredVariable] = action.payload;
   return {...state};

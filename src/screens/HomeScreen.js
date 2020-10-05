@@ -26,10 +26,7 @@ class HomeScreen extends React.Component {
     } = this.props;
     if (isCollectionsLoading) {
       return (
-        <View style={{
-          flex: 1,
-          padding: 20,
-        }}>
+        <View style={styles.loadingContainer}>
           <Content>
             <Spinner color="black"/>
           </Content>
@@ -71,6 +68,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
+  },
+  loadingContainer: {
+    flex: 1,
+    padding: 20,
   },
 });
 
