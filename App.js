@@ -2,18 +2,14 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import MainApp from './src/navigation/AppNavigation';
-import allReducers from './store/reducers/index.js';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
 import {fetchTrendingTopics, fetchCollections} from './store/actions/topics';
-import {composeWithDevTools} from 'redux-devtools-extension';
 import AuthApp from './src/navigation/AuthNavigation';
 import { FooterPlayer } from './src/components/organisms';
 
-const Stack = createStackNavigator();
+import store from './store';
 
-const store = createStore(allReducers, composeWithDevTools(applyMiddleware(thunk)));
+const Stack = createStackNavigator();
 
 store.dispatch(fetchTrendingTopics());
 store.dispatch(fetchCollections());
