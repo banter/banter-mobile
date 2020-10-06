@@ -10,7 +10,7 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import { FONT_SIZE_24, FONT_SIZE_16 } from '../styles/typography';
 import { BLACK, TRANSPARENT } from '../styles/colors';
 import MOCKPLAYLIST from '../../constants/mock-playlist';
-import { DiscussionPlaylist } from '../components/organisms';
+import { DiscussionPlaylist, ExpandedAudioPlayer } from '../components/organisms';
 import SwipeUpDown from '../components/organisms/SwipeUpDown';
 export default class ForYouScreen extends React.Component {
 
@@ -45,15 +45,19 @@ export default class ForYouScreen extends React.Component {
         backgroundColor: 'red',
       }}>
         <SwipeUpDown
-	itemMini={<Text>HIIII</Text>} // Pass props component when collapsed
-	itemFull={<Text>HI</Text>} // Pass props component when show full
+	itemMini={<SafeAreaView>
+    <Text>AYOYOY</Text>
+    <Text>AYOYOY</Text>
+    <Text>AYOYOY</Text>
+    <Text>AYOYOY</Text>
+    <Text>AYOYOY</Text></SafeAreaView>} // Pass props component when collapsed
+	itemFull={<ExpandedAudioPlayer discussion={MOCKDISCUSSIONS} />} // Pass props component when show full
 	onShowMini={() => console.log('mini')}
 	onShowFull={() => console.log('full')}
   onMoveDown={() => console.log('down')}
-  swipeHeight={60}
+  // swipeHeight={60}
 	onMoveUp={() => console.log('up')}
 	disablePressToShow={false} // Press item mini to show full
-	style={{ backgroundColor: 'green'}} // style for swipe
 />
         {/* <View
           style={{

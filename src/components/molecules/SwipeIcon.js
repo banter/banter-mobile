@@ -12,7 +12,7 @@ export default class SwipeIcon extends Component {
       showIcon: false,
     };
   }
-  componentDidMount() {
+  UNSAFE_componentWillMount() {
     this.props.hasRef && this.props.hasRef(this);
   }
 

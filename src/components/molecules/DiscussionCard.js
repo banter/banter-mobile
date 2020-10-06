@@ -78,7 +78,6 @@ export default class DiscussionCard extends React.Component {
               {this.discussion.description}</Text>
           </CardItem>
           <CardItem style={styles.discussionCardTagItem}>
-                    <Icon type="AntDesign" name="tag" style={styles.smallIconStyle}/>
             <TagList tags={this.discussion.tags}/>
           </CardItem>
 

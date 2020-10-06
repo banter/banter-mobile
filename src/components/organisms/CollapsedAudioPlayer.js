@@ -9,19 +9,15 @@ import {
   View,
 } from 'react-native';
 import { Icon } from 'native-base';
-
-import AudioService from '../../../services/AudioService';
 import { ProgressBar, ControlButton } from '../atoms';
-import SwipeUpDown from './SwipeUpDown';
-import MOCKDISCUSSIONS from '../../../constants/mock-discussions';
-import { CollapsedAudioPlayer, ExpandedAudioPlayer } from '.';
+import AudioService from '../../../services/AudioService';
 
 const watchedEvents = [
   TrackPlayerEvents.PLAYBACK_STATE,
   TrackPlayerEvents.PLAYBACK_ERROR,
   TrackPlayerEvents.PLAYBACK_TRACK_CHANGED,
 ];
-export default function FooterPlayer(props) {
+export default function CollapsedAudioPlayer(props) {
   const [track, setTrack] = useState('');
   const [playerState, setPlayerState] = useState(null);
 
@@ -46,18 +42,20 @@ export default function FooterPlayer(props) {
 
   return (
     <View>
-      {track ? <View style={styles.card}>
-      <SwipeUpDown
-	itemMini={<CollapsedAudioPlayer />} // Pass props component when collapsed
-	itemFull={<ExpandedAudioPlayer discussion={MOCKDISCUSSIONS} />} // Pass props component when show full
-	onShowMini={() => console.log('mini')}
-	onShowFull={() => console.log('full')}
-  onMoveDown={() => console.log('down')}
-  // swipeHeight={60}
-	onMoveUp={() => console.log('up')}
-	disablePressToShow={false} // Press item mini to show full
-/>
-      </View> : null}
+        <View style={styles.card}>
+        <Image style={styles.cover} source={{ uri: track.artwork }} />
+        <ProgressBar />
+        <Text style={styles.title}>{track.title}</Text>
+        <Text style={styles.artist}>{track.artist}</Text>
+        <View style={styles.controls}>
+          <ControlButton title={'<<'} onPress={AudioService.skipToPrevious} />
+          <Icon
+            style={styles.icon}
+            onPress={AudioService.togglePlayback}
+            name={isPlaying ? 'pause' : 'play'}  />
+          <ControlButton title={'>>'} onPress={AudioService.skipToNext} />
+        </View>
+      </View>
     </View>
   );
 }

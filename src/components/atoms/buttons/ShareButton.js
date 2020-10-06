@@ -1,17 +1,16 @@
 import React from 'react';
-import { Share, View, Button, Platform } from 'react-native';
-import { Icon } from 'native-base';
+import {Share, View, Button, Platform} from 'react-native';
+import {Icon, Text} from 'native-base';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const ShareButton = () => {
-  const onShare = async () => {
+  const onShare = async() => {
     try {
-        let shareMessage = 'Banter, the new way to listen to sports Podcasts.';
-        shareMessage =  Platform.OS === 'ios' ? shareMessage : shareMessage + ' https://banteraudio.com';
-      const result = await Share.share({
-        message: shareMessage,
-          url: 'https://banteraudio.com',
-          title:'Banter',
-      });
+      let shareMessage = 'Banter, the new way to listen to sports Podcasts.';
+      shareMessage = Platform.OS === 'ios'
+        ? shareMessage
+        : shareMessage + ' https://banteraudio.com';
+      const result = await Share.share({message: shareMessage, url: 'https://banteraudio.com', title: 'Banter'});
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType
@@ -26,15 +25,14 @@ const ShareButton = () => {
     }
   };
   return (
-    <View style={{ marginTop: 50 }}>
-                    <Icon
-              type="Entypo"
-              name="share"
-              onPress={onShare}
-              style={{
-              color: 'white',
-}}/>
-    </View>
+
+    <TouchableOpacity onPress={onShare}>
+      <Text>
+        <Icon type="Entypo" name="share" style={{
+          color: 'white',
+        }}/>
+      </Text>
+    </TouchableOpacity>
   );
 };
 

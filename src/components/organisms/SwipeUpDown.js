@@ -7,6 +7,7 @@ import {
   Dimensions,
   LayoutAnimation,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import { SwipeIcon } from '../molecules';
 import assets from '../../assets';
@@ -14,6 +15,7 @@ import assets from '../../assets';
 import {
     Text,
   } from 'native-base';
+import { GRAY_DARK } from '../../styles/colors';
 
 
 const MARGIN_TOP = Platform.OS === 'ios' ? 20 : 0;
@@ -54,7 +56,7 @@ export default class SwipeUpDown extends Component<Props> {
     this.showFull = this.showFull.bind(this);
   }
 
-  componentWillMount() {
+ UNSAFE_componentWillMount() {
     this._panResponder = PanResponder.create({
       onMoveShouldSetPanResponder: (event, gestureState) => true,
       onPanResponderMove: this._onPanResponderMove.bind(this),
@@ -64,6 +66,7 @@ export default class SwipeUpDown extends Component<Props> {
 
   componentDidMount() {
     this.props.hasRef && this.props.hasRef(this);
+    this.showFull();
   }
 
   updateNativeProps() {
@@ -85,10 +88,12 @@ export default class SwipeUpDown extends Component<Props> {
   }
 
   _onPanResponderMove(event, gestureState) {
+    console.log('Gesture Height', gestureState.dy);
     if (gestureState.dy > 0 && !this.checkCollapsed) {
       // SWIPE DOWN
-
+      console.log('Gesture Height', gestureState.dy);
       this.customStyle.style.top = this.top + gestureState.dy;
+      console.log('Gesture Height', gestureState.dy);
       this.customStyle.style.height = DEVICE_HEIGHT - gestureState.dy;
       this.swipeIconRef && this.swipeIconRef.setState({ icon: assets.minus });
       !this.state.collapsed && this.setState({ collapsed: true });
@@ -133,7 +138,9 @@ export default class SwipeUpDown extends Component<Props> {
   }
 
   showMini() {
+      console.log('show Mini');
     const { onShowMini, itemMini } = this.props;
+    console.log(DEVICE_HEIGHT, this.SWIPE_HEIGHT);
     this.customStyle.style.top = itemMini
       ? DEVICE_HEIGHT - this.SWIPE_HEIGHT
       : DEVICE_HEIGHT;
@@ -149,7 +156,7 @@ export default class SwipeUpDown extends Component<Props> {
     const { itemMini, itemFull, style } = this.props;
     const { collapsed } = this.state;
     return (
-      <View
+      <SafeAreaView
         ref={ref => (this.viewRef = ref)}
         {...this._panResponder.panHandlers}
         style={[
@@ -179,7 +186,7 @@ export default class SwipeUpDown extends Component<Props> {
         ) : (
           itemFull
         )}
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -187,7 +194,7 @@ export default class SwipeUpDown extends Component<Props> {
 const styles = StyleSheet.create({
   wrapSwipe: {
     padding: 10,
-    backgroundColor: '#ccc',
+    backgroundColor: GRAY_DARK,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     position: 'absolute',
