@@ -6,10 +6,7 @@ import { setCurrentTopic } from '../../store/actions/topics';
 
 import {
   Content,
-  Icon,
   Container,
-  Button,
-  Fab,
   Spinner,
 } from 'native-base';
 import {DiscussionItem} from '../models';
@@ -66,19 +63,6 @@ class PlaylistScreen extends React.Component {
                   discussion={playlistItem}/>)
               }
             </Content>
-            <Fab
-              active={this.state.active}
-              direction="up"
-              style={styles.mainFab}
-              position="bottomRight"
-              onPress={() => this.setState({
-              active: !this.state.active,
-            })}>
-              <Icon name="share"/>
-              <Button style={styles.twitterFab}>
-                <Icon name="logo-twitter"/>
-              </Button>
-            </Fab>
         </ScrollView>
       </Container>
     );
@@ -93,12 +77,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
-  },
-  mainFab: {
-    backgroundColor: '#5067FF',
-  },
-  twitterFab: {
-    backgroundColor: '#1DA2F2',
   },
   topicHeader: {
     width: '100%',

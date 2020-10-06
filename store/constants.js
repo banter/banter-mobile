@@ -12,7 +12,7 @@ const errorRequest = (name) => {
 const trendingTopics = 'FETCH_TRENDING_TOPICS';
 const collections = 'FETCH_COLLECTIONS';
 const queryTopics = 'QUERY_TOPICS';
-const setTopicPlaylist = 'SET_TOPIC_PLAYLIST';
+const setPlaylist = 'SET_PLAYLIST';
 
 
 const TOPIC_STORE = {
@@ -25,7 +25,7 @@ const TOPIC_STORE = {
     QUERY_TOPICS: queryTopics,
     QUERY_TOPICS_SUCCESS: successfulRequest(queryTopics),
     QUERY_TOPICS_ERROR: errorRequest(queryTopics),
-    SET_TOPIC_PLAYLIST: setTopicPlaylist,
+    SET_PLAYLIST: setPlaylist,
   };
 
   export default TOPIC_STORE;

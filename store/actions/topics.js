@@ -16,7 +16,7 @@ export function queryTopics(tagString) {
 
 export function setCurrentTopic(playlist) {
   return {
-    type: TOPIC_STORE.SET_TOPIC_PLAYLIST,
+    type: TOPIC_STORE.SET_PLAYLIST,
     payload: playlist,
   };
 }
