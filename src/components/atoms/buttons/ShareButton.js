@@ -1,12 +1,12 @@
 import React from 'react';
-import { Share, View, Button, Platform } from 'react-native';
+import { Share, View, Platform } from 'react-native';
 import { Icon } from 'native-base';
 
 const ShareButton = () => {
   const onShare = async () => {
     try {
-        let shareMessage = 'Banter, the new way to listen to sports Podcasts.';
-        shareMessage =  Platform.OS === 'ios' ? shareMessage : shareMessage + ' https://banteraudio.com';
+      let shareMessage = 'Banter, the new way to listen to sports Podcasts.';
+      shareMessage =  Platform.OS === 'ios' ? shareMessage : shareMessage + ' https://banteraudio.com';
       const result = await Share.share({
         message: shareMessage,
           url: 'https://banteraudio.com',
@@ -27,13 +27,13 @@ const ShareButton = () => {
   };
   return (
     <View style={{ marginTop: 50 }}>
-                    <Icon
-              type="Entypo"
-              name="share"
-              onPress={onShare}
-              style={{
-              color: 'white',
-}}/>
+    <Icon
+      type="Entypo"
+      name="share"
+      onPress={onShare}
+      style={{
+        color: 'white',
+    }}/>
     </View>
   );
 };

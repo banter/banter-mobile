@@ -4,7 +4,6 @@ import { Container, Header,
   Text, Item, Icon, Input,
   ListItem, List, Body, Spinner }
   from 'native-base';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import { queryTopics } from '../../store/actions/topics';
 

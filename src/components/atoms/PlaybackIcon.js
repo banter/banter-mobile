@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
-import { Icon, Text } from 'native-base';
-import TrackPlayer, { useTrackPlayerEvents, TrackPlayerEvents, STATE_PLAYING } from 'react-native-track-player';
+import { Icon, Text, Spinner } from 'native-base';
+import TrackPlayer, { useTrackPlayerEvents, TrackPlayerEvents, STATE_PLAYING, STATE_BUFFERING, STATE_READY } from 'react-native-track-player';
 
 import AudioService from '../../../services/AudioService.js';
 import { largeIconStyle } from '../../styles/icons.js';
@@ -36,18 +35,26 @@ export default function PlaybackIcon(props) {
         break;
     }
   });
+
   const playingThisDiscussion = currentTrack?.id === discussion.discussionId;
-  const isPlaying = playingThisDiscussion && playerState === STATE_PLAYING;
+
+  const audioPlaying = [STATE_PLAYING, STATE_READY].includes(playerState);
+  const audioBuffering = [STATE_BUFFERING].includes(playerState);
+
+  const isPlaying = playingThisDiscussion && audioPlaying;
 
   return (
-<TouchableOpacity>
-                  <Text>
-                  <Icon
+    <TouchableOpacity onPress={playingThisDiscussion ? AudioService.togglePlayback : () => AudioService.startNewTrack(discussion)}>
+      <Text>
+        {audioBuffering && playingThisDiscussion
+        ? <Spinner color="white"/>
+        :
+        <Icon
           style={styles.icon}
-          onPress={playingThisDiscussion ? AudioService.togglePlayback : () => AudioService.startNewTrack(discussion)}
           name={isPlaying ? 'pause' : 'play'} />
-                  </Text>
-                </TouchableOpacity>
+        }
+      </Text>
+    </TouchableOpacity>
   );
 }
 
