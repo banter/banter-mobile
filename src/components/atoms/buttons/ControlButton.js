@@ -16,8 +16,8 @@ export default function ControlButton({ icon, onPress }) {
 }
 
 ControlButton.propTypes = {
-  title: PropTypes.string.isRequired,
-onPress: PropTypes.func.isRequired,
+  icon: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

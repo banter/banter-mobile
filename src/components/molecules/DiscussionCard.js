@@ -19,7 +19,12 @@ import { CardStyle, Typography } from '../../styles';
 import { GRAY_DARK, TRANSPARENT } from '../../styles/colors';
 import { LARGE_CORNER_RADIUS } from '../../styles/card';
 import howLongAgo from '../../../utils/date-format';
-import moment from 'moment';
+import dayjs from 'dayjs';
+const duration = require('dayjs/plugin/duration');
+const utc = require('dayjs/plugin/utc');
+dayjs.extend(utc);
+dayjs.extend(duration);
+
 import { largeIconStyle, smallIconStyle } from '../../styles/icons';
 
 export default class DiscussionCard extends React.Component {
@@ -29,10 +34,10 @@ export default class DiscussionCard extends React.Component {
   }
 
   discussionAge({ year, monthValue: month, dayOfMonth: day }) {
-    return howLongAgo({ year, month, day }, this.$moment);
+    return howLongAgo({ year, month, day }, this.$dayjs);
   }
   discussionTime(discussion) {
-    const duration = moment.utc(moment.duration(discussion.duration).as('milliseconds')).format('m:ss');
+    const duration = dayjs.utc(dayjs.duration(discussion.duration).as('milliseconds')).format('m:ss');
     return duration === '0:00' ? '' : duration;
   }
 
