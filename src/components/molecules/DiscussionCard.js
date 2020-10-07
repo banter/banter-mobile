@@ -10,11 +10,9 @@ import {
   Grid,
   Col,
 } from 'native-base';
-import AudioService from '../../../services/AudioService';
 import { DiscussionItem } from '../../models';
 import { PlaybackIcon } from '../atoms';
 import { TagList } from '.';
-import { CardStyleInterpolators } from '@react-navigation/stack';
 import { CardStyle, Typography } from '../../styles';
 import { GRAY_DARK, TRANSPARENT } from '../../styles/colors';
 import { LARGE_CORNER_RADIUS } from '../../styles/card';

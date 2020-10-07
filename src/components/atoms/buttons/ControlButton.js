@@ -7,10 +7,10 @@ import {
 } from 'react-native';
 import { Icon } from 'native-base';
 
-export default function ControlButton({ icon, onPress }) {
+export default function ControlButton({ icon, onPress, style }) {
   return (
     <TouchableOpacity style={styles.controlButtonContainer} onPress={onPress}>
-      <Icon name={icon} style={styles.controlButtonText}/>
+      <Icon name={icon} style={{...styles.controlButtonText, ...style}}/>
     </TouchableOpacity>
   );
 }

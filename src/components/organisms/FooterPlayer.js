@@ -5,10 +5,9 @@ import TrackPlayer, {
 import {
   Image,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
-import { Icon } from 'native-base';
+import { Text } from 'native-base';
 
 import AudioService from '../../../services/AudioService';
 import { ProgressBar, ControlButton } from '../atoms';
@@ -50,10 +49,9 @@ export default function FooterPlayer(props) {
         <Text style={styles.artist}>{track.artist}</Text>
         <View style={styles.controls}>
           <ControlButton icon={'play-skip-back-outline'} onPress={AudioService.skipToPrevious} />
-          <Icon
-            style={styles.icon}
-            onPress={AudioService.togglePlayback}
-            name={isPlaying ? 'pause' : 'play-outline'}  />
+          <ControlButton style={styles.backTime} icon={'refresh'} onPress={AudioService.jumpAhead} />
+          <ControlButton style={styles.largeIcon} icon={isPlaying ? 'pause' : 'play-outline'} onPress={AudioService.togglePlayback} />
+          <ControlButton icon={'refresh'} onPress={AudioService.jumpBack} />
           <ControlButton icon={'play-skip-forward-outline'} onPress={AudioService.skipToNext} />
         </View>
       </View> : null}
@@ -86,8 +84,11 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     flexDirection: 'row',
   },
-  icon: {
-    marginVertical: -7,
+  largeIcon: {
+    fontSize: 24,
+  },
+  backTime: {
+    transform: [{rotateY: '180deg'}],
   },
 });
 
