@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  Text,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import { Icon } from 'native-base';
 
-export default function ControlButton({ title, onPress }) {
+export default function ControlButton({ icon, onPress }) {
   return (
     <TouchableOpacity style={styles.controlButtonContainer} onPress={onPress}>
-      <Text style={styles.controlButtonText}>{title}</Text>
+      <Icon name={icon} style={styles.controlButtonText}/>
     </TouchableOpacity>
   );
 }

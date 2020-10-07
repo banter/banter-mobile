@@ -49,12 +49,12 @@ export default function FooterPlayer(props) {
         <Text style={styles.title}>{track.title}</Text>
         <Text style={styles.artist}>{track.artist}</Text>
         <View style={styles.controls}>
-          <ControlButton title={'<<'} onPress={AudioService.skipToPrevious} />
+          <ControlButton icon={'play-skip-back-outline'} onPress={AudioService.skipToPrevious} />
           <Icon
             style={styles.icon}
             onPress={AudioService.togglePlayback}
-            name={isPlaying ? 'pause' : 'play'}  />
-          <ControlButton title={'>>'} onPress={AudioService.skipToNext} />
+            name={isPlaying ? 'pause' : 'play-outline'}  />
+          <ControlButton icon={'play-skip-forward-outline'} onPress={AudioService.skipToNext} />
         </View>
       </View> : null}
     </View>
@@ -82,8 +82,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   controls: {
-    marginVertical: 20,
+    marginTop: 15,
+    marginBottom: 30,
     flexDirection: 'row',
+  },
+  icon: {
+    marginVertical: -7,
   },
 });
 
