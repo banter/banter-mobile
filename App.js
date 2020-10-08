@@ -82,8 +82,8 @@ const App : () => React$Node = () => {
             name="Auth"
             component={AuthApp}/>
         </Stack.Navigator>
-        <CollapsedAudioPlayer />
-{track ?
+        <FooterPlayer />
+{/* {track ?
       <SwipeUpDown
 	itemMini={<CollapsedAudioPlayer />} // Pass props component when collapsed
 	itemFull={<ExpandedAudioPlayer discussion={MOCKDISCUSSIONS} />} // Pass props component when show full
@@ -93,7 +93,7 @@ const App : () => React$Node = () => {
   swipeHeight={120}
 	onMoveUp={() => console.log('up')}
 	disablePressToShow={false} // Press item mini to show full
-/> : null}
+/> : null} */}
       </NavigationContainer>
     </Provider>
   );
