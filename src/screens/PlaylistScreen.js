@@ -27,6 +27,7 @@ class PlaylistScreen extends React.Component {
     const {topic} = this.props.route.params;
     const {setPlaylist} = this.props;
 
+    // TODO: Move this to an action.
     return fetch(`https://api.banteraudio.com/v1/topics/?id=${topic.id}`).then((response) => response.json()).then((responseJson) => {
       this.setState({
         isLoading: false,

@@ -1,4 +1,6 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 export default function howLongAgo({ day, month, year }) {
   const dateObject = new Date(
@@ -9,5 +11,5 @@ export default function howLongAgo({ day, month, year }) {
     month: '2-digit',
     day: '2-digit',
   });
-  return moment(dateString).fromNow();
+  return dayjs(dateString).fromNow();
 }

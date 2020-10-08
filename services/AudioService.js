@@ -28,6 +28,20 @@ export default {
     }
   },
 
+  async jumpAhead() {
+    try {
+      const newPosition = await TrackPlayer.getPosition() + 15;
+      await TrackPlayer.seekTo(newPosition);
+    } catch (_) {}
+  },
+
+  async jumpBack() {
+    try {
+      const newPosition = await TrackPlayer.getPosition() - 15;
+      await TrackPlayer.seekTo(newPosition);
+    } catch (_) {}
+  },
+
   async skipToNext() {
     try {
       await TrackPlayer.skipToNext();

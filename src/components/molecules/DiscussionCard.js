@@ -10,16 +10,21 @@ import {
   Grid,
   Col,
 } from 'native-base';
-import AudioService from '../../../services/AudioService';
 import { DiscussionItem } from '../../models';
 import { PlaybackIcon } from '../atoms';
 import { TagList } from '.';
-import { CardStyleInterpolators } from '@react-navigation/stack';
 import { CardStyle, Typography } from '../../styles';
 import { GRAY_DARK, TRANSPARENT } from '../../styles/colors';
 import { LARGE_CORNER_RADIUS } from '../../styles/card';
 import howLongAgo from '../../../utils/date-format';
-import moment from 'moment';
+
+import dayjs from 'dayjs';
+import dayDuration from 'dayjs/plugin/duration';
+import dayUtc from 'dayjs/plugin/utc';
+
+dayjs.extend(dayUtc);
+dayjs.extend(dayDuration);
+
 import { largeIconStyle, smallIconStyle } from '../../styles/icons';
 
 export default class DiscussionCard extends React.Component {
@@ -29,10 +34,15 @@ export default class DiscussionCard extends React.Component {
   }
 
   discussionAge({ year, monthValue: month, dayOfMonth: day }) {
-    return howLongAgo({ year, month, day }, this.$moment);
+    return howLongAgo({ year, month, day }, this.$dayjs);
   }
   discussionTime(discussion) {
-    const duration = moment.utc(moment.duration(discussion.duration).as('milliseconds')).format('m:ss');
+    let duration;
+    try {
+      duration = dayjs.utc(dayjs.duration(discussion.duration).as('milliseconds')).format('m:ss');
+    } catch (e) {
+      duration = '';
+    }
     return duration === '0:00' ? '' : duration;
   }
 
@@ -78,7 +88,7 @@ export default class DiscussionCard extends React.Component {
               {this.discussion.description}</Text>
           </CardItem>
           <CardItem style={styles.discussionCardTagItem}>
-                    <Icon type="AntDesign" name="tag" style={styles.smallIconStyle}/>
+            <Icon type="AntDesign" name="tag" style={styles.smallIconStyle}/>
             <TagList tags={this.discussion.tags}/>
           </CardItem>
 
