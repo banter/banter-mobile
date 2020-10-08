@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-const relativeTime = require('dayjs/plugin/relativeTime');
+import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 export default function howLongAgo({ day, month, year }) {

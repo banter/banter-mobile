@@ -17,11 +17,13 @@ import { CardStyle, Typography } from '../../styles';
 import { GRAY_DARK, TRANSPARENT } from '../../styles/colors';
 import { LARGE_CORNER_RADIUS } from '../../styles/card';
 import howLongAgo from '../../../utils/date-format';
+
 import dayjs from 'dayjs';
-const duration = require('dayjs/plugin/duration');
-const utc = require('dayjs/plugin/utc');
-dayjs.extend(utc);
-dayjs.extend(duration);
+import dayDuration from 'dayjs/plugin/duration';
+import dayUtc from 'dayjs/plugin/utc';
+
+dayjs.extend(dayUtc);
+dayjs.extend(dayDuration);
 
 import { largeIconStyle, smallIconStyle } from '../../styles/icons';
 
@@ -35,7 +37,12 @@ export default class DiscussionCard extends React.Component {
     return howLongAgo({ year, month, day }, this.$dayjs);
   }
   discussionTime(discussion) {
-    const duration = dayjs.utc(dayjs.duration(discussion.duration).as('milliseconds')).format('m:ss');
+    let duration;
+    try {
+      duration = dayjs.utc(dayjs.duration(discussion.duration).as('milliseconds')).format('m:ss');
+    } catch (e) {
+      duration = '';
+    }
     return duration === '0:00' ? '' : duration;
   }
 
@@ -81,7 +88,7 @@ export default class DiscussionCard extends React.Component {
               {this.discussion.description}</Text>
           </CardItem>
           <CardItem style={styles.discussionCardTagItem}>
-                    <Icon type="AntDesign" name="tag" style={styles.smallIconStyle}/>
+            <Icon type="AntDesign" name="tag" style={styles.smallIconStyle}/>
             <TagList tags={this.discussion.tags}/>
           </CardItem>
 
