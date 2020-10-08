@@ -1,14 +1,10 @@
 import React from 'react';
 import {Thumbnail, Text, Card, CardItem} from 'native-base';
-import {StyleSheet, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {StyleSheet, View, Pressable} from 'react-native';
 import PropTypes from 'prop-types';
 import {useNavigation} from '@react-navigation/native';
 import { TagItem } from '../../models';
 import {ImageStyle, CardStyle} from '../../styles';
-import { LARGE_CORNER_RADIUS } from '../../styles/card';
-
-
 
 export default function TopicCard(props){
   const navigation = useNavigation();
@@ -16,7 +12,7 @@ export default function TopicCard(props){
     return (
 
       <View style={styles.container}>
-        <TouchableOpacity
+        <Pressable
           style={styles.topicImage}
           onPress={() => navigation.navigate('Playlist', {topic: tag})}>
           <Card transparent style={styles.discussionCard}>
@@ -32,8 +28,7 @@ export default function TopicCard(props){
               <Text style={styles.topicCardText}>{tag.value}</Text>
             </CardItem>
           </Card>
-        </TouchableOpacity>
-
+        </Pressable>
       </View>
 
     );

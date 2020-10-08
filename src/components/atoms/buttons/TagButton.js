@@ -1,9 +1,7 @@
 
 import React from 'react';
-import { Icon, Thumbnail, Text, Button } from 'native-base';
-import { StyleSheet, View,  Image } from 'react-native';
-import Animation from 'lottie-react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, Button } from 'native-base';
+import { StyleSheet, View } from 'react-native';
 import { TagItem } from '../../../models';
 import { useNavigation } from '@react-navigation/native';
 
