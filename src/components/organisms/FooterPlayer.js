@@ -50,7 +50,7 @@ export default function FooterPlayer(props) {
         <View style={styles.controls}>
           <ControlButton icon={'play-skip-back-outline'} onPress={AudioService.skipToPrevious} />
           <ControlButton style={styles.backTime} icon={'refresh'} onPress={AudioService.jumpBack} />
-          <ControlButton style={styles.largeIcon} icon={isPlaying ? 'pause' : 'play-outline'} onPress={AudioService.togglePlayback} />
+          <ControlButton style={styles.largeIcon} icon={isPlaying ? 'pause-outline' : 'play-outline'} onPress={AudioService.togglePlayback} />
           <ControlButton icon={'refresh'} onPress={AudioService.jumpAhead} />
           <ControlButton icon={'play-skip-forward-outline'} onPress={AudioService.skipToNext} />
         </View>
