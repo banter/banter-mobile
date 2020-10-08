@@ -42,6 +42,7 @@ export default function CollapsedAudioPlayer(props) {
 
   return (
     <View>
+       {track ?
         <View style={styles.card}>
         <Image style={styles.cover} source={{ uri: track.artwork }} />
         <ProgressBar />
@@ -56,6 +57,7 @@ export default function CollapsedAudioPlayer(props) {
           <ControlButton title={'>>'} onPress={AudioService.skipToNext} />
         </View>
       </View>
+       : null}
     </View>
   );
 }

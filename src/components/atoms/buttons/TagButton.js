@@ -6,10 +6,10 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {TagItem} from '../../../models';
 import {useNavigation} from '@react-navigation/native';
 import {FONT_SIZE_MEDIUM, FONT_SIZE_SMALL} from '../../../styles/typography';
-
+import * as RootNavigation from '../../../navigation/RootNavigation';
 export default function TagButton(props) {
   const tag = new TagItem(props.tag);
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Button
@@ -17,7 +17,7 @@ export default function TagButton(props) {
         rounded
         small
         light
-        onPress={() => navigation.navigate('Playlist', {topic: tag})}>
+        onPress={() => RootNavigation.navigate('Playlist', {topic: tag})}>
         <Text style={styles.tagButtonFontStyle}>{tag.value}</Text>
       </Button>
     </View>

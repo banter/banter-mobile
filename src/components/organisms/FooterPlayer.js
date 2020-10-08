@@ -8,10 +8,6 @@ import {
   Text,
   View,
 } from 'react-native';
-import { Icon } from 'native-base';
-
-import AudioService from '../../../services/AudioService';
-import { ProgressBar, ControlButton } from '../atoms';
 import SwipeUpDown from './SwipeUpDown';
 import MOCKDISCUSSIONS from '../../../constants/mock-discussions';
 import { CollapsedAudioPlayer, ExpandedAudioPlayer } from '.';
@@ -53,7 +49,7 @@ export default function FooterPlayer(props) {
 	onShowMini={() => console.log('mini')}
 	onShowFull={() => console.log('full')}
   onMoveDown={() => console.log('down')}
-  // swipeHeight={60}
+  swipeHeight={120}
 	onMoveUp={() => console.log('up')}
 	disablePressToShow={false} // Press item mini to show full
 />

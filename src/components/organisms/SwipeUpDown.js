@@ -88,12 +88,9 @@ export default class SwipeUpDown extends Component<Props> {
   }
 
   _onPanResponderMove(event, gestureState) {
-    console.log('Gesture Height', gestureState.dy);
     if (gestureState.dy > 0 && !this.checkCollapsed) {
       // SWIPE DOWN
-      console.log('Gesture Height', gestureState.dy);
       this.customStyle.style.top = this.top + gestureState.dy;
-      console.log('Gesture Height', gestureState.dy);
       this.customStyle.style.height = DEVICE_HEIGHT - gestureState.dy;
       this.swipeIconRef && this.swipeIconRef.setState({ icon: assets.minus });
       !this.state.collapsed && this.setState({ collapsed: true });
@@ -142,8 +139,8 @@ export default class SwipeUpDown extends Component<Props> {
     const { onShowMini, itemMini } = this.props;
     console.log(DEVICE_HEIGHT, this.SWIPE_HEIGHT);
     this.customStyle.style.top = itemMini
-      ? DEVICE_HEIGHT - this.SWIPE_HEIGHT
-      : DEVICE_HEIGHT;
+      ? DEVICE_HEIGHT - this.SWIPE_HEIGHT - 100
+      : DEVICE_HEIGHT - 100;
     this.customStyle.style.height = itemMini ? this.SWIPE_HEIGHT : 0;
     this.swipeIconRef && this.swipeIconRef.setState({ showIcon: false });
     this.updateNativeProps();

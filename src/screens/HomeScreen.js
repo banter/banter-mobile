@@ -3,15 +3,8 @@ import {StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {
   Text,
-  List,
-  ListItem,
-  Left,
-  Right,
-  Icon,
   Content,
   Spinner,
-  Body,
-  Thumbnail,
 } from 'native-base';
 
 import {connect} from 'react-redux';
@@ -26,20 +19,14 @@ class HomeScreen extends React.Component {
 
   render() {
     const {
-      navigation,
       trendingTopics,
       collections,
-      isTrendingTopicsLoading,
       isCollectionsLoading,
-      isLoading,
       error,
     } = this.props;
     if (isCollectionsLoading) {
       return (
-        <View style={{
-          flex: 1,
-          padding: 20,
-        }}>
+        <View style={styles.loadingContainer}>
           <Content>
             <Spinner color="black"/>
           </Content>
@@ -47,7 +34,6 @@ class HomeScreen extends React.Component {
       );
     }
 
-    const {selected} = this.state;
     return (
       <View style={styles.container}>
         <ScrollView
@@ -83,18 +69,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'black',
   },
+  loadingContainer: {
+    flex: 1,
+    padding: 20,
+  },
 });
 
 function mapStateToProps(state) {
   return {
-trendingTopics: state.topicState.trendingTopics,
-collections: state.topicState.collections,
-error: state.topicState.errorMessage,
-isTrendingTopicsLoading: state.topicState.isTrendingTopicsLoading,
-isCollectionsLoading: state.topicState.isCollectionsLoading,
+    trendingTopics: state.topicState.trendingTopics,
+    collections: state.topicState.collections,
+    error: state.topicState.errorMessage,
+    isTrendingTopicsLoading: state.topicState.isTrendingTopicsLoading,
+    isCollectionsLoading: state.topicState.isCollectionsLoading,
     isLoading: state.topicState.isLoading,
-topics: state.topicState.topics,
-};
+    topics: state.topicState.topics,
+  };
 }
 
 export default connect(mapStateToProps)(HomeScreen);

@@ -1,20 +1,20 @@
 import {combineReducers} from 'redux';
 import topicReducer from './topicReducer.js';
+import userDataReducer from './userDataReducer.js';
 
 const allReducers = combineReducers({
   topicState: topicReducer,
+  userDataState: userDataReducer,
 });
 
 export default allReducers;
-
-
 
 export function requesting(state,loadingVariable) {
   state[loadingVariable] = true;
   return {...state};
 }
 
-export function success(state,loadingVariable, alteredVariable, action) {
+export function success(state, loadingVariable, alteredVariable, action) {
   state[loadingVariable] = false;
   state[alteredVariable] = action.payload;
   return {...state};

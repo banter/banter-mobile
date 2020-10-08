@@ -46,7 +46,7 @@ export default class ExpandedAudioPlayer extends React.Component {
           {this.discussion.episodeTitle}</Text>
         <Text numberOfLines={2} style={styles.descriptionText}>
           {this.discussion.description}</Text>
-        <TagList tags={this.discussion.tags}/>
+        {/* <TagList tags={this.discussion.tags}/> */}
         <ProgressBar />
         <AudioPlayerActionBar discussion={this.discussion} />
       </View>
