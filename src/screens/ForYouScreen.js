@@ -1,12 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {Text, View, SafeAreaView} from 'react-native';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Pressable, Text, View, SafeAreaView} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import {WINDOW_WIDTH, percentageOfScreenHeight} from '../styles/mixins';
 import {DiscussionCard} from '../components/molecules';
 import MOCKDISCUSSIONS from '../../constants/mock-discussions';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import { FONT_SIZE_24, FONT_SIZE_16 } from '../styles/typography';
 import { BLACK, TRANSPARENT } from '../styles/colors';
 import MOCKPLAYLIST from '../../constants/mock-playlist';
@@ -47,13 +45,13 @@ export default class ForYouScreen extends React.Component {
           flexDirection: 'row',
           justifyContent: 'center',
         }}>
-          <TouchableOpacity onPress={() => this.carousel.snapToPrev()}>
+          <Pressable onPress={() => this.carousel.snapToPrev()}>
             <Text style={[(this.state.activeIndex == 0) ? styles.headerText : styles.headerTextNonSelected]}>For You</Text>
-          </TouchableOpacity>
+          </Pressable>
           <Text style={styles.headerTextNonSelected}> | </Text>
-          <TouchableOpacity onPress={() => this.carousel.snapToNext()}>
+          <Pressable onPress={() => this.carousel.snapToNext()}>
           <Text style={[(this.state.activeIndex == 1) ? styles.headerText : styles.headerTextNonSelected]}>Following</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
         <View
           style={{

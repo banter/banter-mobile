@@ -1,11 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Pressable} from 'react-native';
 import {
   Thumbnail,
   Card,
   CardItem,
   Text,
-  Icon,
   Grid,
   Col,
 } from 'native-base';
@@ -55,8 +54,6 @@ export default class TopicHeaderCard extends React.Component {
   }
 
 }
-
-const CARD_COLOR = '#282828';
 const CARD_RADIUS = 20;
 const LARGE_ICON_SIZE = 42;
 const LARGE_IMAGE_SIZE = 110;
