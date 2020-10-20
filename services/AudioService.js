@@ -19,7 +19,6 @@ export default {
   },
 
   async togglePlayback() {
-    console.log('CLICK');
     const isPlaying = await TrackPlayer.getState() === TrackPlayer.STATE_PLAYING;
 
     if (isPlaying) {

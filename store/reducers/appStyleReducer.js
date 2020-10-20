@@ -1,5 +1,4 @@
-import TOPIC_STORE from '../constants/topicStore';
-import {requesting, success, error, setValue} from './index';
+import { setValue} from './index';
 import {APP_STYLE_STORE } from '../constants';
 
 let initialState = {

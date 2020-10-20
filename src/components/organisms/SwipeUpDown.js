@@ -14,7 +14,7 @@ import { GRAY_DARK } from '../../styles/colors';
 
 const MARGIN_TOP = Platform.OS === 'ios' ? 20 : 0;
 const DEVICE_HEIGHT = Dimensions.get('window').height - MARGIN_TOP;
-const SENSITIVITY = 5;
+const SWIPE_SENSITIVITY = 5;
 export default class SwipeUpDown extends Component<Props> {
   static defautProps = {
     disablePressToShow: false,
@@ -47,11 +47,11 @@ export default class SwipeUpDown extends Component<Props> {
       // onMoveShouldSetPanResponder/Capture are both set in order to allow clicks on child components
     onMoveShouldSetPanResponder: (_, gestureState) => {
       const { dx, dy } = gestureState;
-      return (dx > SENSITIVITY || dx < -SENSITIVITY || dy > SENSITIVITY || dy < -SENSITIVITY);
+      return (dx > SWIPE_SENSITIVITY || dx < -SWIPE_SENSITIVITY || dy > SWIPE_SENSITIVITY || dy < -SWIPE_SENSITIVITY);
     },
   onMoveShouldSetPanResponderCapture: (_, gestureState) => {
       const { dx, dy } = gestureState;
-      return (dx > SENSITIVITY || dx < -SENSITIVITY || dy > SENSITIVITY || dy < -SENSITIVITY);
+      return (dx > SWIPE_SENSITIVITY || dx < -SWIPE_SENSITIVITY || dy > SWIPE_SENSITIVITY || dy < -SWIPE_SENSITIVITY);
     },
       onPanResponderMove: this._onPanResponderMove.bind(this),
       onPanResponderRelease: this._onPanResponderRelease.bind(this),
