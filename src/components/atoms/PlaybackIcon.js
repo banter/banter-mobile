@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Pressable} from 'react-native';
 import PropTypes from 'prop-types';
 import { Icon, Text, Spinner } from 'native-base';
 import TrackPlayer, { useTrackPlayerEvents, TrackPlayerEvents, STATE_PLAYING, STATE_BUFFERING, STATE_READY } from 'react-native-track-player';
 
 import AudioService from '../../../services/AudioService.js';
 import { largeIconStyle } from '../../styles/icons.js';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const watchedEvents = [
   TrackPlayerEvents.PLAYBACK_STATE,
@@ -44,7 +43,7 @@ export default function PlaybackIcon(props) {
   const isPlaying = playingThisDiscussion && audioPlaying;
 
   return (
-    <TouchableOpacity onPress={playingThisDiscussion ? AudioService.togglePlayback : () => AudioService.startNewTrack(discussion)}>
+    <Pressable onPress={playingThisDiscussion ? AudioService.togglePlayback : () => AudioService.startNewTrack(discussion)}>
       <Text>
         {audioBuffering && playingThisDiscussion
         ? <Spinner color="white"/>
@@ -54,7 +53,7 @@ export default function PlaybackIcon(props) {
           name={isPlaying ? 'pause' : 'play'} />
         }
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { Container, Header, Button,
   Text, Item, Icon, Input,
-  ListItem, Grid, Col, List, TouchableOpacity }
+  ListItem, Grid, Col, List, Pressable }
   from 'native-base';
 import MOCKTEAMS from '../../constants/mock-teams';
 import _ from 'lodash';
@@ -30,9 +30,9 @@ export default class OnboardingScreen extends React.Component {
                     onPress={() =>
                       alert('Following this thing')
                     }>
-            {/* <TouchableOpacity> */}
+            {/* <Pressable> */}
             <Text>NFL</Text>
-            {/* </TouchableOpacity> */}
+            {/* </Pressable> */}
             </ListItem>
             <ListItem>
               <Text>MLB</Text>

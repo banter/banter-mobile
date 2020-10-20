@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import {Icon, Thumbnail, Text, Button} from 'native-base';
 import {StyleSheet, View, Image} from 'react-native';
 import Animation from 'lottie-react-native';
@@ -10,6 +11,16 @@ import * as RootNavigation from '../../../navigation/RootNavigation';
 export default function TagButton(props) {
   const tag = new TagItem(props.tag);
   // const navigation = useNavigation();
+=======
+import { Text, Button } from 'native-base';
+import { StyleSheet, View } from 'react-native';
+import { TagItem } from '../../../models';
+import { useNavigation } from '@react-navigation/native';
+
+export default function TagButton(props){
+    const tag = new TagItem(props.tag);
+    const navigation = useNavigation();
+>>>>>>> 1c12307ea1ebdc417be4c794b563ee52fa745b3c
   return (
     <View style={styles.container}>
       <Button

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { NAV_BAR_HEIGHT } from '../styles/mixins';
 import { GRAY_LIGHT } from '../styles/colors';
 import { Icon } from 'native-base';
-import { FONT_SIZE_SMALL, FONT_SIZE_VERY_SMALL } from '../styles/typography';
+import { FONT_SIZE_VERY_SMALL } from '../styles/typography';
 
 function MyTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
     const focusedOptions = descriptors[state.routes[state.index].key].options;

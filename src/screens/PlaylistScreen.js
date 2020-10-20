@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, SafeAreaView} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import { connect } from 'react-redux';
 import { setCurrentTopic } from '../../store/actions/topics';
 

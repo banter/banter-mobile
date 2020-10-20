@@ -3,12 +3,9 @@ import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import {Text} from 'native-base';
 import { containerStyles } from './styles';
 import { TopicCard } from '.';
-import { LARGE_IMAGE_SIZE } from '../../styles/images';
 
 export const TopicCarousel = (props: any) => {
-
   const { primaryTopic, relatedTopics, style } = props;
-  const itemsPerInterval = props.itemsPerInterval || 1;
 
   return (
     <SafeAreaView style={containerStyles.container}>

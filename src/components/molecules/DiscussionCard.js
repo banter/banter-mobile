@@ -1,6 +1,6 @@
 /* eslint-disable no-trailing-spaces */
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Pressable} from 'react-native';
 import {
   Thumbnail,
   Card,
@@ -72,14 +72,14 @@ export default class DiscussionCard extends React.Component {
               <Col style={{
                 width: 20,
               }}>
-                <TouchableOpacity onPress={this.onPress}>
+                <Pressable onPress={this.onPress}>
                   <Icon
                     type="Feather"
                     name="more-vertical"
                     style={{
                     color: 'white',
                   }}/>
-                </TouchableOpacity>
+                </Pressable>
               </Col>
             </Grid>
           </CardItem >
@@ -102,11 +102,11 @@ export default class DiscussionCard extends React.Component {
                 </Text>
               </Col>
               <Col style={{ width: 50 }}>
-                <TouchableOpacity onPress={this.onPress}>
+                <Pressable onPress={this.onPress}>
                   <Text>
                     <Icon name="heart" style={styles.largeIconStyle}/>
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               </Col>
             </Grid>
           </CardItem>
