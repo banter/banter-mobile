@@ -1,66 +1,31 @@
-import React, { useState } from 'react';
-import TrackPlayer, {
-  useTrackPlayerEvents, TrackPlayerEvents, STATE_PLAYING,
-} from 'react-native-track-player';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import { Icon } from 'native-base';
-import { ProgressBar, ControlButton } from '../atoms';
-import AudioService from '../../../services/AudioService';
+import React from 'react';
+import {DiscussionItem} from '../../models';
+import {Grid, Col, Text, View, Container} from 'native-base';
+import {LikeButton, ShareButton, PlaybackIcon, ControlButton, ProgressBar} from '../atoms';
+import {StyleSheet, SafeAreaView, Image} from 'react-native';
+import ControlButtonActionBar from '../molecules/ControlButtonActionBar';
 
-const watchedEvents = [
-  TrackPlayerEvents.PLAYBACK_STATE,
-  TrackPlayerEvents.PLAYBACK_ERROR,
-  TrackPlayerEvents.PLAYBACK_TRACK_CHANGED,
-];
 export default function CollapsedAudioPlayer(props) {
-  const [track, setTrack] = useState('');
-  const [playerState, setPlayerState] = useState(null);
 
-  useTrackPlayerEvents(watchedEvents, async (event) => {
-    switch (event.type) {
-      case TrackPlayerEvents.PLAYBACK_ERROR:
-        console.warn('An error occured while playing the current track.');
-        break;
-      case TrackPlayerEvents.PLAYBACK_STATE:
-        setPlayerState(event.state);
-        break;
-      case TrackPlayerEvents.PLAYBACK_TRACK_CHANGED:
-        const currentTrack = await TrackPlayer.getTrack(event.nextTrack);
-        setTrack(currentTrack);
-        break;
-      default:
-        break;
-    }
-  });
-
-  const isPlaying = playerState === STATE_PLAYING;
+  const AudioService = props.service;
+  const isPlaying = props.playing;
+  const track = props.playingTrack;
+  console.log('In Collapsed Audio Player Function');
 
   return (
-    <View>
-       {track ?
-        <View style={styles.card}>
-        <Image style={styles.cover} source={{ uri: track.artwork }} />
-        <ProgressBar />
-        <Text style={styles.title}>{track.title}</Text>
-        <Text style={styles.artist}>{track.artist}</Text>
-        <View style={styles.controls}>
-          <ControlButton title={'<<'} onPress={AudioService.skipToPrevious} />
-          <Icon
-            style={styles.icon}
-            onPress={AudioService.togglePlayback}
-            name={isPlaying ? 'pause' : 'play'}  />
-          <ControlButton title={'>>'} onPress={AudioService.skipToNext} />
-        </View>
-      </View>
-       : null}
+    <View style={styles.card}>
+      <Image style={styles.cover} source={{
+        uri: track.artwork,
+      }}/>
+      <ProgressBar/>
+      <Text style={styles.title}>{track.title}</Text>
+      <Text style={styles.artist}>{track.artist}</Text>
+      <ControlButtonActionBar service={AudioService} playing={isPlaying}/>
     </View>
   );
 }
+
+const COL_HEIGHT = 60;
 
 const styles = StyleSheet.create({
   card: {
@@ -68,7 +33,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     alignItems: 'center',
     backgroundColor: '#DDDDDD',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
   },
   cover: {
     width: 40,
@@ -83,8 +51,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   controls: {
-    marginVertical: 20,
+    marginTop: 15,
+    marginBottom: 30,
     flexDirection: 'row',
   },
+  largeIcon: {
+    fontSize: 24,
+  },
+  backTime: {
+    transform: [
+      {
+        rotateY: '180deg',
+      },
+    ],
+  },
 });
-

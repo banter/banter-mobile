@@ -1,66 +1,51 @@
 import React from 'react';
-import {DiscussionItem} from '../../models';
 import {
-  Card,
-  CardItem,
   Text,
-  Icon,
-  Grid,
-  Col,
   View,
   Thumbnail,
 } from 'native-base';
-import PropTypes from 'prop-types';
-import {TagList, AudioPlayerActionBar} from '../molecules';
-import {PlaybackIcon, LikeButton, ShareButton, ProgressBar} from '../atoms';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import mockDiscussions from '../../../constants/mock-discussions';
 import {StyleSheet} from 'react-native';
 import {TRANSPARENT, GRAY_DARK} from '../../styles/colors';
-import {LARGE_CORNER_RADIUS} from '../../styles/card';
-import {largeIconStyle, smallIconStyle} from '../../styles/icons';
-import {CardStyle, Typography} from '../../styles';
-import {WINDOW_WIDTH, WINDOW_HEIGHT} from '../../styles/mixins';
-import { SCALE_8, MEDIUM_SPACING, SMALL_SPACING, BIG_SPACING } from '../../styles/spacing';
+import {Typography} from '../../styles';
+import {WINDOW_WIDTH} from '../../styles/mixins';
+import { MEDIUM_SPACING, BIG_SPACING } from '../../styles/spacing';
 
-export default class ExpandedAudioPlayer extends React.Component {
-  constructor(props) {
-    super(props);
-    // FIXME this.props.topic.imageUrl works however, this.topic.imageUrl DOES NOT
-    // work
-    this.discussion = new DiscussionItem(this.props.discussion);
-  }
-  onPress() {
-    alert('Preses');
-  }
-  render() {
+import ControlButtonActionBar from '../molecules/ControlButtonActionBar';
+import { ProgressBar } from '../atoms';
+
+export default function ExpandedAudioPlayer(props){
+
+    const AudioService = props.service;
+    const isPlaying = props.playing;
+    const track = props.playingTrack;
+    console.log('In Expanded Audio Player');
+
     return (
       <View style={styles.container}>
         <Thumbnail
           square
           style={styles.largeThumbnailStyle}
           source={{
-          uri: this.discussion.podcastThumbnailUrl,
+          uri: track.artwork,
         }}/>
         <Text numberOfLines={2} style={styles.titleText}>
-          {this.discussion.episodeTitle}</Text>
+          {track.title}</Text>
         <Text numberOfLines={2} style={styles.descriptionText}>
-          {this.discussion.description}</Text>
+          {track.artist}</Text>
         {/* <TagList tags={this.discussion.tags}/> */}
         <ProgressBar />
-        <AudioPlayerActionBar discussion={this.discussion} />
+        <ControlButtonActionBar service={AudioService} playing={isPlaying} />
+        {/* <AudioPlayerActionBar discussion={this.discussion} /> */}
       </View>
     );
-  }
-
 }
 
 ExpandedAudioPlayer.propTypes = {
-  discussion: PropTypes.object,
+  // discussion: PropTypes.object,
 };
 
 ExpandedAudioPlayer.defaultProps = {
-  discussion: mockDiscussions,
+  // discussion: mockDiscussions,
 };
 
 const styles = StyleSheet.create({

@@ -5,15 +5,11 @@ import MainApp from './src/navigation/AppNavigation';
 import {Provider} from 'react-redux';
 import {fetchTrendingTopics, fetchCollections} from './store/actions/topics';
 import AuthApp from './src/navigation/AuthNavigation';
-import { FooterPlayer, CollapsedAudioPlayer, SwipeUpDown, ExpandedAudioPlayer } from './src/components/organisms';
-import ForYouScreen from './src/screens/ForYouScreen';
 import TrackPlayer, {
   useTrackPlayerEvents, TrackPlayerEvents, STATE_PLAYING,
 } from 'react-native-track-player';
 import store from './store';
 import { fetchForYou } from './store/actions/userData';
-import { Text } from 'native-base';
-import MOCKDISCUSSIONS from './constants/mock-discussions';
 import { navigationRef } from './src/navigation/RootNavigation';
 
 const Stack = createStackNavigator();
@@ -29,6 +25,8 @@ const watchedEvents = [
   TrackPlayerEvents.PLAYBACK_ERROR,
   TrackPlayerEvents.PLAYBACK_TRACK_CHANGED,
 ];
+// You can now get a ref directly to the DOM button:
+const ref = React.createRef();
 
 const App : () => React$Node = () => {
 
@@ -67,7 +65,7 @@ const App : () => React$Node = () => {
         options={{
         headerShown: false,
       }}
-        component={ForYouScreen}
+        component={TestScreen}
         name="For You"/> */}
         <Stack.Screen
             options={{
@@ -82,21 +80,10 @@ const App : () => React$Node = () => {
             name="Auth"
             component={AuthApp}/>
         </Stack.Navigator>
-        <FooterPlayer />
-{/* {track ?
-      <SwipeUpDown
-	itemMini={<CollapsedAudioPlayer />} // Pass props component when collapsed
-	itemFull={<ExpandedAudioPlayer discussion={MOCKDISCUSSIONS} />} // Pass props component when show full
-	onShowMini={() => console.log('mini')}
-	onShowFull={() => console.log('full')}
-  onMoveDown={() => console.log('down')}
-  swipeHeight={120}
-	onMoveUp={() => console.log('up')}
-	disablePressToShow={false} // Press item mini to show full
-/> : null} */}
       </NavigationContainer>
     </Provider>
   );
         };
+
 
 export default App;

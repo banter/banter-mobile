@@ -36,7 +36,9 @@ class ForYouScreen extends React.Component {
 
   _renderItem({item, index}) {
     // Render item is called for both For You and Follow you when Swiping
-    let discussionPlaylist = index == FOR_YOU_INDEX ? this.props.playlist : MOCKPLAYLIST;
+    let discussionPlaylist = index == FOR_YOU_INDEX
+      ? this.props.playlist
+      : MOCKPLAYLIST;
     return (
       <View style={styles.slide1}>
         <DiscussionPlaylist playlist={discussionPlaylist}/>
@@ -63,7 +65,9 @@ class ForYouScreen extends React.Component {
           sliderWidth={WINDOW_WIDTH}
           itemWidth={WINDOW_WIDTH}
           windowSize={WINDOW_WIDTH}
-          renderItem={this._renderItem.bind(this)}
+          renderItem={this
+          ._renderItem
+          .bind(this)}
           onSnapToItem=
           { index => this.setState({activeIndex:index}) }/>
       </View>;
@@ -95,18 +99,7 @@ class ForYouScreen extends React.Component {
           </TouchableOpacity>
         </View>
         {body}
-        {/* <SwipeUpDown
-	itemMini={<Text>aaa</Text>} // Pass props component when collapsed
-	itemFull={<Text>aaa</Text>} // Pass props component when show full
-	onShowMini={() => console.log('mini')}
-	onShowFull={() => console.log('full')}
-  onMoveDown={() => console.log('down')}
-  swipeHeight={120}
-	onMoveUp={() => console.log('up')}
-	disablePressToShow={false} // Press item mini to show full
-/> */}
-{/* <FooterPlayer /> */}
-
+        <FooterPlayer/>
       </SafeAreaView>
     );
   }

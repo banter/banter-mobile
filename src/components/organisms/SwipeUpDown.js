@@ -2,35 +2,19 @@ import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
-  View,
   PanResponder,
   Dimensions,
   LayoutAnimation,
-  TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
 import { SwipeIcon } from '../molecules';
 import assets from '../../assets';
-
-import {
-    Text,
-  } from 'native-base';
 import { GRAY_DARK } from '../../styles/colors';
 
 
 const MARGIN_TOP = Platform.OS === 'ios' ? 20 : 0;
 const DEVICE_HEIGHT = Dimensions.get('window').height - MARGIN_TOP;
-type Props = {
-  hasRef?: () => void,
-  swipeHeight?: number,
-  itemMini?: object,
-  itemFull: object,
-  disablePressToShow?: boolean,
-  style?: object,
-  onShowMini?: () => void,
-  onShowFull?: () => void,
-  animation?: 'linear' | 'spring' | 'easeInEaseOut' | 'none'
-};
+const SENSITIVITY = 5;
 export default class SwipeUpDown extends Component<Props> {
   static defautProps = {
     disablePressToShow: false,
@@ -54,11 +38,21 @@ export default class SwipeUpDown extends Component<Props> {
     };
     this.checkCollapsed = true;
     this.showFull = this.showFull.bind(this);
+    this.showMini = this.showMini.bind(this);
   }
+
 
  UNSAFE_componentWillMount() {
     this._panResponder = PanResponder.create({
-      onMoveShouldSetPanResponder: (event, gestureState) => true,
+      // onMoveShouldSetPanResponder/Capture are both set in order to allow clicks on child components
+    onMoveShouldSetPanResponder: (_, gestureState) => {
+      const { dx, dy } = gestureState;
+      return (dx > SENSITIVITY || dx < -SENSITIVITY || dy > SENSITIVITY || dy < -SENSITIVITY);
+    },
+  onMoveShouldSetPanResponderCapture: (_, gestureState) => {
+      const { dx, dy } = gestureState;
+      return (dx > SENSITIVITY || dx < -SENSITIVITY || dy > SENSITIVITY || dy < -SENSITIVITY);
+    },
       onPanResponderMove: this._onPanResponderMove.bind(this),
       onPanResponderRelease: this._onPanResponderRelease.bind(this),
     });
@@ -66,7 +60,6 @@ export default class SwipeUpDown extends Component<Props> {
 
   componentDidMount() {
     this.props.hasRef && this.props.hasRef(this);
-    this.showFull();
   }
 
   updateNativeProps() {
@@ -88,6 +81,7 @@ export default class SwipeUpDown extends Component<Props> {
   }
 
   _onPanResponderMove(event, gestureState) {
+    console.log('Pan Responder Move', gestureState.dy);
     if (gestureState.dy > 0 && !this.checkCollapsed) {
       // SWIPE DOWN
       this.customStyle.style.top = this.top + gestureState.dy;
@@ -135,12 +129,8 @@ export default class SwipeUpDown extends Component<Props> {
   }
 
   showMini() {
-      console.log('show Mini');
     const { onShowMini, itemMini } = this.props;
-    console.log(DEVICE_HEIGHT, this.SWIPE_HEIGHT);
-    this.customStyle.style.top = itemMini
-      ? DEVICE_HEIGHT - this.SWIPE_HEIGHT - 100
-      : DEVICE_HEIGHT - 100;
+    this.customStyle.style.top = 0;
     this.customStyle.style.height = itemMini ? this.SWIPE_HEIGHT : 0;
     this.swipeIconRef && this.swipeIconRef.setState({ showIcon: false });
     this.updateNativeProps();
@@ -172,13 +162,7 @@ export default class SwipeUpDown extends Component<Props> {
         />
         {collapsed ? (
           itemMini ? (
-            <TouchableOpacity
-              activeOpacity={this.disablePressToShow ? 1 : 0.6}
-              style={{ height: this.SWIPE_HEIGHT }}
-              onPress={() => !this.disablePressToShow && this.showFull()}
-            >
-              {itemMini}
-            </TouchableOpacity>
+              itemMini
           ) : null
         ) : (
           itemFull
@@ -194,7 +178,8 @@ const styles = StyleSheet.create({
     backgroundColor: GRAY_DARK,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    position: 'absolute',
+    // Normally Abolute but that fucks it up, well have to see for other pages (Tested on FOR YOU)
+    position: 'relative',
     bottom: 0,
     left: 0,
     right: 0,
