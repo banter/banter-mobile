@@ -4,6 +4,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { NAV_BAR_HEIGHT } from '../styles/mixins';
 import { GRAY_LIGHT } from '../styles/colors';
+import { Icon } from 'native-base';
+import { FONT_SIZE_SMALL, FONT_SIZE_VERY_SMALL } from '../styles/typography';
 
 function MyTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
     const focusedOptions = descriptors[state.routes[state.index].key].options;
@@ -44,6 +46,16 @@ function MyTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
               target: route.key,
             });
           };
+          let icon;
+          if (label == 'For You'){
+              icon = <Icon style={styles.iconStyle} type="Entypo" name="fingerprint"/>;
+          }
+          else if (label == 'Explore'){
+            icon = <Icon style={styles.iconStyle} name="ios-search"/>;
+          }
+          else if (label == 'Home'){
+            icon = <Icon style={styles.iconStyle} type="Entypo" name="home"/>;
+          }
 
           return (
             <TouchableOpacity
@@ -55,7 +67,8 @@ function MyTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
               onLongPress={onLongPress}
               style={{ flex: 1 }}
             >
-              <Text style={{ color: isFocused ? '#673ab7' : '#222', textAlign:'center' }}>
+                {icon}
+              <Text style={{ color: isFocused ? '#673ab7' : '#222', textAlign:'center', fontSize: FONT_SIZE_VERY_SMALL }}>
                 {label}
               </Text>
             </TouchableOpacity>
@@ -75,6 +88,9 @@ function MyTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
       height: '0%',
       flexDirection: 'row',
       backgroundColor: GRAY_LIGHT,
+    },
+    iconStyle: {
+        textAlign:'center',
     },
 }
   );
