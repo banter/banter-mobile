@@ -2,20 +2,11 @@
 import * as React from 'react';
 import {StyleSheet, Pressable, Text, View, SafeAreaView} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import {WINDOW_WIDTH, percentageOfScreenHeight} from '../styles/mixins';
-import {DiscussionCard} from '../components/molecules';
-import MOCKDISCUSSIONS from '../../constants/mock-discussions';
-<<<<<<< HEAD
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
-import {FONT_SIZE_24, FONT_SIZE_16} from '../styles/typography';
-import {BLACK, TRANSPARENT} from '../styles/colors';
-=======
-import { FONT_SIZE_24, FONT_SIZE_16 } from '../styles/typography';
-import { BLACK, TRANSPARENT } from '../styles/colors';
->>>>>>> 1c12307ea1ebdc417be4c794b563ee52fa745b3c
+import {WINDOW_WIDTH} from '../styles/mixins';
+import { FONT_SIZE_24 } from '../styles/typography';
+import { BLACK } from '../styles/colors';
 import MOCKPLAYLIST from '../../constants/mock-playlist';
-import {DiscussionPlaylist, ExpandedAudioPlayer, FooterPlayer} from '../components/organisms';
-import SwipeUpDown from '../components/organisms/SwipeUpDown';
+import {DiscussionPlaylist, FooterPlayer} from '../components/organisms';
 import {connect} from 'react-redux';
 import {Spinner} from 'native-base';
 
@@ -86,31 +77,13 @@ class ForYouScreen extends React.Component {
           flexDirection: 'row',
           justifyContent: 'center',
         }}>
-<<<<<<< HEAD
-          <TouchableOpacity onPress={() => this.carousel.snapToPrev()}>
-            <Text
-              style={[(this.state.activeIndex == FOR_YOU_INDEX)
-                ? styles.headerText
-                : styles.headerTextNonSelected]}>For You</Text>
-          </TouchableOpacity>
-          <Text style={styles.headerTextNonSelected}>
-            |
-          </Text>
-          <TouchableOpacity onPress={() => this.carousel.snapToNext()}>
-            <Text
-              style={[(this.state.activeIndex == FOLLOWING_INDEX)
-                ? styles.headerText
-                : styles.headerTextNonSelected]}>Following</Text>
-          </TouchableOpacity>
-=======
           <Pressable onPress={() => this.carousel.snapToPrev()}>
-            <Text style={[(this.state.activeIndex == 0) ? styles.headerText : styles.headerTextNonSelected]}>For You</Text>
+            <Text style={[(this.state.activeIndex == FOR_YOU_INDEX) ? styles.headerText : styles.headerTextNonSelected]}>For You</Text>
           </Pressable>
           <Text style={styles.headerTextNonSelected}> | </Text>
           <Pressable onPress={() => this.carousel.snapToNext()}>
-          <Text style={[(this.state.activeIndex == 1) ? styles.headerText : styles.headerTextNonSelected]}>Following</Text>
+          <Text style={[(this.state.activeIndex == FOLLOWING_INDEX) ? styles.headerText : styles.headerTextNonSelected]}>Following</Text>
           </Pressable>
->>>>>>> 1c12307ea1ebdc417be4c794b563ee52fa745b3c
         </View>
         {body}
         <FooterPlayer/>

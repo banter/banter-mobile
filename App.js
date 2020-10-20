@@ -19,12 +19,6 @@ store.dispatch(fetchCollections());
 // TODO move to a for You Specific API?
 store.dispatch(fetchForYou());
 
-
-const watchedEvents = [
-  TrackPlayerEvents.PLAYBACK_STATE,
-  TrackPlayerEvents.PLAYBACK_ERROR,
-  TrackPlayerEvents.PLAYBACK_TRACK_CHANGED,
-];
 // You can now get a ref directly to the DOM button:
 const ref = React.createRef();
 
@@ -33,29 +27,6 @@ const App : () => React$Node = () => {
   const linking = {
     prefixes: ['https://banteraudio.com', 'https://www.banteraudio.com', 'https://banteraudio.com', 'banteraudio:'],
   };
-
-  const [track, setTrack] = React.useState('');
-  const [playerState, setPlayerState] = React.useState(null);
-
-  useTrackPlayerEvents(watchedEvents, async (event) => {
-    switch (event.type) {
-      case TrackPlayerEvents.PLAYBACK_ERROR:
-        console.warn('An error occured while playing the current track.');
-        break;
-      case TrackPlayerEvents.PLAYBACK_STATE:
-        setPlayerState(event.state);
-        break;
-      case TrackPlayerEvents.PLAYBACK_TRACK_CHANGED:
-        const currentTrack = await TrackPlayer.getTrack(event.nextTrack);
-        setTrack(currentTrack);
-        break;
-      default:
-        break;
-    }
-  });
-
-  const isPlaying = playerState === STATE_PLAYING;
-
   console.log('APP.js Render');
   return (
     <Provider store={store}>
