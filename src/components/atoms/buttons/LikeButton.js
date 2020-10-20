@@ -17,7 +17,7 @@ export default function LikeButton({discussion, size}) {
 }
 
 LikeButton.propTypes = {
-  discussion: PropTypes.object.isRequired,
+  // discussion: PropTypes.object.isRequired,
   size: PropTypes.string,
 };
 

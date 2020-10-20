@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 import { NAV_BAR_HEIGHT } from '../styles/mixins';
 import { GRAY_LIGHT } from '../styles/colors';
@@ -16,7 +16,7 @@ function MyTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
 
     return (
         //
-      <View style={isNavBarDisplayed === true ? styles.visible : styles.collapsed}>
+      <SafeAreaView style={isNavBarDisplayed === true ? styles.visible : styles.collapsed}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
           const label =
@@ -59,6 +59,7 @@ function MyTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
 
           return (
             <TouchableOpacity
+              key={index}
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
               accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -74,7 +75,7 @@ function MyTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
             </TouchableOpacity>
           );
         })}
-      </View>
+      </SafeAreaView>
     );
   }
 

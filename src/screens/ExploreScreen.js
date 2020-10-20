@@ -6,6 +6,7 @@ import { Container, Header,
   from 'native-base';
 import { connect } from 'react-redux';
 import { queryTopics } from '../../store/actions/topics';
+import { FooterPlayer } from '../components/organisms';
 
 class ExploreScreen extends React.Component {
 
@@ -68,10 +69,7 @@ class ExploreScreen extends React.Component {
               </ListItem>
               );
         })}
-
 </List>
-
-<Text>AY</Text>
       </Container>
       );
   }

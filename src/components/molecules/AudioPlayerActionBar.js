@@ -3,22 +3,26 @@ import { DiscussionItem } from '../../models';
 import { Grid, Col, Text, View, Container } from 'native-base';
 import { LikeButton, ShareButton, PlaybackIcon } from '../atoms';
 import { StyleSheet, SafeAreaView } from 'react-native';
+import CollapsedAudioPlayer from '../organisms/CollapsedAudioPlayer';
+import ControlButtonActionBar from './ControlButtonActionBar';
 
 
 
 export default function AudioPlayerActionBar(props){
 
-    const discussion = new DiscussionItem(props.discussion);
+    // const discussion = new DiscussionItem(props.discussion);
+    const AudioService = props.service;
+    const isPlaying = props.playing;
 
     return (
         <View style={styles.container}>
         <Grid>
         <Col style={styles.colStyleLeft}>
-            <LikeButton discussion={discussion} />
+            <LikeButton />
         </Col>
         <Col
         style={styles.wideColStyle}>
-            <PlaybackIcon discussion={discussion} />
+          <ControlButtonActionBar service={AudioService} playing={isPlaying} />
         </Col>
         <Col style={styles.colStyleRight}>
             <ShareButton />
@@ -58,6 +62,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // backgroundColor:'#00CE9F',
     height: COL_HEIGHT,
-    width: '50%',
+    width: '70%',
   },
 });

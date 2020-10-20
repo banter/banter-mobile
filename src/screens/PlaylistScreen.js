@@ -65,7 +65,7 @@ class PlaylistScreen extends React.Component {
               }
             </Content>
         </ScrollView>
-        {/* <FooterPlayer /> */}
+        <FooterPlayer />
       </Container>
     );
   }

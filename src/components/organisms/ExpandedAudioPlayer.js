@@ -12,6 +12,7 @@ import { MEDIUM_SPACING, BIG_SPACING } from '../../styles/spacing';
 
 import ControlButtonActionBar from '../molecules/ControlButtonActionBar';
 import { ProgressBar } from '../atoms';
+import { AudioPlayerActionBar } from '../molecules';
 
 export default function ExpandedAudioPlayer(props){
 
@@ -29,13 +30,12 @@ export default function ExpandedAudioPlayer(props){
           uri: track.artwork,
         }}/>
         <Text numberOfLines={2} style={styles.titleText}>
-          {track.title}</Text>
-        <Text numberOfLines={2} style={styles.descriptionText}>
           {track.artist}</Text>
+        <Text numberOfLines={2} style={styles.descriptionText}>
+          {track.title}</Text>
         {/* <TagList tags={this.discussion.tags}/> */}
         <ProgressBar />
-        <ControlButtonActionBar service={AudioService} playing={isPlaying} />
-        {/* <AudioPlayerActionBar discussion={this.discussion} /> */}
+        <AudioPlayerActionBar service={AudioService} playing={isPlaying} />
       </View>
     );
 }

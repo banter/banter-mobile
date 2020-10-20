@@ -156,10 +156,6 @@ export default class SwipeUpDown extends Component<Props> {
           style,
         ]}
       >
-        <SwipeIcon
-          onClose={() => this.showMini()}
-          hasRef={ref => (this.swipeIconRef = ref)}
-        />
         {collapsed ? (
           itemMini ? (
               itemMini
@@ -174,7 +170,7 @@ export default class SwipeUpDown extends Component<Props> {
 
 const styles = StyleSheet.create({
   wrapSwipe: {
-    padding: 10,
+    // padding: 10,
     backgroundColor: GRAY_DARK,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,

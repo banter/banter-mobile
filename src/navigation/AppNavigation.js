@@ -6,6 +6,7 @@ import ForYouScreen from '../screens/ForYouScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import PlaylistScreen from '../screens/PlaylistScreen';
 import MyTabBar from './MyTabBar';
+import HomeScreen from '../screens/HomeScreen';
 
 const AppNavigator = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'App';
@@ -20,7 +21,7 @@ function HomeStack() {
         options={{
         headerShown: false,
       }}
-        component={ForYouScreen}
+        component={HomeScreen}
         name="Home"/>
         <Stack.Screen name="Playlist" component={PlaylistScreen}/>
     </Stack.Navigator>
@@ -47,18 +48,18 @@ export default function MainApp({navigation, route}) {
   return (
   <AppNavigator.Navigator initialRouteName={INITIAL_ROUTE_NAME} tabBar={props => <MyTabBar {...props} />}>
       <AppNavigator.Screen
-        name="For You"
-        component={ForYouStack}
-        options={{
-        tabBarLabel: 'For You',
-        tabBarIcon: () => (<Icon type="Entypo" name="fingerprint"/>),
-      }}/>
-      <AppNavigator.Screen
         name="Home"
         component={HomeStack}
         options={{
         headerShown: false,
         tabBarIcon: () => (<Icon type="Entypo" name="home"/>),
+      }}/>
+            <AppNavigator.Screen
+        name="For You"
+        component={ForYouStack}
+        options={{
+        tabBarLabel: 'For You',
+        tabBarIcon: () => (<Icon type="Entypo" name="fingerprint"/>),
       }}/>
       <AppNavigator.Screen
         name="Explore"
