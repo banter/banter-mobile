@@ -27,7 +27,7 @@ dayjs.extend(dayDuration);
 
 import { largeIconStyle, smallIconStyle } from '../../styles/icons';
 
-export default class DiscussionCard extends React.Component {
+export default class DiscussionCard extends React.PureComponent {
   constructor(props) {
     super(props);
     this.discussion = new DiscussionItem(this.props.discussion);

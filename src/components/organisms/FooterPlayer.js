@@ -29,6 +29,14 @@ function displayNavBar(){
   store.dispatch(showNavBar());
 }
 
+function moveDown(){
+  console.log('down');
+}
+
+function moveUp(){
+  console.log('Up');
+}
+
 export default function FooterPlayer(props) {
   const [track, setTrack] = useState('');
   const [playerState, setPlayerState] = useState(null);
@@ -61,7 +69,7 @@ export default function FooterPlayer(props) {
          itemFull={<ExpandedAudioPlayer service={AudioService} playing={isPlaying} playingTrack={track} />} // Pass props component when show full
          onShowMini={displayNavBar}
          onShowFull={collapseNavBar}
-         onMoveDown={() => console.log('down')}
+         onMoveDown={moveDown }
          swipeHeight={COLLAPSED_AUDIO_PLAYER_HEIGHT}
          onMoveUp={() => console.log('up')}
          disablePressToShow={true} // Press item mini to show full
