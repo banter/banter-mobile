@@ -1,7 +1,6 @@
 import {getTrendingTopics, getCollections, getTopics} from '../api/topics';
 import {fetchDataGeneral} from './index';
-import TOPIC_STORE from '../constants';
-
+import { TOPIC_STORE } from '../constants';
 export function fetchTrendingTopics() {
   return fetchDataGeneral(TOPIC_STORE.TRENDING_TOPICS, getTrendingTopics());
 }

@@ -1,12 +1,12 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as React from 'react';
-
-import HomeScreen from '../screens/HomeScreen';
 import {Icon} from 'native-base';
 import {createStackNavigator} from '@react-navigation/stack';
 import ForYouScreen from '../screens/ForYouScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import PlaylistScreen from '../screens/PlaylistScreen';
+import MyTabBar from './MyTabBar';
+import HomeScreen from '../screens/HomeScreen';
 
 const AppNavigator = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'App';
@@ -14,6 +14,7 @@ const INITIAL_ROUTE_NAME = 'App';
 const Stack = createStackNavigator();
 
 function HomeStack() {
+  console.log('HOME STACK RENDER');
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -27,8 +28,8 @@ function HomeStack() {
   );
 }
 
-
 function ForYouStack() {
+  console.log('FOR YOU STACK RENDER');
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -43,15 +44,9 @@ function ForYouStack() {
 }
 
 export default function MainApp({navigation, route}) {
+  console.log('MAIN APP Render');
   return (
-    <AppNavigator.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
-      <AppNavigator.Screen
-        name="For You"
-        component={ForYouStack}
-        options={{
-        tabBarLabel: 'For You',
-        tabBarIcon: () => (<Icon type="Entypo" name="fingerprint"/>),
-      }}/>
+  <AppNavigator.Navigator initialRouteName={INITIAL_ROUTE_NAME} tabBar={props => <MyTabBar {...props} />}>
       <AppNavigator.Screen
         name="Home"
         component={HomeStack}
@@ -59,7 +54,13 @@ export default function MainApp({navigation, route}) {
         headerShown: false,
         tabBarIcon: () => (<Icon type="Entypo" name="home"/>),
       }}/>
-
+            <AppNavigator.Screen
+        name="For You"
+        component={ForYouStack}
+        options={{
+        tabBarLabel: 'For You',
+        tabBarIcon: () => (<Icon type="Entypo" name="fingerprint"/>),
+      }}/>
       <AppNavigator.Screen
         name="Explore"
         component={ExploreScreen}

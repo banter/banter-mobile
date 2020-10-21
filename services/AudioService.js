@@ -57,8 +57,22 @@ export default {
 
 function generatePlaylist(currentItemId) {
   const currentState = store.getState();
-  const currentPlaylist = currentState.topicState?.topicPlaylist;
-  const currentItemIndex = currentPlaylist.findIndex(discussionItem => discussionItem.discussionId === currentItemId);
 
+  // TODO HOW DO WE WANT TO HANDLE THIS
+  let  currentPlaylist;
+  const playlist = 'FOR_YOU';
+  switch (playlist) {
+    case 'TOPIC':
+      currentPlaylist =  currentState.topicState?.topicPlaylist;
+      break;
+    case 'FOR_YOU':
+      currentPlaylist = currentState.userDataState?.forYou.playlist;
+      break;
+    default:
+      currentPlaylist =  currentState.topicState?.topicPlaylist;
+      break;
+  }
+  const currentItemIndex = currentPlaylist.findIndex(discussionItem => discussionItem.discussionId === currentItemId);
   return currentPlaylist.slice(currentItemIndex);
+
 }

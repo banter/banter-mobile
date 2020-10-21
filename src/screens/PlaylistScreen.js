@@ -11,6 +11,7 @@ import {
 import {DiscussionItem} from '../models';
 import {DiscussionCard} from '../components/molecules';
 import TopicHeaderCard from '../components/organisms/TopicHeaderCard';
+import { FooterPlayer } from '../components/organisms';
 
 class PlaylistScreen extends React.Component {
   constructor(props) {
@@ -64,6 +65,7 @@ class PlaylistScreen extends React.Component {
               }
             </Content>
         </ScrollView>
+        <FooterPlayer />
       </Container>
     );
   }

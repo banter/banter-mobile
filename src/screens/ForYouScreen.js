@@ -2,14 +2,18 @@
 import * as React from 'react';
 import {StyleSheet, Pressable, Text, View, SafeAreaView} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import {WINDOW_WIDTH, percentageOfScreenHeight} from '../styles/mixins';
-import {DiscussionCard} from '../components/molecules';
-import MOCKDISCUSSIONS from '../../constants/mock-discussions';
-import { FONT_SIZE_24, FONT_SIZE_16 } from '../styles/typography';
-import { BLACK, TRANSPARENT } from '../styles/colors';
+import {WINDOW_WIDTH} from '../styles/mixins';
+import { FONT_SIZE_24 } from '../styles/typography';
+import { BLACK } from '../styles/colors';
 import MOCKPLAYLIST from '../../constants/mock-playlist';
-import { DiscussionPlaylist } from '../components/organisms';
-export default class ForYouScreen extends React.Component {
+import {DiscussionPlaylist, FooterPlayer} from '../components/organisms';
+import {connect} from 'react-redux';
+import {Spinner} from 'native-base';
+
+const FOR_YOU_INDEX = 0;
+const FOLLOWING_INDEX = 1;
+
+class ForYouScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -26,17 +30,45 @@ export default class ForYouScreen extends React.Component {
   }
 
   _renderItem({item, index}) {
+    // Render item is called for both For You and Follow you when Swiping
+    let discussionPlaylist = index == FOR_YOU_INDEX
+      ? this.props.playlist
+      : MOCKPLAYLIST;
     return (
       <View style={styles.slide1}>
-          <DiscussionPlaylist playlist={MOCKPLAYLIST} />
+        <DiscussionPlaylist playlist={discussionPlaylist}/>
       </View>
     );
   }
 
   render() {
-    return (
-      <SafeAreaView
+    const {playlist, isForYouLoading} = this.props;
+    let body;
+    if (isForYouLoading) {
+      body = <Spinner color="white"/>;
+    } else {
+      body = <View
         style={{
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+      }}>
+        <Carousel
+          layout={'default'}
+          ref={ref => this.carousel = ref}
+          data={this.state.carouselItems}
+          sliderWidth={WINDOW_WIDTH}
+          itemWidth={WINDOW_WIDTH}
+          windowSize={WINDOW_WIDTH}
+          renderItem={this
+          ._renderItem
+          .bind(this)}
+          onSnapToItem=
+          { index => this.setState({activeIndex:index}) }/>
+      </View>;
+    }
+    return (
+      <SafeAreaView style={{
         flex: 1,
         backgroundColor: BLACK,
       }}>
@@ -46,30 +78,15 @@ export default class ForYouScreen extends React.Component {
           justifyContent: 'center',
         }}>
           <Pressable onPress={() => this.carousel.snapToPrev()}>
-            <Text style={[(this.state.activeIndex == 0) ? styles.headerText : styles.headerTextNonSelected]}>For You</Text>
+            <Text style={[(this.state.activeIndex == FOR_YOU_INDEX) ? styles.headerText : styles.headerTextNonSelected]}>For You</Text>
           </Pressable>
           <Text style={styles.headerTextNonSelected}> | </Text>
           <Pressable onPress={() => this.carousel.snapToNext()}>
-          <Text style={[(this.state.activeIndex == 1) ? styles.headerText : styles.headerTextNonSelected]}>Following</Text>
+          <Text style={[(this.state.activeIndex == FOLLOWING_INDEX) ? styles.headerText : styles.headerTextNonSelected]}>Following</Text>
           </Pressable>
         </View>
-        <View
-          style={{
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'center',
-        }}>
-          <Carousel
-            layout={'default'}
-            ref={ref => this.carousel = ref}
-            data={this.state.carouselItems}
-            sliderWidth={WINDOW_WIDTH}
-            itemWidth={WINDOW_WIDTH}
-            windowSize={WINDOW_WIDTH}
-            renderItem={this._renderItem}
-            onSnapToItem=
-            { index => this.setState({activeIndex:index}) }/>
-        </View>
+        {body}
+        <FooterPlayer/>
       </SafeAreaView>
     );
   }
@@ -110,6 +127,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 15,
-    opacity:0.4,
+    opacity: 0.4,
   },
 });
+
+function mapStateToProps(state) {
+  return {playlist: state.userDataState.forYou.playlist, isForYouLoading: state.userDataState.isForYouLoading};
+}
+
+export default connect(mapStateToProps)(ForYouScreen);

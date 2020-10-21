@@ -88,10 +88,8 @@ export default class DiscussionCard extends React.Component {
               {this.discussion.description}</Text>
           </CardItem>
           <CardItem style={styles.discussionCardTagItem}>
-            <Icon type="AntDesign" name="tag" style={styles.smallIconStyle}/>
             <TagList tags={this.discussion.tags}/>
           </CardItem>
-
           <CardItem style={styles.discussionCardItem}>
             <Grid>
               <Col style={{ width: 50 }}>
@@ -99,7 +97,8 @@ export default class DiscussionCard extends React.Component {
               </Col>
               <Col style={styles.dateAndTimeStyle}>
                 <Text style={styles.timestampText}>
-                {this.discussionAge(this.discussion.episodePublishDate)} • {this.discussionTime(this.discussion)}
+                {this.discussionAge(this.discussion.episodePublishDate)}
+                 • {this.discussionTime(this.discussion)}
                 </Text>
               </Col>
               <Col style={{ width: 50 }}>

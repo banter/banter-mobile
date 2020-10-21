@@ -22,7 +22,8 @@ ControlButton.propTypes = {
 
 const styles = StyleSheet.create({
   controlButtonContainer: {
-    flex: 1,
+    // Do we want Flex to be 1 here? that will take the entire size of parent container?
+    // flex: 1,
   },
   controlButtonText: {
     fontSize: 18,
