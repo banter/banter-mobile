@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, FlatList} from 'react-native';
 import {Text} from 'native-base';
 import { containerStyles } from './styles';
 import { TopicCard } from '.';
@@ -11,22 +11,15 @@ export const TopicCarousel = (props: any) => {
     <SafeAreaView style={containerStyles.container}>
         <Text style={styles.topicCarouselText}>{primaryTopic === undefined ?
         'Trending' : primaryTopic.tag.value}</Text>
-      <ScrollView
-        horizontal={true}
-        contentContainerStyle={{...styles.scrollView}}
-        showsHorizontalScrollIndicator={false}
-        scrollEventThrottle={200}
-        pagingEnabled
-        decelerationRate="fast">
-        {relatedTopics.map((topic: any, index: number) => {
-          switch (style) {
-            default:
-              return (
-                <TopicCard key={index}  topic={topic} />
-              );
-          }
-        })}
-      </ScrollView>
+                    <FlatList
+            data={relatedTopics}
+            horizontal={true}
+            maxToRenderPerBatch={15}
+            initialNumToRender={3}
+            renderItem={({ item, index, separators }) => (
+              <TopicCard key={index}  topic={item} />
+            )}
+            keyExtractor={item => item.tag.id}/>
     </SafeAreaView>
   );
 };
