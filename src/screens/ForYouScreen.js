@@ -31,7 +31,7 @@ class ForYouScreen extends React.Component {
 
   _renderItem({item, index}) {
     // Render item is called for both For You and Follow you when Swiping
-    let discussionPlaylist = index == FOR_YOU_INDEX
+    let discussionPlaylist = index === FOR_YOU_INDEX
       ? this.props.playlist
       : MOCKPLAYLIST;
     return (
@@ -42,7 +42,7 @@ class ForYouScreen extends React.Component {
   }
 
   render() {
-    const {playlist, isForYouLoading} = this.props;
+    const {isForYouLoading} = this.props;
     let body;
     if (isForYouLoading) {
       body = <Spinner color="white"/>;
@@ -55,7 +55,7 @@ class ForYouScreen extends React.Component {
       }}>
         <Carousel
           layout={'default'}
-          ref={ref => this.carousel = ref}
+          ref={ref => (this.carousel = ref)}
           data={this.state.carouselItems}
           sliderWidth={WINDOW_WIDTH}
           itemWidth={WINDOW_WIDTH}
@@ -78,11 +78,11 @@ class ForYouScreen extends React.Component {
           justifyContent: 'center',
         }}>
           <Pressable onPress={() => this.carousel.snapToPrev()}>
-            <Text style={[(this.state.activeIndex == FOR_YOU_INDEX) ? styles.headerText : styles.headerTextNonSelected]}>For You</Text>
+            <Text style={[(this.state.activeIndex === FOR_YOU_INDEX) ? styles.headerText : styles.headerTextNonSelected]}>For You</Text>
           </Pressable>
           <Text style={styles.headerTextNonSelected}> | </Text>
           <Pressable onPress={() => this.carousel.snapToNext()}>
-          <Text style={[(this.state.activeIndex == FOLLOWING_INDEX) ? styles.headerText : styles.headerTextNonSelected]}>Following</Text>
+          <Text style={[(this.state.activeIndex === FOLLOWING_INDEX) ? styles.headerText : styles.headerTextNonSelected]}>Following</Text>
           </Pressable>
         </View>
         {body}

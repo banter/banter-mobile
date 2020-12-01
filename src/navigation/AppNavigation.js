@@ -14,7 +14,6 @@ const INITIAL_ROUTE_NAME = 'App';
 const Stack = createStackNavigator();
 
 function HomeStack() {
-  console.log('HOME STACK RENDER');
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -29,7 +28,6 @@ function HomeStack() {
 }
 
 function ForYouStack() {
-  console.log('FOR YOU STACK RENDER');
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -44,9 +42,8 @@ function ForYouStack() {
 }
 
 export default function MainApp({navigation, route}) {
-  console.log('MAIN APP Render');
   return (
-  <AppNavigator.Navigator initialRouteName={INITIAL_ROUTE_NAME} tabBar={props => <MyTabBar {...props} />}>
+  <AppNavigator.Navigator initialRouteName={INITIAL_ROUTE_NAME} tabBar={props => <MyTabBar {...props}/>}>
       <AppNavigator.Screen
         name="Home"
         component={HomeStack}

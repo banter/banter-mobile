@@ -1,15 +1,11 @@
 import * as React from 'react';
-import {StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import {StyleSheet, SafeAreaView} from 'react-native';
 import { connect } from 'react-redux';
 import { setCurrentTopic } from '../../store/actions/topics';
 
 import {
-  Content,
-  Container,
   Spinner,
-  Text,
 } from 'native-base';
-import {DiscussionItem} from '../models';
 import {DiscussionCard} from '../components/molecules';
 import TopicHeaderCard from '../components/organisms/TopicHeaderCard';
 import { FooterPlayer } from '../components/organisms';
@@ -50,7 +46,6 @@ class PlaylistScreen extends React.Component {
   };
 
   render() {
-    console.log('Render PlayList Screen', this.state.isLoading);
     const {topic} = this.state;
     const {playlist} = this.props;
     if (this.state.isLoading) {
@@ -62,17 +57,17 @@ class PlaylistScreen extends React.Component {
     }
     return (
       <SafeAreaView style={styles.container}>
-            <FlatList
-            data={playlist}
-            maxToRenderPerBatch={5}
-            initialNumToRender={1}
-            ListHeaderComponent={this.renderHeader(topic)}
-            renderItem={({ item, index, separators }) => (
-              <DiscussionCard
+        <FlatList
+          data={playlist}
+          maxToRenderPerBatch={5}
+          initialNumToRender={1}
+          ListHeaderComponent={this.renderHeader(topic)}
+          renderItem={({ item, index, separators }) => (
+            <DiscussionCard
               key={`card-${item.discussionId}`}
               discussion={item}/>
             )}
-            keyExtractor={item => item.discussionId}/>
+          keyExtractor={item => item.discussionId}/>
         <FooterPlayer />
       </SafeAreaView>
     );
