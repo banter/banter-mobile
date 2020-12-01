@@ -20,6 +20,7 @@
 		4472AEC8413F427FB98145FD /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 650D4D115F9E4DC39B23EE35 /* Roboto_medium.ttf */; };
 		4FE2BFACF1D78FA1D10C9FE2 /* libPods-bantermobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E35CCC3323F8DE27CD7B99 /* libPods-bantermobile-tvOSTests.a */; };
 		5767F5963A9A4A64A2E2C35D /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95F1CC87D9D64BD5BB5968CC /* Roboto.ttf */; };
+		6F7A7BC825769CEA004E0988 /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A7BC725769CEA004E0988 /* dummy.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9B3D23E27BC43607FC50623C /* libPods-bantermobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E43B950FAF4F96DA4E2172 /* libPods-bantermobile-tvOS.a */; };
 		B9C4FE0EC5EB41C08F5A401F /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F491774237A84794925652DB /* rubicon-icon-font.ttf */; };
@@ -63,6 +64,8 @@
 		5A5B18009FE01AC9207C697E /* libPods-bantermobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bantermobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		650D4D115F9E4DC39B23EE35 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		6DDF0D7F26679778A85AE00D /* Pods-bantermobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bantermobile.release.xcconfig"; path = "Target Support Files/Pods-bantermobile/Pods-bantermobile.release.xcconfig"; sourceTree = "<group>"; };
+		6F7A7BC625769CEA004E0988 /* bantermobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bantermobile-Bridging-Header.h"; sourceTree = "<group>"; };
+		6F7A7BC725769CEA004E0988 /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = bantermobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95F1CC87D9D64BD5BB5968CC /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		B8675F4477D64E704BF5C251 /* Pods-bantermobile-bantermobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bantermobile-bantermobileTests.debug.xcconfig"; path = "Target Support Files/Pods-bantermobile-bantermobileTests/Pods-bantermobile-bantermobileTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -133,11 +136,13 @@
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				6F7A7BC725769CEA004E0988 /* dummy.swift */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				6F7A7BC625769CEA004E0988 /* bantermobile-Bridging-Header.h */,
 			);
 			name = bantermobile;
 			sourceTree = "<group>";
@@ -310,7 +315,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1200;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -652,6 +657,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				6F7A7BC825769CEA004E0988 /* dummy.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -693,6 +699,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B8675F4477D64E704BF5C251 /* Pods-bantermobile-bantermobileTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -716,6 +723,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C9AC01417734D935BF6448FB /* Pods-bantermobile-bantermobileTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = bantermobileTests/Info.plist;
@@ -749,6 +757,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = bantermobile;
+				SWIFT_OBJC_BRIDGING_HEADER = "bantermobile-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -771,6 +780,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = bantermobile;
+				SWIFT_OBJC_BRIDGING_HEADER = "bantermobile-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
