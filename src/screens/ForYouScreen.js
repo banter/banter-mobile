@@ -8,7 +8,7 @@ import { BLACK } from '../styles/colors';
 import MOCKPLAYLIST from '../../constants/mock-playlist';
 import {DiscussionPlaylist, FooterPlayer} from '../components/organisms';
 import {connect} from 'react-redux';
-import {Spinner, Button} from 'native-base';
+import {Spinner} from 'native-base';
 import SignInOptions from '../components/molecules/SignInOptions';
 
 const FOR_YOU_INDEX = 0;
@@ -52,25 +52,26 @@ class ForYouScreen extends React.Component {
       if (!this.currentUser) {
         body = <SignInOptions/>;
       } else {
-      body = <View
-        style={{
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-      }}>
-        <Carousel
-          layout={'default'}
-          ref={ref => (this.carousel = ref)}
-          data={this.state.carouselItems}
-          sliderWidth={WINDOW_WIDTH}
-          itemWidth={WINDOW_WIDTH}
-          windowSize={WINDOW_WIDTH}
-          renderItem={this
-          ._renderItem
-          .bind(this)}
-          onSnapToItem=
-          { index => this.setState({activeIndex:index}) }/>
-      </View>;
+        body = <View
+          style={{
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'center',
+        }}>
+          <Carousel
+            layout={'default'}
+            ref={ref => (this.carousel = ref)}
+            data={this.state.carouselItems}
+            sliderWidth={WINDOW_WIDTH}
+            itemWidth={WINDOW_WIDTH}
+            windowSize={WINDOW_WIDTH}
+            renderItem={this
+            ._renderItem
+            .bind(this)}
+            onSnapToItem=
+            { index => this.setState({activeIndex:index}) }/>
+        </View>;
+      }
     }
     return (
       <SafeAreaView style={{
@@ -95,7 +96,6 @@ class ForYouScreen extends React.Component {
       </SafeAreaView>
     );
   }
-}
 }
 
 const styles = StyleSheet.create({

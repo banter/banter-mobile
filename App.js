@@ -25,6 +25,7 @@ const ref = React.createRef();
 
 const App : () => React$Node = () => {
 
+  // TODO - enable universal linking in ios
   const linking = {
     prefixes: ['https://banteraudio.com', 'https://www.banteraudio.com', 'https://banteraudio.com', 'banteraudio:'],
   };

@@ -5,11 +5,11 @@ import { StyleSheet, SafeAreaView, Linking } from 'react-native';
 export default function SignInOptions(props){
     return (
       <SafeAreaView
-      style={styles.buttonList}>
-      <Button rounded small light onPress={ ()=>{ Linking.openURL('https://api.banteraudio.com/oauth1/authorization/twitter?redirect_uri=banteraudio://test/secret');}} >
-        <Text>Sign In To Twitter</Text>
-      </Button>
-    </SafeAreaView>
+        style={styles.buttonList}>
+        <Button rounded small light onPress={ ()=>{ Linking.openURL('https://api.banteraudio.com/oauth1/authorization/twitter?redirect_uri=');}} >
+          <Text>Sign In To Twitter</Text>
+        </Button>
+      </SafeAreaView>
     );
 }
 const styles = StyleSheet.create({
