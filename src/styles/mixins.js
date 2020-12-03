@@ -2,6 +2,8 @@ import {Dimensions,PixelRatio} from 'react-native';
 export const WINDOW_WIDTH = Dimensions.get('window').width;
 export const WINDOW_HEIGHT = Dimensions.get('window').height;
 export const guidelineBaseWidth = 375;
+export const NAV_BAR_HEIGHT = 50;
+export const COLLAPSED_AUDIO_PLAYER_HEIGHT = 60;
 
 export const percentageOfScreenHeight = percent => (WINDOW_HEIGHT ) * percent;
 

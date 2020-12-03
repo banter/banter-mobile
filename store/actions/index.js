@@ -14,9 +14,14 @@ export function  fetchDataGeneral(requestName , apiRequest) {
     dispatch(fetchRequest(requestName));
     try {
       const topics = await apiRequest;
-      dispatch(fetchSuccess(topics, requestName));
+      if (topics.error){
+        dispatch(fetchError(topics.message, requestName));
+      }
+      else {
+        dispatch(fetchSuccess(topics, requestName));
+      }
     } catch (error) {
-      dispatch(fetchError(error.message, requestName));
+      // CATCH isnt catching errors
     }
   };
 }

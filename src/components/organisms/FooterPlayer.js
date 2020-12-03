@@ -3,20 +3,40 @@ import TrackPlayer, {
   useTrackPlayerEvents, TrackPlayerEvents, STATE_PLAYING,
 } from 'react-native-track-player';
 import {
-  Image,
-  StyleSheet,
   View,
 } from 'react-native';
-import { Text } from 'native-base';
-
 import AudioService from '../../../services/AudioService';
-import { ProgressBar, ControlButton } from '../atoms';
+import CollapsedAudioPlayer from './CollapsedAudioPlayer';
+import ExpandedAudioPlayer from './ExpandedAudioPlayer';
+import SwipeUpDown from './SwipeUpDown';
+import store from '../../../store';
+import { hideNavBar, showNavBar } from '../../../store/actions/appStyle';
+import { COLLAPSED_AUDIO_PLAYER_HEIGHT } from '../../styles/mixins';
 
 const watchedEvents = [
   TrackPlayerEvents.PLAYBACK_STATE,
   TrackPlayerEvents.PLAYBACK_ERROR,
   TrackPlayerEvents.PLAYBACK_TRACK_CHANGED,
 ];
+
+function collapseNavBar(){
+  console.log('collapseNavBar');
+  store.dispatch(hideNavBar());
+}
+
+function displayNavBar(){
+  console.log('displayNavBar');
+  store.dispatch(showNavBar());
+}
+
+function moveDown(){
+  console.log('down');
+}
+
+function moveUp(){
+  console.log('Up');
+}
+
 export default function FooterPlayer(props) {
   const [track, setTrack] = useState('');
   const [playerState, setPlayerState] = useState(null);
@@ -38,57 +58,23 @@ export default function FooterPlayer(props) {
     }
   });
 
-  const isPlaying = playerState === STATE_PLAYING;
 
+  const isPlaying = playerState === STATE_PLAYING;
+  console.log('In Footer Player Function');
   return (
     <View>
-      {track ? <View style={styles.card}>
-        <Image style={styles.cover} source={{ uri: track.artwork }} />
-        <ProgressBar />
-        <Text style={styles.title}>{track.title}</Text>
-        <Text style={styles.artist}>{track.artist}</Text>
-        <View style={styles.controls}>
-          <ControlButton icon={'play-skip-back-outline'} onPress={AudioService.skipToPrevious} />
-          <ControlButton style={styles.backTime} icon={'refresh'} onPress={AudioService.jumpBack} />
-          <ControlButton style={styles.largeIcon} icon={isPlaying ? 'pause-outline' : 'play-outline'} onPress={AudioService.togglePlayback} />
-          <ControlButton icon={'refresh'} onPress={AudioService.jumpAhead} />
-          <ControlButton icon={'play-skip-forward-outline'} onPress={AudioService.skipToNext} />
-        </View>
-      </View> : null}
+      {track ?
+      <SwipeUpDown
+        itemMini={<CollapsedAudioPlayer service={AudioService} playing={isPlaying} playingTrack={track} />}
+         itemFull={<ExpandedAudioPlayer service={AudioService} playing={isPlaying} playingTrack={track} />} // Pass props component when show full
+         onShowMini={displayNavBar}
+         onShowFull={collapseNavBar}
+         onMoveDown={moveDown }
+         swipeHeight={COLLAPSED_AUDIO_PLAYER_HEIGHT}
+         onMoveUp={() => console.log('up')}
+         disablePressToShow={true} // Press item mini to show full
+       />
+       : null}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    width: '100%',
-    shadowOpacity: 0.1,
-    alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    shadowOffset: { width: 0, height: 1 },
-  },
-  cover: {
-    width: 40,
-    height: 40,
-    marginTop: 5,
-    backgroundColor: 'grey',
-  },
-  title: {
-    marginTop: 5,
-  },
-  artist: {
-    fontWeight: 'bold',
-  },
-  controls: {
-    marginTop: 15,
-    marginBottom: 30,
-    flexDirection: 'row',
-  },
-  largeIcon: {
-    fontSize: 24,
-  },
-  backTime: {
-    transform: [{rotateY: '180deg'}],
-  },
-});
-

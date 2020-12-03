@@ -1,4 +1,4 @@
-import TOPIC_STORE from '../constants';
+import TOPIC_STORE from '../constants/topicStore';
 import {requesting, success, error} from './index';
 
 let initialState = {

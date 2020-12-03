@@ -7,8 +7,8 @@ export default {
     return await getCurrentTrack();
   },
 
-  async startNewTrack(discussion) {
-    const playlist = generatePlaylist(discussion.discussionId)
+  async startNewTrack(discussion, playlistType) {
+    const playlist = generatePlaylist(discussion.discussionId, playlistType)
       .map(
         playlistItem => new PlaylistItem(playlistItem)
       );
@@ -55,10 +55,22 @@ export default {
   },
 };
 
-function generatePlaylist(currentItemId) {
+function generatePlaylist(discussionId, playlistType) {
   const currentState = store.getState();
-  const currentPlaylist = currentState.topicState?.topicPlaylist;
-  const currentItemIndex = currentPlaylist.findIndex(discussionItem => discussionItem.discussionId === currentItemId);
 
+  let  currentPlaylist;
+  switch (playlistType) {
+    case 'TOPIC':
+      currentPlaylist =  currentState.topicState?.topicPlaylist;
+      break;
+    case 'FOR_YOU':
+      currentPlaylist = currentState.userDataState?.forYou.playlist;
+      break;
+    default:
+      currentPlaylist =  currentState.topicState?.topicPlaylist;
+      break;
+  }
+  const currentItemIndex = currentPlaylist.findIndex(discussionItem => discussionItem.discussionId === discussionId);
   return currentPlaylist.slice(currentItemIndex);
+
 }

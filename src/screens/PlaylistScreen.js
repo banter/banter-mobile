@@ -1,16 +1,15 @@
 import * as React from 'react';
-import {StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import {StyleSheet, SafeAreaView} from 'react-native';
 import { connect } from 'react-redux';
 import { setCurrentTopic } from '../../store/actions/topics';
 
 import {
-  Content,
-  Container,
   Spinner,
 } from 'native-base';
-import {DiscussionItem} from '../models';
 import {DiscussionCard} from '../components/molecules';
 import TopicHeaderCard from '../components/organisms/TopicHeaderCard';
+import { FooterPlayer } from '../components/organisms';
+import { FlatList } from 'react-native-gesture-handler';
 
 class PlaylistScreen extends React.Component {
   constructor(props) {
@@ -28,43 +27,50 @@ class PlaylistScreen extends React.Component {
 
     // TODO: Move this to an action.
     return fetch(`https://api.banteraudio.com/v1/topics/?id=${topic.id}`).then((response) => response.json()).then((responseJson) => {
+      console.log('Got Responseee', responseJson);
       this.setState({
         isLoading: false,
         topic: responseJson.primaryTag,
       });
-      setPlaylist(responseJson.playlist.map(playlistItem => new DiscussionItem(playlistItem)));
+      // console.log('Before setPlaylist');
+      setPlaylist(responseJson.playlist.map(playlistItem => playlistItem));
+      // console.log('After setPlaylist');
     }).catch((error) => {
       console.error(error);
     });
+
   }
+
+  renderHeader = (topic) => {
+    return <TopicHeaderCard topic={topic}/>;
+  };
 
   render() {
     const {topic} = this.state;
     const {playlist} = this.props;
-    if (this.isLoading) {
+    if (this.state.isLoading) {
       return (
-        <SafeAreaView>
-          <Content>
+        <SafeAreaView style={styles.container}>
             <Spinner color="white"/>
-          </Content>
         </SafeAreaView>
       );
     }
     return (
-      <Container style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-            <TopicHeaderCard topic={topic}/>
-            <Content>
-              {
-                playlist?.map(playlistItem => <DiscussionCard
-                  key={`card-${playlistItem.discussionId}`}
-                  discussion={playlistItem}/>)
-              }
-            </Content>
-        </ScrollView>
-      </Container>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={playlist}
+          maxToRenderPerBatch={5}
+          initialNumToRender={1}
+          ListHeaderComponent={this.renderHeader(topic)}
+          renderItem={({ item, index, separators }) => (
+            <DiscussionCard
+              key={`card-${item.discussionId}`}
+              playlistType={'TOPIC'}
+              discussion={item}/>
+            )}
+          keyExtractor={item => item.discussionId}/>
+        <FooterPlayer />
+      </SafeAreaView>
     );
   }
 }

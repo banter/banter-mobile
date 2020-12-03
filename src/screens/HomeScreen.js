@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, View, ScrollView} from 'react-native';
+import {StyleSheet, View, ScrollView, SafeAreaView} from 'react-native';
 import {
   Text,
   Content,
@@ -7,7 +7,7 @@ import {
 } from 'native-base';
 
 import {connect} from 'react-redux';
-import { TopicCarousel } from '../components/organisms';
+import { TopicCarousel, FooterPlayer } from '../components/organisms';
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +34,7 @@ class HomeScreen extends React.Component {
     }
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
@@ -54,7 +54,8 @@ class HomeScreen extends React.Component {
                 </View>
               )}
         </ScrollView>
-      </View>
+        <FooterPlayer/>
+      </SafeAreaView>
     );
   }
 }

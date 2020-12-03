@@ -15,6 +15,22 @@ export default function ControlButton({ icon, onPress, style }) {
   );
 }
 
+// export default class ControlButton extends React.PureComponent {
+//   constructor(props) {
+//     super(props);
+//     this.icon = this.props.icon;
+//     this.style = this.props.style;
+//     this.onPress = this.props.onPress;
+//   }
+
+//   render() {
+//     return (
+//       <Pressable style={styles.controlButtonContainer} onPress={this.onPress}>
+//       <Icon name={this.icon} style={{...styles.controlButtonText, ...this.style}}/>
+//     </Pressable>
+//     );
+//   }
+
 ControlButton.propTypes = {
   icon: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
@@ -22,7 +38,8 @@ ControlButton.propTypes = {
 
 const styles = StyleSheet.create({
   controlButtonContainer: {
-    flex: 1,
+    // Do we want Flex to be 1 here? that will take the entire size of parent container?
+    // flex: 1,
   },
   controlButtonText: {
     fontSize: 18,
