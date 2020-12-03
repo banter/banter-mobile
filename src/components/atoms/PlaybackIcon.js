@@ -65,6 +65,7 @@ export default class PlaybackIcon extends React.PureComponent {
   constructor(props) {
     super(props);
     this.discussion = this.props.discussion;
+    this.playlistType = this.props.playlistType;
     this.playerState = null;
     this.currentTrack = '';
   }
@@ -80,7 +81,7 @@ export default class PlaybackIcon extends React.PureComponent {
     console.log('PLAYBACK!');
     console.log(this.discussion);
     return (
-        <Pressable onPress={playingThisDiscussion ? AudioService.togglePlayback : () => AudioService.startNewTrack(this.discussion)}>
+        <Pressable onPress={playingThisDiscussion ? AudioService.togglePlayback : () => AudioService.startNewTrack(this.discussion, this.playlistType)}>
           <Text>
             {audioBuffering && playingThisDiscussion
             ? <Spinner color="white"/>

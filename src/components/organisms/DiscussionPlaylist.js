@@ -19,7 +19,7 @@ export default class DiscussionPlaylist extends React.Component {
   _renderItem({item, index}) {
     return (
       <View style={styles.slide1}>
-        <DiscussionCard key={`card-${item.discussionId}`} discussion={item}/>
+        <DiscussionCard key={`card-${item.discussionId}`} playlistType={'FOR_YOU'} discussion={item}/>
       </View>
     );
   }

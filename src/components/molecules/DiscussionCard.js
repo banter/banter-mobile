@@ -30,6 +30,7 @@ export default class DiscussionCard extends React.PureComponent {
   constructor(props) {
     super(props);
     this.discussion = new DiscussionItem(this.props.discussion);
+    this.playlistType = this.props.playlistType;
   }
 
   discussionAge({ year, monthValue: month, dayOfMonth: day }) {
@@ -92,7 +93,7 @@ export default class DiscussionCard extends React.PureComponent {
           <CardItem style={styles.discussionCardItem}>
             <Grid>
               <Col style={{ width: 50 }}>
-                <PlaybackIcon discussion={this.discussion}/>
+                <PlaybackIcon playlistType={this.playlistType} discussion={this.discussion}/>
               </Col>
               <Col style={styles.dateAndTimeStyle}>
                 <Text style={styles.timestampText}>

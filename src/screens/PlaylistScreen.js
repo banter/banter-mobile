@@ -65,6 +65,7 @@ class PlaylistScreen extends React.Component {
           renderItem={({ item, index, separators }) => (
             <DiscussionCard
               key={`card-${item.discussionId}`}
+              playlistType={'TOPIC'}
               discussion={item}/>
             )}
           keyExtractor={item => item.discussionId}/>
