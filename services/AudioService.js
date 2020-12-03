@@ -7,8 +7,8 @@ export default {
     return await getCurrentTrack();
   },
 
-  async startNewTrack(discussion) {
-    const playlist = generatePlaylist(discussion.discussionId)
+  async startNewTrack(discussion, playlistType) {
+    const playlist = generatePlaylist(discussion.discussionId, playlistType)
       .map(
         playlistItem => new PlaylistItem(playlistItem)
       );
@@ -55,13 +55,11 @@ export default {
   },
 };
 
-function generatePlaylist(currentItemId) {
+function generatePlaylist(discussionId, playlistType) {
   const currentState = store.getState();
 
-  // TODO HOW DO WE WANT TO HANDLE THIS
   let  currentPlaylist;
-  const playlist = 'FOR_YOU';
-  switch (playlist) {
+  switch (playlistType) {
     case 'TOPIC':
       currentPlaylist =  currentState.topicState?.topicPlaylist;
       break;
@@ -72,7 +70,7 @@ function generatePlaylist(currentItemId) {
       currentPlaylist =  currentState.topicState?.topicPlaylist;
       break;
   }
-  const currentItemIndex = currentPlaylist.findIndex(discussionItem => discussionItem.discussionId === currentItemId);
+  const currentItemIndex = currentPlaylist.findIndex(discussionItem => discussionItem.discussionId === discussionId);
   return currentPlaylist.slice(currentItemIndex);
 
 }
