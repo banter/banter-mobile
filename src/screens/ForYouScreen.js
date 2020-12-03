@@ -8,7 +8,8 @@ import { BLACK } from '../styles/colors';
 import MOCKPLAYLIST from '../../constants/mock-playlist';
 import {DiscussionPlaylist, FooterPlayer} from '../components/organisms';
 import {connect} from 'react-redux';
-import {Spinner} from 'native-base';
+import {Spinner, Button} from 'native-base';
+import SignInOptions from '../components/molecules/SignInOptions';
 
 const FOR_YOU_INDEX = 0;
 const FOLLOWING_INDEX = 1;
@@ -17,6 +18,7 @@ class ForYouScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    this.currentUser = null;
     this.state = {
       activeIndex: 0,
       carouselItems: [
@@ -47,6 +49,9 @@ class ForYouScreen extends React.Component {
     if (isForYouLoading) {
       body = <Spinner color="white"/>;
     } else {
+      if (!this.currentUser) {
+        body = <SignInOptions/>;
+      } else {
       body = <View
         style={{
         flex: 1,
@@ -90,6 +95,7 @@ class ForYouScreen extends React.Component {
       </SafeAreaView>
     );
   }
+}
 }
 
 const styles = StyleSheet.create({

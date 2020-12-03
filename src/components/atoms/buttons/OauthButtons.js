@@ -30,16 +30,16 @@ export default class OauthButtons extends React.Component{
       />
       </View>
       <Button
-                  style={styles.onboardingButton}
-                  color="gray"
-            title="Log in"
-            onPress={() =>
-              this.setState({
-                isButtonSelected: true,
-                buttonText: 'Log in',
-              })
-            }
-          />
+        style={styles.onboardingButton}
+        color="gray"
+        title="Log in"
+        onPress={() =>
+          this.setState({
+            isButtonSelected: true,
+            buttonText: 'Log in',
+          })
+        }
+      />
           </View>
         );
       }
