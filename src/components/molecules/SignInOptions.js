@@ -6,7 +6,7 @@ export default function SignInOptions(props){
     return (
       <SafeAreaView
         style={styles.buttonList}>
-        <Button rounded small light onPress={ ()=>{ Linking.openURL('https://api.banteraudio.com/oauth1/authorization/twitter?redirect_uri=');}} >
+        <Button rounded small light onPress={ ()=>{ Linking.openURL('https://api.banteraudio.com/oauth1/authorization/twitter?redirect_uri=bantermobile://test');}} >
           <Text>Sign In To Twitter</Text>
         </Button>
       </SafeAreaView>
