@@ -6,7 +6,7 @@ export default function SignInOptions(props){
     return (
       <SafeAreaView
         style={styles.buttonList}>
-        <Button rounded small light onPress={ ()=>{ Linking.openURL('https://api.banteraudio.com/oauth1/authorization/twitter?redirect_uri=bantermobile://test');}} >
+        <Button rounded small light onPress={ ()=>{ Linking.openURL('https://api.banteraudio.com/oauth1/authorization/twitter?redirect_uri=banteraudio://');}} >
           <Text>Sign In To Twitter</Text>
         </Button>
       </SafeAreaView>
@@ -19,3 +19,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
