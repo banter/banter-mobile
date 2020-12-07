@@ -1,6 +1,0 @@
-module Pods_bantermobile {
-  umbrella header "Pods-bantermobile-umbrella.h"
-
-  export *
-  module * { export * }
-}
