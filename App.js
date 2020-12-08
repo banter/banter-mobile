@@ -9,15 +9,19 @@ import {Provider} from 'react-redux';
 import {fetchTrendingTopics, fetchCollections} from './store/actions/topics';
 import AuthApp from './src/navigation/AuthNavigation';
 import store from './store';
-import { fetchForYou } from './store/actions/userData';
+import { fetchForYou, getCurrentUser } from './store/actions/userData';
 import { navigationRef, navigate } from './src/navigation/RootNavigation';
 
 const Stack = createStackNavigator();
 
-store.dispatch(fetchTrendingTopics());
-store.dispatch(fetchCollections());
-// TODO move to a for You Specific API?
-store.dispatch(fetchForYou());
+async function initialize() {
+  await store.dispatch(getCurrentUser());
+  store.dispatch(fetchTrendingTopics());
+  store.dispatch(fetchCollections());
+  store.dispatch(fetchForYou());
+}
+
+initialize();
 
 const App : () => React$Node = () => {
   Linking.addEventListener('url', async ({url}) => {

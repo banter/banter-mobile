@@ -15,10 +15,8 @@ const FOR_YOU_INDEX = 0;
 const FOLLOWING_INDEX = 1;
 
 class ForYouScreen extends React.Component {
-
   constructor(props) {
     super(props);
-    this.currentUser = null;
     this.state = {
       activeIndex: 0,
       carouselItems: [
@@ -44,12 +42,12 @@ class ForYouScreen extends React.Component {
   }
 
   render() {
-    const {isForYouLoading} = this.props;
+    const {isForYouLoading, currentUser} = this.props;
     let body;
     if (isForYouLoading) {
       body = <Spinner color="white"/>;
     } else {
-      if (!this.currentUser) {
+      if (!currentUser.id) {
         body = <SignInOptions/>;
       } else {
         body = <View
@@ -138,7 +136,11 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  return {playlist: state.userDataState.forYou.playlist, isForYouLoading: state.userDataState.isForYouLoading};
+  return {
+    playlist: state.userDataState.forYou.playlist,
+    isForYouLoading: state.userDataState.isForYouLoading,
+    currentUser: state.userDataState.currentUser,
+  };
 }
 
 export default connect(mapStateToProps)(ForYouScreen);
