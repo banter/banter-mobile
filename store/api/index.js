@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export async function getData({url, method = 'GET'}) {
-  const token = await AsyncStorage.getItem('token');
+  const token = await AsyncStorage.getItem('banter-auth-token');
   const headers = token ? new Headers({
     'Authorization': `Bearer ${token}`,
   }) : null;

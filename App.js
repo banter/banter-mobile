@@ -34,7 +34,7 @@ const App : () => React$Node = () => {
     const { token } = queryParams;
     if (token) {
       try {
-        await AsyncStorage.setItem('token', token);
+        await AsyncStorage.setItem('banter-auth-token', token);
         initialize();
       } catch (e) {
         console.log('failed to set token', e.message);
