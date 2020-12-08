@@ -30,14 +30,16 @@ const App : () => React$Node = () => {
       const mapping = param.split('=');
       queryParams[mapping[0]] = mapping[1];
     });
-    const { token } = queryParams;
-    try {
-      await AsyncStorage.setItem('token', token);
-    } catch (e) {
-      console.log('ERROR');
-      console.log(e);
-    }
 
+    const { token } = queryParams;
+    if (token) {
+      try {
+        await AsyncStorage.setItem('token', token);
+        initialize();
+      } catch (e) {
+        console.log('failed to set token', e.message);
+      }
+    }
     navigate('For You');
   });
 
