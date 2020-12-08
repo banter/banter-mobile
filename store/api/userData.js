@@ -6,6 +6,6 @@ const sampleData = {'name':'foryou','playlist':[{'discussionId':'8b2ab4c2-9e03-4
 export async function getForYou() {
   const url = `${API.BASE_URL}${API.TOPICS}${API.FORYOU}?limit=15`;
     //   url= https://api.banteraudio.com/v1/topics/for-you?limit=15 (Throwing ERROR SO I THINK IT HAS TO DO WITH not having the right tokens )
-    let data = await getData(url);
-return sampleData;
+  let data = await getData({url});
+  return sampleData;
 }

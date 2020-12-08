@@ -16,9 +16,9 @@ export function requesting(state,loadingVariable) {
   return {...state};
 }
 
-export function success(state, loadingVariable, alteredVariable, action) {
+export function success(state, loadingVariable, alteredVariable, action, payloadKey) {
   state[loadingVariable] = false;
-  state[alteredVariable] = action.payload;
+  state[alteredVariable] = payloadKey ? action.payload[payloadKey] : action.payload;
   return {...state};
 }
 

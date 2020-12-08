@@ -1,4 +1,4 @@
-import {getTrendingTopics, getCollections, getTopics} from '../api/topics';
+import {getTrendingTopics, getCollections, getTopic, getTopics} from '../api/topics';
 import {fetchDataGeneral} from './index';
 import { TOPIC_STORE } from '../constants';
 export function fetchTrendingTopics() {
@@ -11,6 +11,10 @@ export function fetchCollections() {
 
 export function queryTopics(tagString) {
   return fetchDataGeneral(TOPIC_STORE.QUERY_TOPICS, getTopics(tagString));
+}
+
+export function fetchTopic(topicId) {
+  return fetchDataGeneral(TOPIC_STORE.GET_TOPIC, getTopic(topicId));
 }
 
 export function setCurrentTopic(playlist) {

@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {StyleSheet, SafeAreaView} from 'react-native';
 import { connect } from 'react-redux';
-import { setCurrentTopic } from '../../store/actions/topics';
+import { setCurrentTopic, fetchTopic } from '../../store/actions/topics';
 
 import {
   Spinner,
 } from 'native-base';
+
 import {DiscussionCard} from '../components/molecules';
 import TopicHeaderCard from '../components/organisms/TopicHeaderCard';
 import { FooterPlayer } from '../components/organisms';
@@ -14,31 +15,13 @@ import { FlatList } from 'react-native-gesture-handler';
 class PlaylistScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isLoading: true,
-      currentlyPlaying: {},
-      topic: {},
-    };
   }
 
   componentDidMount() {
     const {topic} = this.props.route.params;
-    const {setPlaylist} = this.props;
+    const {getTopic} = this.props;
 
-    // TODO: Move this to an action.
-    return fetch(`https://api.banteraudio.com/v1/topics/?id=${topic.id}`).then((response) => response.json()).then((responseJson) => {
-      console.log('Got Responseee', responseJson);
-      this.setState({
-        isLoading: false,
-        topic: responseJson.primaryTag,
-      });
-      // console.log('Before setPlaylist');
-      setPlaylist(responseJson.playlist.map(playlistItem => playlistItem));
-      // console.log('After setPlaylist');
-    }).catch((error) => {
-      console.error(error);
-    });
-
+    getTopic(topic.id);
   }
 
   renderHeader = (topic) => {
@@ -46,9 +29,8 @@ class PlaylistScreen extends React.Component {
   };
 
   render() {
-    const {topic} = this.state;
-    const {playlist} = this.props;
-    if (this.state.isLoading) {
+    const {playlist, isRequestingTopic, topic} = this.props;
+    if (isRequestingTopic) {
       return (
         <SafeAreaView style={styles.container}>
             <Spinner color="white"/>
@@ -92,13 +74,16 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
+    isRequestingTopic: state.topicState.isRequestingTopic,
     playlist: state.topicState.topicPlaylist,
+    topic: state.topicState.topic,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     setPlaylist: (playlist) => dispatch(setCurrentTopic(playlist)),
+    getTopic: (topicId) => dispatch(fetchTopic(topicId)),
   };
 }
 

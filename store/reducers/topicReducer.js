@@ -2,6 +2,7 @@ import TOPIC_STORE from '../constants/topicStore';
 import {requesting, success, error} from './index';
 
 let initialState = {
+  topic: {},
   trendingTopics: [],
   topicPlaylist: [],
   collections: [],
@@ -9,6 +10,7 @@ let initialState = {
   isTrendingTopicsLoading: false,
   isCollectionsLoading: false,
   isRequestingQuery: false,
+  isRequestingTopic: false,
   tagMatches: [],
 };
 
@@ -34,7 +36,15 @@ export default function (state = initialState, action) {
       return success(state, 'isRequestingQuery', 'tagMatches', action);
     case TOPIC_STORE.QUERY_TOPICS_ERROR:
       return error(state, 'isRequestingQuery', 'tagMatches', action, 'errorMessage');
+    case TOPIC_STORE.GET_TOPIC:
+      return requesting(state, 'isRequestingTopic');
+    case TOPIC_STORE.GET_TOPIC_SUCCESS:
+      const newState = success(state, null, 'topicPlaylist', action, 'playlist');
+      return success(newState, 'isRequestingTopic', 'topic', action, 'primaryTag');
+    case TOPIC_STORE.GET_TOPIC_ERROR:
+      return error(state, 'isRequestingTopic', 'topic', action, 'errorMessage');
     default:
       return state;
+
   }
 }

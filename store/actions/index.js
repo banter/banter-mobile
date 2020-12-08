@@ -21,7 +21,7 @@ export function  fetchDataGeneral(requestName , apiRequest) {
         dispatch(fetchSuccess(topics, requestName));
       }
     } catch (error) {
-      // CATCH isnt catching errors
+      dispatch(fetchError(error, requestName));
     }
   };
 }

@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import ForYouScreen from '../screens/ForYouScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import PlaylistScreen from '../screens/PlaylistScreen';
+import LoginScreen from '../screens/LoginScreen';
 import MyTabBar from './MyTabBar';
 import HomeScreen from '../screens/HomeScreen';
 
@@ -36,7 +37,11 @@ function ForYouStack() {
       }}
         component={ForYouScreen}
         name="For You"/>
-        <Stack.Screen name="Playlist" component={PlaylistScreen}/>
+    <Stack.Screen name="Playlist" component={PlaylistScreen}/>
+      <Stack.Screen
+          options={{ headerShown: false }}
+          name="Login"
+          component={LoginScreen}/>
     </Stack.Navigator>
   );
 }

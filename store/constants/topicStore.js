@@ -12,6 +12,7 @@ const errorRequest = (name) => {
 const trendingTopics = 'FETCH_TRENDING_TOPICS';
 const collections = 'FETCH_COLLECTIONS';
 const queryTopics = 'QUERY_TOPICS';
+const getTopic = 'GET_TOPIC';
 const setPlaylist = 'SET_PLAYLIST';
 
 
@@ -25,6 +26,9 @@ const TOPIC_STORE = {
     QUERY_TOPICS: queryTopics,
     QUERY_TOPICS_SUCCESS: successfulRequest(queryTopics),
     QUERY_TOPICS_ERROR: errorRequest(queryTopics),
+    GET_TOPIC: getTopic,
+    GET_TOPIC_SUCCESS: successfulRequest(getTopic),
+    GET_TOPIC_ERROR: errorRequest(getTopic),
     SET_PLAYLIST: setPlaylist,
   };
 

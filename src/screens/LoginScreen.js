@@ -1,39 +1,20 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {Text, Container} from 'native-base';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {Root, Text, Toast} from 'native-base';
 export default class LoginScreen extends React.Component {
-  static navigationOptions = {
-    headerTintColor: 'white',
-    headerStyle: {
-      backgroundColor: '#f76c57',
-    },
-  };
-
-
-  async componentDidMount() {
-    const token = await AsyncStorage.getItem('token');
-    console.log(token);
-  }
-
-
   render() {
     return (
-      <Container>
+      <Root>
         <Text style={styles.title}>Second level</Text>
-      </Container>
+      </Root>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 100,
-    alignItems: 'center',
-    backgroundColor: '#0f293b',
-    height: '100%',
-    padding: 30,
+    flex: 1,
+    backgroundColor: 'black',
   },
   title: {
     marginTop: 50,

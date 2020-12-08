@@ -6,14 +6,8 @@ import { Container, Header,
   from 'native-base';
 import { connect } from 'react-redux';
 import { queryTopics } from '../../store/actions/topics';
-import { FooterPlayer } from '../components/organisms';
 
 class ExploreScreen extends React.Component {
-
-  componentDidMount() {
-    // this.props.dispatch(queryTopics('Lebron'));
-  }
-
   _onChangeSearchText(text){
     if (text.length > 0){
       this.props.dispatch(queryTopics(text));
