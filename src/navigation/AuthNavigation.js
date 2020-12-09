@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 export default function AuthApp({navigation, route}) {
   return (
     <Stack.Navigator>
-<Stack.Screen
+      <Stack.Screen
         options={{
         headerShown: false,
       }}

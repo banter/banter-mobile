@@ -36,7 +36,7 @@ function ForYouStack() {
       }}
         component={ForYouScreen}
         name="For You"/>
-        <Stack.Screen name="Playlist" component={PlaylistScreen}/>
+      <Stack.Screen name="Playlist" component={PlaylistScreen}/>
     </Stack.Navigator>
   );
 }

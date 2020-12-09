@@ -56,9 +56,10 @@ buck-out/
 *.jsbundle
 
 # CocoaPods
-ios/
 android/
 
+ios/Pods
+ios/Podfile.lock
 package-lock.json
 
 

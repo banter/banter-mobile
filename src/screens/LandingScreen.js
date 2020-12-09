@@ -9,26 +9,26 @@ export default class LandingScreen extends React.Component {
 
   const {navigation} = this.props;
   return (
-        <Container style={styles.container}>
-          <Image
-            style={styles.headerImage}
-            source={require('../assets/Banter_header.png')}
-          />
-                  <Text style={styles.sloganText}>
-          The New Way to
-            Listen to Sports Talk
-          </Text>
-          <SoundAnimation />
-          <ShareButton />
-          <OauthButtons navigation={this.props.navigation}/>
-          <Button bordered success style={styles.exploreButton}
-          onPress={() =>
-            navigation.navigate('App')
-          }>
-            <Text>Explore</Text>
-          </Button>
-        </Container>
-      );
+      <Container style={styles.container}>
+        <Image
+          style={styles.headerImage}
+          source={require('../assets/Banter_header.png')}
+        />
+                <Text style={styles.sloganText}>
+        The New Way to
+          Listen to Sports Talk
+        </Text>
+        <SoundAnimation />
+        <ShareButton />
+        <OauthButtons navigation={this.props.navigation}/>
+        <Button bordered success style={styles.exploreButton}
+        onPress={() =>
+          navigation.navigate('App')
+        }>
+          <Text>Explore</Text>
+        </Button>
+      </Container>
+    );
   }
 }
 
