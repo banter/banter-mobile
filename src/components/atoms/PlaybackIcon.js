@@ -78,8 +78,6 @@ export default class PlaybackIcon extends React.PureComponent {
     const audioBuffering = [STATE_BUFFERING].includes(this.playerState);
 
     const isPlaying = playingThisDiscussion && audioPlaying;
-    console.log('PLAYBACK!');
-    console.log(this.discussion);
     return (
         <Pressable onPress={playingThisDiscussion ? AudioService.togglePlayback : () => AudioService.startNewTrack(this.discussion, this.playlistType)}>
           <Text>
