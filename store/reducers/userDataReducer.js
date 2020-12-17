@@ -1,4 +1,3 @@
-import TOPIC_STORE from '../constants/topicStore';
 import {requesting, success, error} from './index';
 import { USER_DATA_STORE } from '../constants';
 

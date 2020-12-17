@@ -9,7 +9,7 @@ export function decrement() {
   };
 }
 
-export function  fetchDataGeneral(requestName , apiRequest) {
+export function fetchDataGeneral(requestName , apiRequest) {
   return async dispatch => {
     dispatch(fetchRequest(requestName));
     try {

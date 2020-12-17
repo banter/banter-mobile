@@ -4,7 +4,7 @@ export async function getData({url, method = 'GET'}) {
   const token = await AsyncStorage.getItem('banter-auth-token');
   const headers = token ? new Headers({
     'Authorization': `Bearer ${token}`,
-  }) : null;
+  }) : {};
   const response = await fetch(url, {method, headers});
   const data = await response.json();
   return data;

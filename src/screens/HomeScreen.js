@@ -49,8 +49,7 @@ class HomeScreen extends React.Component {
               }))
               : (
                 <View>
-                  <Text>No Stuff</Text>
-                  <Text>{error}</Text>
+                  <Text>No Stuff</Text>q
                 </View>
               )}
         </ScrollView>
