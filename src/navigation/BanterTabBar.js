@@ -1,13 +1,12 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 import { NAV_BAR_HEIGHT } from '../styles/mixins';
 import { GRAY_LIGHT } from '../styles/colors';
 import { Icon } from 'native-base';
 import { FONT_SIZE_VERY_SMALL } from '../styles/typography';
 
-function MyTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
+function BanterTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
     const focusedOptions = descriptors[state.routes[state.index].key].options;
 
     if (focusedOptions.tabBarVisible === false) {
@@ -47,13 +46,13 @@ function MyTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
             });
           };
           let icon;
-          if (label == 'For You'){
+          if (label === 'For You'){
               icon = <Icon style={styles.iconStyle} type="Entypo" name="fingerprint"/>;
           }
-          else if (label == 'Explore'){
+          else if (label === 'Explore'){
             icon = <Icon style={styles.iconStyle} name="ios-search"/>;
           }
-          else if (label == 'Home'){
+          else if (label === 'Home'){
             icon = <Icon style={styles.iconStyle} type="Entypo" name="home"/>;
           }
 
@@ -100,4 +99,4 @@ function MyTabBar({ state, descriptors, navigation, isNavBarDisplayed }) {
     return {isNavBarDisplayed: state.appStyleState.isNavBarDisplayed};
   }
 
-  export default connect(mapStateToProps)(MyTabBar);
+  export default connect(mapStateToProps)(BanterTabBar);

@@ -19,6 +19,12 @@ async function initialize() {
   store.dispatch(fetchTrendingTopics());
   store.dispatch(fetchCollections());
   store.dispatch(fetchForYou());
+  const user = store.getState().userDataState.currentUser;
+  if (user.id) {
+    navigate('App', {screen: 'For You'});
+  } else {
+    navigate('Auth');
+  }
 }
 
 initialize();
@@ -31,16 +37,20 @@ const App : () => React$Node = () => {
       queryParams[mapping[0]] = mapping[1];
     });
 
-    const { token } = queryParams;
+    const { token, error } = queryParams;
+    if (error) {
+      // log error!
+    }
     if (token) {
       try {
         await AsyncStorage.setItem('banter-auth-token', token);
         initialize();
       } catch (e) {
+        // snackbar error
         console.log('failed to set token', e.message);
+        navigate('Auth');
       }
     }
-    navigate('For You');
   });
 
   const linking = {
@@ -50,25 +60,19 @@ const App : () => React$Node = () => {
     <Provider store={store}>
       <NavigationContainer ref={navigationRef} linking={linking}>
         <Stack.Navigator>
-        {/* <Stack.Screen
-        options={{
-        headerShown: false,
-      }}
-        component={TestScreen}
-        name="For You"/> */}
         <Stack.Screen
-            options={{ headerShown: false }}
-            name="App"
-            component={MainApp}/>
-        <Stack.Screen
-            options={{ headerShown: false }}
-            name="Auth"
-            component={AuthApp}/>
+              options={{ headerShown: false }}
+              name="Auth"
+              component={AuthApp}/>
+          <Stack.Screen
+              options={{ headerShown: false }}
+              name="App"
+              component={MainApp}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
-        };
+};
 
 
 export default App;

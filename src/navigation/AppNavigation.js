@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import ForYouScreen from '../screens/ForYouScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import PlaylistScreen from '../screens/PlaylistScreen';
-import MyTabBar from './MyTabBar';
+import BanterTabBar from './BanterTabBar';
 import HomeScreen from '../screens/HomeScreen';
 
 const AppNavigator = createBottomTabNavigator();
@@ -17,12 +17,10 @@ function HomeStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        options={{
-        headerShown: false,
-      }}
+        options={{ headerShown: false }}
         component={HomeScreen}
         name="Home"/>
-        <Stack.Screen name="Playlist" component={PlaylistScreen}/>
+      <Stack.Screen name="Playlist" component={PlaylistScreen}/>
     </Stack.Navigator>
   );
 }
@@ -43,7 +41,9 @@ function ForYouStack() {
 
 export default function MainApp({navigation, route}) {
   return (
-  <AppNavigator.Navigator initialRouteName={INITIAL_ROUTE_NAME} tabBar={props => <MyTabBar {...props}/>}>
+  <AppNavigator.Navigator
+    initialRouteName={INITIAL_ROUTE_NAME}
+    tabBar={props => <BanterTabBar {...props}/>}>
       <AppNavigator.Screen
         name="Home"
         component={HomeStack}
@@ -51,7 +51,7 @@ export default function MainApp({navigation, route}) {
         headerShown: false,
         tabBarIcon: () => (<Icon type="Entypo" name="home"/>),
       }}/>
-            <AppNavigator.Screen
+      <AppNavigator.Screen
         name="For You"
         component={ForYouStack}
         options={{

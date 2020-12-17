@@ -1,9 +1,7 @@
 
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, View, Button, Linking } from 'react-native';
 import { FacebookSocialButton, GoogleSocialButton, TwitterSocialButton } from 'react-native-social-buttons';
-import { useNavigation } from '@react-navigation/native';
-
 
 export default class OauthButtons extends React.Component{
     constructor(props) {
@@ -14,71 +12,62 @@ export default class OauthButtons extends React.Component{
       };
     }
     render (){
-      const {navigation} = this.props;
       if (!this.state.isButtonSelected) {
         return (
           <View>
-      <View style={{marginTop:40, marginBottom:15}} >
-      <Button
-        title="Sign Up Free"
-        onPress={() =>
-          this.setState({
-            isButtonSelected: true,
-            buttonText: 'Sign up',
-          })
-        }
-      />
-      </View>
-      <Button
-        style={styles.onboardingButton}
-        color="gray"
-        title="Log in"
-        onPress={() =>
-          this.setState({
-            isButtonSelected: true,
-            buttonText: 'Log in',
-          })
-        }
-      />
+            <Button
+              title="Sign Up Free"
+              style={styles.onboardingSpacing}
+              onPress={() =>
+                this.setState({
+                  isButtonSelected: true,
+                  buttonText: 'Sign up',
+                })
+              }
+            />
+            <Button
+              style={styles.onboardingButton}
+              color="gray"
+              title="Log in"
+              onPress={() =>
+                this.setState({
+                  isButtonSelected: true,
+                  buttonText: 'Log in',
+                })
+              }
+            />
           </View>
         );
       }
+
       return (
         <View>
-          <View style={{marginTop:30, marginBottom:5}} >
-          <FacebookSocialButton
-                    onPress={() =>
-                      navigation.navigate('Onboarding')
-                    }
-            buttonText={this.state.buttonText + ' with Facebook'}/>
-                             </View>
-
-                             <View style={styles.oauthButton}>
-          <GoogleSocialButton
-                    onPress={() =>
-                      navigation.navigate('Onboarding')
-                    }
-                    buttonText={this.state.buttonText + ' with Google'} />
-                    </View>
-                    <View style={styles.oauthButton} >
-
-                    <TwitterSocialButton
-                    onPress={() =>
-                      navigation.navigate('Onboarding')
-                    }
-                    buttonText={this.state.buttonText + ' with Twitter'}/>
-                    </View>
-                    <View style={styles.oauthButton} >
-                    <Button
-            title="Back"
-            onPress={() =>
-              this.setState({
-                isButtonSelected: false,
-                buttonText: 'Log in',
-              })
-            }
-          />
-  </View>
+          <View style={styles.onboardingSpacing} >
+            <FacebookSocialButton onPress={() =>
+              Linking.openURL('https://api.banteraudio.com/oauth2/authorization/facebook?redirect_uri=banteraudio://')
+            } buttonText={this.state.buttonText + ' with Facebook'}/>
+          </View>
+          <View style={styles.oauthButton}>
+            <GoogleSocialButton onPress={() =>
+              Linking.openURL('https://api.banteraudio.com/oauth2/authorization/google?redirect_uri=banteraudio://')
+            } buttonText={this.state.buttonText + ' with Google'} />
+          </View>
+          <View style={styles.oauthButton} >
+            <TwitterSocialButton onPress={() =>
+              Linking.openURL('https://api.banteraudio.com/oauth1/authorization/twitter?redirect_uri=banteraudio://')
+            } buttonText={this.state.buttonText + ' with Twitter'}/>
+          </View>
+          <View style={styles.oauthButton}>
+            <Button
+              title="Back"
+              onPress={() =>
+                this.setState({
+                  isButtonSelected: false,
+                  buttonText: 'Log in',
+                })
+              }
+            />
+          </View>
         </View>
       );
     }
@@ -86,7 +75,6 @@ export default class OauthButtons extends React.Component{
 
 
 const styles = StyleSheet.create({
-
   oauthButton: {
     marginTop:5, marginBottom:5,
   },
@@ -99,5 +87,8 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 25,
   },
-
+  onboardingSpacing: {
+    marginTop: 30,
+    marginBottom: 5,
+  },
 });
