@@ -21,7 +21,6 @@ class HomeScreen extends React.Component {
       trendingTopics,
       collections,
       isCollectionsLoading,
-      error,
     } = this.props;
     if (isCollectionsLoading) {
       return (
@@ -49,7 +48,7 @@ class HomeScreen extends React.Component {
               }))
               : (
                 <View>
-                  <Text>No Stuff</Text>q
+                  <Text>No Stuff</Text>
                 </View>
               )}
         </ScrollView>

@@ -9,7 +9,6 @@ import MOCKPLAYLIST from '../../constants/mock-playlist';
 import {DiscussionPlaylist, FooterPlayer} from '../components/organisms';
 import {connect} from 'react-redux';
 import {Spinner} from 'native-base';
-import SignInOptions from '../components/molecules/SignInOptions';
 
 const FOR_YOU_INDEX = 0;
 const FOLLOWING_INDEX = 1;
@@ -42,34 +41,30 @@ class ForYouScreen extends React.Component {
   }
 
   render() {
-    const {isForYouLoading, currentUser} = this.props;
+    const {isForYouLoading} = this.props;
     let body;
     if (isForYouLoading) {
       body = <Spinner color="white"/>;
     } else {
-      if (!currentUser.id) {
-        body = <SignInOptions/>;
-      } else {
-        body = <View
-          style={{
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'center',
-        }}>
-          <Carousel
-            layout={'default'}
-            ref={ref => (this.carousel = ref)}
-            data={this.state.carouselItems}
-            sliderWidth={WINDOW_WIDTH}
-            itemWidth={WINDOW_WIDTH}
-            windowSize={WINDOW_WIDTH}
-            renderItem={this
-            ._renderItem
-            .bind(this)}
-            onSnapToItem=
-            { index => this.setState({activeIndex:index}) }/>
-        </View>;
-      }
+      body = <View
+        style={{
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+      }}>
+        <Carousel
+          layout={'default'}
+          ref={ref => (this.carousel = ref)}
+          data={this.state.carouselItems}
+          sliderWidth={WINDOW_WIDTH}
+          itemWidth={WINDOW_WIDTH}
+          windowSize={WINDOW_WIDTH}
+          renderItem={this
+          ._renderItem
+          .bind(this)}
+          onSnapToItem=
+          { index => this.setState({activeIndex:index}) }/>
+      </View>;
     }
     return (
       <SafeAreaView style={{
@@ -139,7 +134,6 @@ function mapStateToProps(state) {
   return {
     playlist: state.userDataState.forYou.playlist,
     isForYouLoading: state.userDataState.isForYouLoading,
-    currentUser: state.userDataState.currentUser,
   };
 }
 

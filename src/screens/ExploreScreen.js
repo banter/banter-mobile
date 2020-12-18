@@ -26,7 +26,6 @@ class ExploreScreen extends React.Component {
 
   render() {
     const {
-      isRequestingQuery,
       tagMatches,
       navigation,
     } = this.props;
@@ -68,8 +67,6 @@ class ExploreScreen extends React.Component {
       );
   }
 }
-
-
 
 const styles = StyleSheet.create({
   container: {

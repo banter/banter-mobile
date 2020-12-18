@@ -6,6 +6,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import MainApp from './src/navigation/AppNavigation';
 import {Provider} from 'react-redux';
+import {Root, Toast} from 'native-base';
 import {fetchTrendingTopics, fetchCollections} from './store/actions/topics';
 import AuthApp from './src/navigation/AuthNavigation';
 import store from './store';
@@ -16,6 +17,12 @@ const Stack = createStackNavigator();
 
 async function initialize() {
   await store.dispatch(getCurrentUser());
+  const user = store.getState().userDataState.currentUser;
+  if (user.id) {
+    navigate('App', {screen: 'For You'});
+  } else {
+    navigate('Auth');
+  }
   store.dispatch(fetchTrendingTopics());
   store.dispatch(fetchCollections());
   store.dispatch(fetchForYou());
@@ -31,16 +38,26 @@ const App : () => React$Node = () => {
       queryParams[mapping[0]] = mapping[1];
     });
 
-    const { token } = queryParams;
+    const { token, error } = queryParams;
+    if (error) {
+      Toast.show({
+        text: decodeURI(error),
+        duration: 5000,
+      });
+    }
     if (token) {
       try {
         await AsyncStorage.setItem('banter-auth-token', token);
         initialize();
       } catch (e) {
+        Toast.show({
+          text: decodeURI(e.message),
+          duration: 5000,
+        });
         console.log('failed to set token', e.message);
+        navigate('Auth');
       }
     }
-    navigate('For You');
   });
 
   const linking = {
@@ -48,27 +65,23 @@ const App : () => React$Node = () => {
   };
   return (
     <Provider store={store}>
-      <NavigationContainer ref={navigationRef} linking={linking}>
-        <Stack.Navigator>
-        {/* <Stack.Screen
-        options={{
-        headerShown: false,
-      }}
-        component={TestScreen}
-        name="For You"/> */}
-        <Stack.Screen
-            options={{ headerShown: false }}
-            name="App"
-            component={MainApp}/>
-        <Stack.Screen
-            options={{ headerShown: false }}
-            name="Auth"
-            component={AuthApp}/>
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Root>
+        <NavigationContainer ref={navigationRef} linking={linking}>
+          <Stack.Navigator>
+          <Stack.Screen
+                options={{ headerShown: false }}
+                name="Auth"
+                component={AuthApp}/>
+            <Stack.Screen
+                options={{ headerShown: false }}
+                name="App"
+                component={MainApp}/>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Root>
     </Provider>
   );
-        };
+};
 
 
 export default App;

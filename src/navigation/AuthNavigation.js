@@ -1,4 +1,3 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import * as React from 'react';
 
 import {Text, Pressable} from 'native-base';
@@ -27,9 +26,7 @@ export default function AuthApp({navigation, route}) {
           <Pressable
             onPress={() => navigation.navigate('ExperienceCreation')}
             title="Info"
-            style={{
-            marginRight: 10,
-          }}>
+            style={{marginRight: 10}}>
             <Text>Done</Text>
           </Pressable>
         ),
