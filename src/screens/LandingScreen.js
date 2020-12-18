@@ -1,37 +1,45 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import { StyleSheet, Image } from 'react-native';
-import { Text, Button, Container } from 'native-base';
+import { Text, Button, Container, View } from 'native-base';
 import { SoundAnimation, OauthButtons, ShareButton } from '../components/atoms';
 
-
-export default class LandingScreen extends React.Component {
+class LandingScreen extends React.Component {
   render() {
-
-  const {navigation} = this.props;
-  return (
-      <Container style={styles.container}>
-        <Image
-          style={styles.headerImage}
-          source={require('../assets/Banter_header.png')}
-        />
-                <Text style={styles.sloganText}>
-        The New Way to
-          Listen to Sports Talk
-        </Text>
-        <SoundAnimation />
-        <ShareButton />
-        <OauthButtons navigation={this.props.navigation}/>
-        <Button bordered success style={styles.exploreButton}
-        onPress={() =>
-          navigation.navigate('App')
-        }>
-          <Text>Explore</Text>
-        </Button>
-      </Container>
-    );
-  }
+    const {navigation, isCurrentUserLoading} = this.props;
+    return (
+        <Container style={styles.container}>
+          <Image
+            style={styles.headerImage}
+            source={require('../assets/Banter_header.png')}/>
+          <Text style={styles.sloganText}>
+              The New Way to
+            Listen to Sports Talk
+          </Text>
+          <SoundAnimation />
+          <ShareButton />
+          {
+            !isCurrentUserLoading && <View>
+              <OauthButtons navigation={this.props.navigation}/>
+              <Button bordered success style={styles.exploreButton}
+                onPress={() =>navigation.navigate('App')}>
+                <Text>Explore</Text>
+              </Button>
+            </View>
+          }
+        </Container>
+      );
+    }
 }
 
+function mapStateToProps(state) {
+  return {
+    isRequestingUser: state.userDataState.isCurrentUserLoading,
+  };
+}
+
+export default connect(mapStateToProps)(LandingScreen);
 
 const styles = StyleSheet.create({
   container: {

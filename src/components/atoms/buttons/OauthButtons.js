@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { StyleSheet, View, Button, Linking } from 'react-native';
-import { FacebookSocialButton, GoogleSocialButton, TwitterSocialButton } from 'react-native-social-buttons';
+import { GoogleSocialButton, TwitterSocialButton } from 'react-native-social-buttons';
 
 export default class OauthButtons extends React.Component{
     constructor(props) {
@@ -43,9 +43,9 @@ export default class OauthButtons extends React.Component{
       return (
         <View>
           <View style={styles.onboardingSpacing} >
-            <FacebookSocialButton onPress={() =>
-              Linking.openURL('https://api.banteraudio.com/oauth2/authorization/facebook?redirect_uri=banteraudio://')
-            } buttonText={this.state.buttonText + ' with Facebook'}/>
+            <Button onPress={() =>
+              Linking.openURL('https://api.banteraudio.com/oauth2/authorization/spotify?redirect_uri=banteraudio://')
+            } title={this.state.buttonText + ' with Spotify'} style={styles.spotifyButton}/>
           </View>
           <View style={styles.oauthButton}>
             <GoogleSocialButton onPress={() =>
@@ -77,6 +77,11 @@ export default class OauthButtons extends React.Component{
 const styles = StyleSheet.create({
   oauthButton: {
     marginTop:5, marginBottom:5,
+  },
+  // TOODO - make this match
+  spotifyButton: {
+    padding: 5,
+    backgroundColor: 'white',
   },
   onboardingButton: {
     margin: 15,
