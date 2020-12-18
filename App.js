@@ -18,7 +18,6 @@ const Stack = createStackNavigator();
 async function initialize() {
   await store.dispatch(getCurrentUser());
   const user = store.getState().userDataState.currentUser;
-  // TODO if new user, push to onboarding. Otherwise to foryou.
   if (user.id) {
     navigate('App', {screen: 'For You'});
   } else {
